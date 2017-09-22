@@ -10,10 +10,23 @@ public class Max {
 	/**
 	* Метод возвращает максимальное значение из 2-х чисел.
 	* @param first первое число
-	* @param second первое число
+	* @param second второе число
 	* @return возвращает максимальное из 2-х чисел
 	*/
 	public int max(int first, int second) {
 		return (first >= second) ? first : second;
+	}
+
+	/**
+	* Метод возвращает максимальное значение из 3-х чисел.
+	* @param first первое число
+	* @param second второе число
+	* @param third третье число
+	* @return возвращает максимальное из 2-х чисел
+	*/
+	public int max(int first, int second, int third) {
+		int oneVar =  max(first, second);
+		int twoVar = max(second, third);
+		return (oneVar > twoVar) ? oneVar : twoVar;
 	}
 }
