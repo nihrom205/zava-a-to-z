@@ -25,8 +25,6 @@ public class Max {
 	* @return возвращает максимальное из 2-х чисел
 	*/
 	public int max(int first, int second, int third) {
-		int oneVar =  max(first, second);
-		int twoVar = max(second, third);
-		return (oneVar > twoVar) ? oneVar : twoVar;
+		return max(max(first, second), third);
 	}
 }
