@@ -81,6 +81,9 @@ public class Triangle {
 	* @return возвращает true или false
 	*/
 	public boolean exist(double ab, double ac, double bc) {
-		return (ab > 0 && ac > 0 && bc > 0) ? true : false;
+		if (ab <= 0 && ac <= 0 && bc <= 0) {
+			return false;
+		}
+		return (ab + ac > bc && ab + bc > ac && ac + bc > ab) ? true : false;
 	}
 }
