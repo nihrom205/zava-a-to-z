@@ -18,15 +18,26 @@ public class MergerTwoArray {
     public int[] merge(int[] arrayOne, int[] arrayTwo) {
         int sizeArray = arrayOne.length + arrayTwo.length;
         int[] rezult = new int[sizeArray];
-        for (int i = 0; i < arrayOne.length; i++) {
-            if (arrayOne[i] <= arrayTwo[i]) {
-                rezult[i + i] = arrayOne[i];
-                rezult[i + i + 1] = arrayTwo[i];
-            } else {
-                rezult[i + i] = arrayTwo[i];
-                rezult[i + i + 1] = arrayOne[i];
-            }
+        for (int i = 0; i < arrayOne.length ; i++) {
+            rezult[i] = arrayOne[i];
         }
-        return rezult;
+        for (int j = 0 ; j < arrayTwo.length; j++) {
+            rezult[arrayOne.length + j] = arrayTwo[j];
+        }
+
+        BubbleSort buble = new BubbleSort();
+        return rezult = buble.sort(rezult);
+//        for (int i = rezult.length - 1; i > 0 ; i--) {
+//            for (int j = 0; j < i; j++) {
+//                if (rezult[j] > rezult[j + 1]) {
+//                    int tmp = rezult[j];
+//                    rezult[j] = rezult[j + 1];
+//                    rezult[j + 1] = tmp;
+//                }
+//            }
+//        }
+
+        
+//        return rezult;
     }
 }
