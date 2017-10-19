@@ -86,7 +86,7 @@ public class Tracker {
             }
         }
         Item[] result = new Item[index];
-        System.arraycopy(arrayName,0,result,0, index);
+        System.arraycopy(arrayName, 0, result, 0, index);
         return result;
     }
 
@@ -106,6 +106,10 @@ public class Tracker {
         return result;
     }
 
+    /**
+     * генератор id.
+     * @return id
+     */
     String generateId() {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }

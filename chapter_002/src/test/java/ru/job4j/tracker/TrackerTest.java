@@ -16,7 +16,7 @@ public class TrackerTest {
      * tests method add.
      */
     @Test
-    public void whenAddNewItemThenTrackerHasSameItem(){
+    public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
@@ -59,7 +59,7 @@ public class TrackerTest {
      * tests method update.
      */
     @Test
-    public void whenUpdatetemThenTrackerUpdatingItem(){
+    public void whenUpdatetemThenTrackerUpdatingItem() {
         Tracker tracker = new Tracker();
         tracker.add(new Item("test1", "testDescription", 123L));
         tracker.add(new Item("test2", "testDescription", 123L));
@@ -76,7 +76,7 @@ public class TrackerTest {
      * tests method findAll.
      */
     @Test
-    public void whenFindAllThenTrackerGetItems(){
+    public void whenFindAllThenTrackerGetItems() {
         Tracker tracker = new Tracker();
         Item itemOne = new Item("test1", "testDescription", 123L);
         Item itemTwo = new Item("test2", "testDescription", 123L);
@@ -98,7 +98,7 @@ public class TrackerTest {
      * tests method findByName.
      */
     @Test
-    public void whenFindByNameThenTrackerNameItems(){
+    public void whenFindByNameThenTrackerNameItems() {
         Tracker tracker = new Tracker();
         Item itemOne = new Item("test1", "testDescription", 123L);
         Item itemTwo = new Item("test2", "testDescription2222", 123L);
@@ -124,7 +124,7 @@ public class TrackerTest {
      * tests method findById.
      */
     @Test
-    public void whenFindByIdThenTrackerIdItem(){
+    public void whenFindByIdThenTrackerIdItem() {
         Tracker tracker = new Tracker();
         Item itemOne = new Item("test1", "testDescription", 123L);
         Item itemTwo = new Item("test2", "testDescription", 123L);
