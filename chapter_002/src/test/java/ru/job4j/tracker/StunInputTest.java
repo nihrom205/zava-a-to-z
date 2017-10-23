@@ -19,7 +19,7 @@ public class StunInputTest {
     @Test
     public void whenUserAddNewItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[] {"0","test name", "desc", "6"});
+        Input input = new StubInput(new String[] {"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("test name"));
     }
@@ -93,7 +93,7 @@ public class StunInputTest {
         tracker.add(itemOne);
         tracker.add(itemTwo);
         tracker.add(itemThree);
-        Input input = new StubInput(new String[]{"4", itemTwo.getId() ,"6"});
+        Input input = new StubInput(new String[]{"4", itemTwo.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(itemTwo.getId()).getName(), is("Error page"));
     }
@@ -113,7 +113,7 @@ public class StunInputTest {
         tracker.add(itemThree);
         Item[] items = new Item[1];
         items[0] = itemThree;
-        Input input = new StubInput(new String[]{"5", itemThree.getName() ,"6"});
+        Input input = new StubInput(new String[]{"5", itemThree.getName(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findByName(itemThree.getName()), is(items));
     }
