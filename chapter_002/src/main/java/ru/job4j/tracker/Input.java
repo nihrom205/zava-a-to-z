@@ -8,5 +8,10 @@ package ru.job4j.tracker;
  * @since 20.10.2017
  */
 public interface Input {
+    /**
+     * прнимает вопрос и ожидает ответ на него.
+     * @param question воопрос
+     * @return ответ
+     */
     String ask(String question);
 }

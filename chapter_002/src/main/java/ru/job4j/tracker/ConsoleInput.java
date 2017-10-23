@@ -19,7 +19,7 @@ public class ConsoleInput implements Input {
      * @param question переданный вопрос
      * @return возвращает ответ
      */
-    public String ask(String question){
+    public String ask(String question) {
         System.out.print(question);
         return scanner.nextLine();
     }

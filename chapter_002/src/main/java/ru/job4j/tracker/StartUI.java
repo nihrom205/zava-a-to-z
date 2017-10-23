@@ -54,11 +54,17 @@ public class StartUI {
     /**
      * Конструктор.
      * @param input пользовательский интерфейс
+     * @param tracker хранилище заявок
      */
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
+
+    /**
+     * Конструктор .
+     * @param input пользовательский интерфейс
+     */
     public StartUI(Input input) {
         this.input = input;
     }
@@ -114,6 +120,9 @@ public class StartUI {
             case FIND_NAME:
                 this.findName(input, tracker);
                 break;
+            default:
+                //
+                break;
         }
     }
 
@@ -128,7 +137,7 @@ public class StartUI {
             Formatter fmt = new Formatter();
             long date = item.getCreated();
             fmt.format("%td.%tm.%tY %tl:%tM", date, date, date, date, date);
-            System.out.println("id:" + item.getId() + " name:" + item.getName() + " description:" + " date:" + fmt);
+            System.out.println("id:" + item.getId() + " name:" + item.getName() + " description:" + item.getDesc() + " date:" + fmt);
         }
         System.out.println();
     }
@@ -186,16 +195,20 @@ public class StartUI {
      * метод для поиска заявки по id.
      * @param input объект для взаимодействия с пользователем
      * @param tracker хранилише с заявками
+     * @return заявка
      */
     private Item findId(Input input, Tracker tracker) {
         String id = input.ask("Input id item for search: ");
-        return tracker.findById(id);
+        Item item = tracker.findById(id);
+        this.printItems(new Item[]{item});
+        return item;
     }
 
     /**
      * метод для поиска заявки по имени.
      * @param input объект для взаимодействия с пользователем
      * @param tracker хранилише с заявками
+     * @return pfz
      */
     private Item[] findName(Input input, Tracker tracker) {
         String name = input.ask("Input name item for search: ");
