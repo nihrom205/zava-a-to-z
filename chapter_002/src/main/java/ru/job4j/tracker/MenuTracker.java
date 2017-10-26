@@ -26,7 +26,8 @@ public class MenuTracker {
 
     /**
      * Констуртор
-     * @param input интефейс
+     *
+     * @param input   интефейс
      * @param tracker хранилище заявок
      */
     public MenuTracker(Input input, Tracker tracker) {
@@ -49,6 +50,7 @@ public class MenuTracker {
 
     /**
      * выбор значения из пользовательского меню.
+     *
      * @param key значение
      */
     public void select(int key) {
@@ -69,7 +71,7 @@ public class MenuTracker {
     /**
      * Внутренний клас для добавления заявок в хранилище.
      */
-    private static class AddItem implements UserAction {
+    private class AddItem implements UserAction {
         @Override
         public int key() {
             return 0;
@@ -92,7 +94,7 @@ public class MenuTracker {
     /**
      * Внутренний кла для вывода всех заявок на экран.
      */
-    private static class ShowAllItem implements UserAction {
+    private class ShowAllItem implements UserAction {
         @Override
         public int key() {
             return 1;
@@ -116,7 +118,7 @@ public class MenuTracker {
     /**
      * Внутренний клас для редактирования заявки.
      */
-    private static class EditItem implements UserAction {
+    private class EditItem implements UserAction {
         @Override
         public int key() {
             return 2;
@@ -142,7 +144,7 @@ public class MenuTracker {
     /**
      * Внутренний клас для удаления заявки.
      */
-    private static class DeleteItem implements UserAction {
+    private class DeleteItem implements UserAction {
         @Override
         public int key() {
             return 3;
@@ -164,7 +166,7 @@ public class MenuTracker {
     /**
      * Внутренний класс для поиска заявки по id.
      */
-    private static class FindById implements UserAction {
+    private class FindById implements UserAction {
         @Override
         public int key() {
             return 4;
@@ -190,7 +192,7 @@ public class MenuTracker {
     /**
      * Внутренний класс для поиска заявки по имени.
      */
-    private static class FindByName implements UserAction {
+    private class FindByName implements UserAction {
         @Override
         public int key() {
             return 5;
@@ -211,5 +213,4 @@ public class MenuTracker {
             return String.format("%s. %s", this.key(), "Find item by id");
         }
     }
-
 }
