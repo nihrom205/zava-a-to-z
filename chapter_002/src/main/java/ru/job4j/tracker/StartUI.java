@@ -12,6 +12,7 @@ import java.util.Formatter;
  * @since 20.10.2017
  */
 public class StartUI {
+
     /**
      * хранит в себе объект пользовательского интерфейса.
      */
@@ -52,8 +53,8 @@ public class StartUI {
         menu.fillAction();
         do {
             menu.show();
-            int key = Integer.valueOf(input.ask("Select: "));
-            menu.select(key);
+//            int key = Integer.valueOf(input.ask("Select: "));
+            menu.select(input.ask("Select: ", menu.getIndexFillAction()));
         } while (!"y".equals(this.input.ask("Exit? (y): ")));
     }
 
@@ -62,6 +63,6 @@ public class StartUI {
      * @param args аргументы
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput()).init();
+        new StartUI(new ValidateInput()).init();
     }
 }

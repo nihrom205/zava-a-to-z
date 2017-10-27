@@ -23,4 +23,28 @@ public class ConsoleInput implements Input {
         System.out.print(question);
         return scanner.nextLine();
     }
+
+    /**
+     * метод для взаимодействия с пользователем.
+     * возвращает код элемента меню которе выбрал пользователь.
+     * @param question вопрос пользователю
+     * @param range массив индексов меню взаимодействия с пользователем
+     * @return возвращает элемнт
+     */
+    @Override
+    public int ask(String question, int[] range) {
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (key == value) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("out of menu range.");
+        }
+    }
 }

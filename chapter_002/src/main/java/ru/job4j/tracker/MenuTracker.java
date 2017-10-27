@@ -22,7 +22,7 @@ public class MenuTracker {
     /**
      * Массив действий пользователя.
      */
-    private UserAction[] actions = new UserAction[6];
+    private UserAction[] actions = new UserAction[7];
 
     /**
      * Констуртор
@@ -39,13 +39,25 @@ public class MenuTracker {
      * Инициализация массива пользовательских действий.
      */
     public void fillAction() {
-        this.actions[0] = new AddItem();
-        this.actions[1] = new ShowAllItem();
-        this.actions[2] = new EditItem();
-        this.actions[3] = new DeleteItem();
-        this.actions[4] = new FindById();
-        this.actions[5] = new FindByName();
+        this.actions[1] = this.new AddItem();
+        this.actions[2] = this.new ShowAllItem();
+        this.actions[3] = this.new EditItem();
+        this.actions[4] = this.new DeleteItem();
+        this.actions[5] = this.new FindById();
+        this.actions[6] = this.new FindByName();
 
+    }
+
+    /**
+     * Возвращает список индексов массива пользовательских действий.
+     * @return список индексов
+     */
+    public int[] getIndexFillAction() {
+        int[] ranges = new int[this.actions.length - 1];
+        for (int i = 1; i <= ranges.length; i++) {
+            ranges[i - 1] = i;
+        }
+        return ranges;
     }
 
     /**
@@ -87,7 +99,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return String.format("%s. %s", this.key(), "Add the new item.");
+            return String.format("%s. %s", this.key() + 1, "Add the new item.");
         }
     }
 
@@ -111,7 +123,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return String.format("%s. %s", this.key(), "Show all item");
+            return String.format("%s. %s", this.key() + 1, "Show all item");
         }
     }
 
@@ -137,7 +149,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return String.format("%s. %s", this.key(), "Edit item");
+            return String.format("%s. %s", this.key() + 1, "Edit item");
         }
     }
 
@@ -159,7 +171,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return String.format("%s. %s", this.key(), "Delete item");
+            return String.format("%s. %s", this.key() + 1, "Delete item");
         }
     }
 
@@ -185,7 +197,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return String.format("%s. %s", this.key(), "Find item by id");
+            return String.format("%s. %s", this.key() + 1, "Find item by id");
         }
     }
 
@@ -210,7 +222,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return String.format("%s. %s", this.key(), "Find item by id");
+            return String.format("%s. %s", this.key() + 1, "Find item by name");
         }
     }
 }
