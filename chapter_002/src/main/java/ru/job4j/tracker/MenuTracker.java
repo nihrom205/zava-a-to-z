@@ -19,11 +19,13 @@ public class MenuTracker {
      * Объект с хранилищем заявок.
      */
     private Tracker tracker;
+
     /**
      * Массив действий пользователя.
      */
     private UserAction[] actions = new UserAction[7];
 
+    private int position = 1;
     /**
      * Констуртор
      *
@@ -39,12 +41,12 @@ public class MenuTracker {
      * Инициализация массива пользовательских действий.
      */
     public void fillAction() {
-        this.actions[1] = this.new AddItem();
-        this.actions[2] = this.new ShowAllItem();
-        this.actions[3] = this.new EditItem();
-        this.actions[4] = this.new DeleteItem();
-        this.actions[5] = this.new FindById();
-        this.actions[6] = this.new FindByName();
+        this.actions[position++] = this.new AddItem("Add the new item.", 1);
+        this.actions[position++] = this.new ShowAllItem("Show all item.", 2);
+        this.actions[position++] = this.new EditItem("Edit item.", 3);
+        this.actions[position++] = this.new DeleteItem("Delete item.", 4);
+        this.actions[position++] = this.new FindById("Find item by id", 5);
+        this.actions[position++] = this.new FindByName("Find item by name", 6);
 
     }
 
@@ -83,10 +85,15 @@ public class MenuTracker {
     /**
      * Внутренний клас для добавления заявок в хранилище.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
+
+        public AddItem(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 0;
+            return 1;
         }
 
         @Override
@@ -96,20 +103,19 @@ public class MenuTracker {
             long data = Calendar.getInstance().getTimeInMillis();
             tracker.add(new Item(name, desc, data));
         }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key() + 1, "Add the new item.");
-        }
     }
 
     /**
      * Внутренний кла для вывода всех заявок на экран.
      */
-    private class ShowAllItem implements UserAction {
+    private class ShowAllItem extends BaseAction {
+        public ShowAllItem(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 1;
+            return 2;
         }
 
         @Override
@@ -117,23 +123,23 @@ public class MenuTracker {
             for (Item item : tracker.findAll()) {
                 long date = item.getCreated();
                 String strDate = String.format("%td.%tm.%tY %tl:%tM", date, date, date, date, date);
-                System.out.println("ID: " + item.getId() + " Name: " + item.getName() + " Description: " + item.getDesc() + " Date: " + strDate);
+                System.out.println("ID: " + item.getId() + ", Name: " + item.getName() + ", Description: " + item.getDesc() + ", Date: " + strDate);
             }
-        }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key() + 1, "Show all item");
         }
     }
 
     /**
      * Внутренний клас для редактирования заявки.
      */
-    private class EditItem implements UserAction {
+    private class EditItem extends BaseAction{
+
+        public EditItem(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -146,20 +152,20 @@ public class MenuTracker {
             item.setDesc(desc);
             tracker.update(item);
         }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key() + 1, "Edit item");
-        }
     }
 
     /**
      * Внутренний клас для удаления заявки.
      */
-    private class DeleteItem implements UserAction {
+    private class DeleteItem extends BaseAction{
+
+        public DeleteItem(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -168,20 +174,20 @@ public class MenuTracker {
             tracker.delete(tracker.findById(id));
             System.out.println("items for id:" + id + " deleting\n");
         }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key() + 1, "Delete item");
-        }
     }
 
     /**
      * Внутренний класс для поиска заявки по id.
      */
-    private class FindById implements UserAction {
+    private class FindById extends BaseAction{
+
+        public FindById(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 4;
+            return 5;
         }
 
         @Override
@@ -191,23 +197,23 @@ public class MenuTracker {
             if (item != null) {
                 long date = item.getCreated();
                 String strDate = String.format("%td.%tm.%tY %tl:%tM", date, date, date, date, date);
-                System.out.println("ID: " + item.getId() + " Name: " + item.getName() + " Description: " + item.getDesc() + " Date: " + strDate);
+                System.out.println("ID: " + item.getId() + ", Name: " + item.getName() + ", Description: " + item.getDesc() + ", Date: " + strDate);
             }
-        }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key() + 1, "Find item by id");
         }
     }
 
     /**
      * Внутренний класс для поиска заявки по имени.
      */
-    private class FindByName implements UserAction {
+    private class FindByName extends BaseAction{
+
+        public FindByName(String name, int key) {
+            super(name, key);
+        }
+
         @Override
         public int key() {
-            return 5;
+            return 6;
         }
 
         @Override
@@ -216,13 +222,8 @@ public class MenuTracker {
             for (Item item : tracker.findByName(name)) {
                 long date = item.getCreated();
                 String strDate = String.format("%td.%tm.%tY %tl:%tM", date, date, date, date, date);
-                System.out.println("ID: " + item.getId() + " Name: " + item.getName() + " Description: " + item.getDesc() + " Date: " + strDate);
+                System.out.println("ID: " + item.getId() + ", Name: " + item.getName() + ", Description: " + item.getDesc() + ", Date: " + strDate);
             }
-        }
-
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key() + 1, "Find item by name");
         }
     }
 }
