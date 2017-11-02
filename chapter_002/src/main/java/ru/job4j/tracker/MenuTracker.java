@@ -131,7 +131,7 @@ public class MenuTracker {
     /**
      * Внутренний клас для редактирования заявки.
      */
-    private class EditItem extends BaseAction{
+    private class EditItem extends BaseAction {
 
         public EditItem(String name, int key) {
             super(name, key);
@@ -157,7 +157,7 @@ public class MenuTracker {
     /**
      * Внутренний клас для удаления заявки.
      */
-    private class DeleteItem extends BaseAction{
+    private class DeleteItem extends BaseAction {
 
         public DeleteItem(String name, int key) {
             super(name, key);
@@ -179,7 +179,7 @@ public class MenuTracker {
     /**
      * Внутренний класс для поиска заявки по id.
      */
-    private class FindById extends BaseAction{
+    private class FindById extends BaseAction {
 
         public FindById(String name, int key) {
             super(name, key);
@@ -205,7 +205,7 @@ public class MenuTracker {
     /**
      * Внутренний класс для поиска заявки по имени.
      */
-    private class FindByName extends BaseAction{
+    private class FindByName extends BaseAction {
 
         public FindByName(String name, int key) {
             super(name, key);
