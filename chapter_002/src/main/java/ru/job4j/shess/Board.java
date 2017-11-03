@@ -26,33 +26,29 @@ public class Board {
      * @throws FigureNotFoundException Такой фигуры не существует
      */
     public boolean move(Cell source, Cell dist) throws ImposibleMoveException, OccupiedWayException, FigureNotFoundException {
-        boolean figureTrue = false;
         Figure figureFound = null;
         Cell[] cells;
         for (Figure figure : figures) {
             if (figure != null && figure.position.equals(source)) {
                 figureFound = figure;
                 break;
-            } else {
-                throw new FigureNotFoundException();
             }
         }
         if (figureFound != null) {
             cells = figureFound.way(dist);
-            if (cells == null) {
-                throw new ImposibleMoveException();
-            }
             for (Cell cell : cells) {
                 for (Figure figure : figures) {
-                    if (figure != null && figure.position.equals(cell)) {
-                        throw new OccupiedWayException();
-                    } else {
-                        figureTrue = true;
+                    if (figure != null) {
+                        if (figure.position.equals(cell)) {
+                            throw new OccupiedWayException();
+                        }
                     }
                 }
             }
+        } else {
+            throw new FigureNotFoundException();
         }
 
-        return figureTrue;
+        return true;
     }
 }
