@@ -1,4 +1,4 @@
-package ru.job4j.shess;
+package ru.job4j.chess;
 
 import java.util.Arrays;
 
@@ -6,10 +6,10 @@ import java.util.Arrays;
  * Класс Ладья.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
- * @version 0.1
- * @since 01.11.2017
+ * @version 0.2
+ * @since 10.11.2017
  */
-public class Rook extends Figure {
+public class Rook extends King {
     public Rook(Cell position) {
         super(position);
     }
@@ -34,27 +34,21 @@ public class Rook extends Figure {
         } else if (x1 == x2) {
             if (y1 > y2) {
                 // ладья движеться в низ
-                for (int i = y1 - 1; i >= y2; i--) {
-                    points[positArray++] = new Cell(x1, i);
-                }
+                positArray = this.figureMoveDown(y1, y2, x1, points, positArray);
             } else {
                 // ладья движеться в верх
-                for (int i = y1 + 1; i <= y2; i++) {
-                    points[positArray++] = new Cell(x1, i);
-                }
+                positArray = this.figureMoveUp(y1, y2, x1, points, positArray);
             }
         } else if (y1 == y2) {
             if (x1 > x2) {
                 //движение в лево
-                for (int i = x1 - 1; i >= x2; i--) {
-                    points[positArray++] = new Cell(i, y1);
-                }
+                positArray = this.figureMoveLeft(x1, x2, y1, points, positArray);
             } else {
                 //движение в право
-                for (int i = x1 + 1; i <= x2; i++) {
-                    points[positArray++] = new Cell(i, y1);
-                }
+                positArray = this.figureMoveRight(x1, x2, y1, points, positArray);
             }
+        } else {
+            throw new ImposibleMoveException();
         }
 
         return Arrays.copyOf(points, positArray);

@@ -1,15 +1,16 @@
-package ru.job4j.shess;
+package ru.job4j.chess;
 
 /**
  * Class Board.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
- * @version 0.1
- * @since 01.11.2017
+ * @version 0.2
+ * @since 10.11.2017
  */
 
 public class Board {
-    public Figure[] figures = new Figure[7];
+    public Figure[] figures = new Figure[64];
+    private int position = 0;
 
     /**
      * Метод move.
@@ -34,21 +35,29 @@ public class Board {
                 break;
             }
         }
-        if (figureFound != null) {
-            cells = figureFound.way(dist);
-            for (Cell cell : cells) {
-                for (Figure figure : figures) {
-                    if (figure != null) {
-                        if (figure.position.equals(cell)) {
-                            throw new OccupiedWayException();
-                        }
+        if (figureFound == null) {
+            throw new FigureNotFoundException();
+        }
+        cells = figureFound.way(dist);
+        for (Cell cell : cells) {
+            for (Figure figure : figures) {
+                if (figure != null) {
+                    if (figure.position.equals(cell)) {
+                        throw new OccupiedWayException();
                     }
                 }
             }
-        } else {
-            throw new FigureNotFoundException();
         }
 
         return true;
+    }
+
+    /**
+     * Adding figure to board.
+     * Добавление фигур на доску.
+     * @param figure фигура
+     */
+    public void addFigure(Figure figure) {
+        figures[position++] = figure;
     }
 }

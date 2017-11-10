@@ -1,4 +1,4 @@
-package ru.job4j.shess;
+package ru.job4j.chess;
 
 /**
  * невозможно пройти к нужному полю.

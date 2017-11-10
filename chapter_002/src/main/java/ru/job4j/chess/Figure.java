@@ -1,4 +1,4 @@
-package ru.job4j.shess;
+package ru.job4j.chess;
 
 /**
  * Class Figure.
@@ -25,4 +25,5 @@ public abstract class Figure {
      * @return массив координат следования
      */
     abstract Cell[] way(Cell dist) throws ImposibleMoveException;
+
 }
