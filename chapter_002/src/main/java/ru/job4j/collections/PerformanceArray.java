@@ -17,7 +17,7 @@ public class PerformanceArray {
         String[] massStr = new String[]{"Shehas", "very", "pleasant", "smile", "andasoft", "hairandbrown", "eyes", "Myname", "isJessica", "Iameleven"};
         long startL = System.currentTimeMillis();
         for (int i = 0; i < amount; i++) {
-            int num = 0 + (int)(Math.random()*10);
+            int num = 0 + (int) (Math.random() * 10);
             collection.add(massStr[num] + "-" + i);
         }
 

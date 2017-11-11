@@ -56,4 +56,14 @@ public class ConvertList {
         }
         return mass;
     }
+
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> array = new ArrayList<>();
+        for (int[] ints : list) {
+            for (int i = 0; i < ints.length; i++) {
+                array.add(ints[i]);
+            }
+        }
+        return array;
+    }
 }

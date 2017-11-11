@@ -3,6 +3,7 @@ package ru.job4j.collections;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertThat;
  */
 public class ConvertListTest {
 
-    // из массива в колекцию
+    // из массива в колекцию.
     @Test
     public void whenArrayThenList() {
         ConvertList convert = new ConvertList();
@@ -37,7 +38,7 @@ public class ConvertListTest {
         assertThat(except, is(rezult));
     }
 
-    // из колекции в массив
+    // из колекции в массив.
     @Test
     public void whenListThenArray() {
         ConvertList convert = new ConvertList();
@@ -58,5 +59,18 @@ public class ConvertListTest {
 
         int[][] rezult =  convert.toArray(listArray, 3);
         assertThat(except, is(rezult));
+    }
+
+    // из колекции в которой массив int преобразовать в колекциию Integer.
+    @Test
+    public void whenListArryaThenListInteger() {
+        ConvertList convert = new ConvertList();
+        List<int[]> list = new ArrayList<>();
+        List<Integer> except = new ArrayList<>();
+        except.addAll(Arrays.asList(1, 2, 3, 5, 7, 9, 10, 44));
+        list.add(new int[]{1, 2, 3});
+        list.add(new int[]{5, 7, 9, 10, 44});
+        List<Integer> rezult = convert.convert(list);
+        assertThat(rezult, is(except));
     }
 }
