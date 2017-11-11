@@ -34,7 +34,7 @@ public class King extends Figure {
             positionArray = this.figureMoveRight(x1, x2, y1, points, positionArray);
         } else if (x1 + 1 == x2 & y1 + 1 == y2) {
             // фигура движется вправо-вверх
-            positionArray = this.figureMoveRightUp(x1 , x2, y1, y2, points, positionArray);
+            positionArray = this.figureMoveRightUp(x1, x2, y1, y2, points, positionArray);
         } else if (x1 == x2 & y1 + 1 == y2) {
             // фигура движется вверх
             positionArray = this.figureMoveUp(y1, y2, x1, points, positionArray);
@@ -46,7 +46,7 @@ public class King extends Figure {
             positionArray = this.figureMoveLeft(x1, x2, y1, points, positionArray);
         } else if (x1 - 1 == x2 & y1 - 1 == y2) {
             // фигура движеться вниз-влево
-            positionArray = this.figureMoveLeftDown(x1, x2,y1, y2, points, positionArray);
+            positionArray = this.figureMoveLeftDown(x1, x2, y1, y2, points, positionArray);
         } else if (x1 == x2 & y1 - 1 == y2) {
             // фигура движеться вниз
             positionArray = this.figureMoveDown(y1, y2, x1, points, positionArray);
