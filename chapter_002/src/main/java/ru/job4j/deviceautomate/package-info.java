@@ -5,4 +5,4 @@
  * @version 0.1
  * @since 10.11.2017
  */
-package ru.job4j.deviceAutomate;
+package ru.job4j.deviceautomate;

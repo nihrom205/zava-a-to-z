@@ -1,4 +1,4 @@
-package ru.job4j.deviceAutomate;
+package ru.job4j.deviceautomate;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;

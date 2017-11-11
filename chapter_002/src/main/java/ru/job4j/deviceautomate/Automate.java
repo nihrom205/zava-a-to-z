@@ -1,4 +1,4 @@
-package ru.job4j.deviceAutomate;
+package ru.job4j.deviceautomate;
 
 import java.util.Arrays;
 
@@ -29,7 +29,7 @@ public class Automate {
         int[] surrender = new int[surrenderMoney / 10 + 5];
 
         if (surrenderMoney > 0) {
-            coinTen = surrenderMoney / 10 ;
+            coinTen = surrenderMoney / 10;
             surrenderMoney -= coinTen * 10;
             coinFive = surrenderMoney / 5;
             surrenderMoney -= coinFive * 5;
