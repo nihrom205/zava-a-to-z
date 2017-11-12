@@ -1,13 +1,15 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Class MenuTracker.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
- * @version $1d$
- * @since 25.10.2017
+ * @version 0.2
+ * @since 12.11.2017
  */
 public class MenuTracker {
     /**
@@ -23,9 +25,10 @@ public class MenuTracker {
     /**
      * Массив действий пользователя.
      */
-    private UserAction[] actions = new UserAction[7];
+//    private UserAction[] actions = new UserAction[7];
+    private List<UserAction> actions = new ArrayList<>();
 
-    private int position = 1;
+//    private int position = 1;
     /**
      * Констуртор
      *
@@ -41,12 +44,12 @@ public class MenuTracker {
      * Инициализация массива пользовательских действий.
      */
     public void fillAction() {
-        this.actions[position++] = this.new AddItem("Add the new item.", 1);
-        this.actions[position++] = this.new ShowAllItem("Show all item.", 2);
-        this.actions[position++] = this.new EditItem("Edit item.", 3);
-        this.actions[position++] = this.new DeleteItem("Delete item.", 4);
-        this.actions[position++] = this.new FindById("Find item by id", 5);
-        this.actions[position++] = this.new FindByName("Find item by name", 6);
+        this.actions.add(new AddItem("Add the new item.", 1));
+        this.actions.add(new ShowAllItem("Show all item.", 2));
+        this.actions.add(new EditItem("Edit item.", 3));
+        this.actions.add(new DeleteItem("Delete item.", 4));
+        this.actions.add(new FindById("Find item by id", 5));
+        this.actions.add(new FindByName("Find item by name", 6));
 
     }
 
@@ -55,7 +58,7 @@ public class MenuTracker {
      * @return список индексов
      */
     public int[] getIndexFillAction() {
-        int[] ranges = new int[this.actions.length - 1];
+        int[] ranges = new int[actions.size() - 1];
         for (int i = 1; i <= ranges.length; i++) {
             ranges[i - 1] = i;
         }
@@ -68,7 +71,7 @@ public class MenuTracker {
      * @param key значение
      */
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        actions.get(key).execute(this.input, this.tracker);
     }
 
     /**

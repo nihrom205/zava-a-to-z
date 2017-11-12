@@ -1,6 +1,11 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -20,7 +25,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
 
     /**
@@ -36,12 +41,8 @@ public class TrackerTest {
         Item itemFive = new Item("test5", "testDescription", 123L);
         Item itemSex = new Item("test6", "testDescription", 123L);
 
-        Item[] arrayItem = new Item[5];
-        arrayItem[0] = itemOne;
-        arrayItem[1] = itemTwo;
-        arrayItem[2] = itemTree;
-        arrayItem[3] = itemFive;
-        arrayItem[4] = itemSex;
+        List<Item> arrayItem = new ArrayList<>();
+        arrayItem.addAll(Arrays.asList(itemOne, itemTwo, itemTree, itemFive, itemSex));
 
         tracker.add(itemOne);
         tracker.add(itemTwo);
@@ -65,11 +66,11 @@ public class TrackerTest {
         tracker.add(new Item("test2", "testDescription", 123L));
         tracker.add(new Item("test3", "testDescription", 123L));
 
-        Item item = tracker.findAll()[1];
+        Item item = tracker.findAll().get(1);
         item.setName("XXXXX");
         item.setDesc("YYYYYYYYYY");
         item.setCreated(444L);
-        assertThat(tracker.findAll()[1], is(item));
+        assertThat(tracker.findAll().get(1), is(item));
     }
 
     /**
@@ -86,10 +87,8 @@ public class TrackerTest {
         tracker.add(itemTwo);
         tracker.add(itemTree);
 
-        Item[] arrayItem = new Item[3];
-        arrayItem[0] = itemOne;
-        arrayItem[1] = itemTwo;
-        arrayItem[2] = itemTree;
+        List<Item> arrayItem = new ArrayList<>();
+        arrayItem.addAll(Arrays.asList(itemOne, itemTwo, itemTree));
 
         assertThat(tracker.findAll(), is(arrayItem));
     }
@@ -105,9 +104,8 @@ public class TrackerTest {
         Item itemTree = new Item("test3", "testDescription", 123L);
         Item itemFour = new Item("test2", "testDescription00", 123L);
 
-        Item[] result = new Item[2];
-        result[0] = itemTwo;
-        result[1] = itemFour;
+        List<Item> result = new ArrayList<>();
+        result.addAll(Arrays.asList(itemTwo, itemFour));
         //---------------------------
 
         tracker.add(itemOne);
@@ -115,7 +113,7 @@ public class TrackerTest {
         tracker.add(itemTree);
         tracker.add(itemFour);
 
-        Item[] arrayItem = tracker.findByName("test2");
+        List<Item> arrayItem = tracker.findByName("test2");
 
         assertThat(arrayItem, is(result));
     }
@@ -136,9 +134,9 @@ public class TrackerTest {
         tracker.add(itemTree);
         tracker.add(itemFour);
 
-        String id = tracker.findAll()[3].getId();
+        String id = tracker.findAll().get(3).getId();
         Item result = tracker.findById(id);
-        assertThat(tracker.findAll()[3], is(result));
+        assertThat(tracker.findAll().get(3), is(result));
 
 //        String id = "11";
 //        assertThat(null, is(result));         // проверка null
