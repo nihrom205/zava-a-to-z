@@ -36,4 +36,53 @@ public class SortUserTest {
 
         assertThat(except, is(rezult));
     }
+
+    // проверка сортировки по длине имени
+    @Test
+    public void whenListSortNameLengthThenSortedName() {
+        SortUser sortUser = new SortUser();
+        List<User> list = new ArrayList<>();
+        list.addAll(Arrays.asList(new User("Valerya", 60),
+                                    new User("Andrey", 30),
+                                    new User("Alexa", 12),
+                                    new User("olga", 65)));
+
+        List<User> except = new ArrayList<>();
+        except.addAll(Arrays.asList(new User("olga", 65),
+                                    new User("Alexa", 12),
+                                    new User("Andrey", 30),
+                                    new User("Valerya", 60)));
+
+        List<User> rezult;
+        rezult = sortUser.sortNameLength(list);
+        assertThat(except, is(rezult));
+    }
+
+    /**
+     * проверка сортировки по 2 параметрам (имя и возраст),
+     * если имя совпадают то учитывается возраст.
+     */
+    @Test
+    public void whenLIstSortAllFieldThenListSorted() {
+        SortUser sortUser = new SortUser();
+        List<User> list = new ArrayList<>();
+        list.addAll(Arrays.asList(new User("Valerya", 10),
+                                  new User("Andrey", 30),
+                                  new User("Olga", 12),
+                                  new User("Alga", 65),
+                                  new User("Alga", 55)
+        ));
+
+        List<User> except = new ArrayList<>();
+        except.addAll(Arrays.asList(new User("Alga", 55),
+                                    new User("Alga", 65),
+                                    new User("Andrey", 30),
+                                    new User("Olga", 12),
+                                    new User("Valerya", 10)));
+
+        List<User> rezult;
+        rezult = sortUser.sortByAllFields(list);
+        assertThat(except, is(rezult));
+    }
+
 }
