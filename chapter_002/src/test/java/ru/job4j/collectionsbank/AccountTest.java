@@ -30,13 +30,20 @@ public class AccountTest {
         User user3 = new User("Alex", "456");
         bank.addUser(user1);
         bank.addUser(user2);
-        bank.addUser(user3);
+//        bank.addUser(user3);
         Account acc1 = new Account(200.15, 1234567890);
-        Account acc2 = new Account(20_000.00, 1111111111);
         bank.addAccountToUser(user1, acc1);
-        bank.addAccountToUser(user2, acc2);
-        bank.transferMoney(user1, acc1, user2, acc2, 100.05);
 
+        Account accDm1 = new Account(20_000.00, 1111111111);
+        bank.addAccountToUser(user2, accDm1);
+
+        Account accDm2 = new Account(1_000.00, 22);
+        bank.addAccountToUser(user2, accDm2);
+
+//        bank.deleteAccountFromUser(user2, acc3);
+//        List<Account> aa = bank.getUserAccounts(user2);
+
+        bank.transferMoney(user1, acc1, user2, accDm1, 100.05);
 
 //        assertThat(bank.map, equalTo(Collections.EMPTY_MAP));
 

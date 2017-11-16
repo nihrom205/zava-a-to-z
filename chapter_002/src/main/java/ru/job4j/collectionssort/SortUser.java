@@ -16,8 +16,7 @@ public class SortUser {
      * @return отсортированное множество
      */
     public Set<User> sort(List<User> list) {
-        Set<User> set = new TreeSet<>(list);
-        return set;
+        return new TreeSet<>(list);
     }
 
     /**

@@ -1,6 +1,7 @@
 package ru.job4j.collectionsbank;
 
 import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * Class Bank.
@@ -34,9 +35,11 @@ public class Bank {
      * @param account аккаунт пользователя
      */
     public void addAccountToUser(User user, Account account) {
-        if (map.containsKey(user)) {
-            map.get(user).add(account);
-        }
+        map.computeIfPresent(user, (k,v) -> {
+           v.add(account);
+           return v;
+        });
+
     }
 
     /**
@@ -44,19 +47,11 @@ public class Bank {
      * @param user пользователь
      * @param account аккаунт
      */
-    public void deketeAccountFromUser(User user, Account account) {
-        if (map.containsKey(user)) {
-            Iterator<Account> iter = map.get(user).iterator();
-            while (iter.hasNext()) {
-                Account acc = iter.next();
-                if (acc.getRequisites() == account.getRequisites()) {
-                    iter.next();
-                    iter.remove();
-                    break;
-                }
-            }
-        }
-
+    public void deleteAccountFromUser(User user, Account account) {
+        map.computeIfPresent(user, (k,v) -> {
+            v.remove(v.indexOf(account));
+            return v;
+        });
     }
 
     /**
@@ -65,7 +60,7 @@ public class Bank {
      * @return список счетов
      */
     public List<Account> getUserAccounts(User user) {
-        return (this.map.containsKey(user))? this.map.get(user) : new ArrayList<Account>();
+        return map.computeIfPresent(user, (k,v) -> v);
     }
 
     /**
@@ -79,32 +74,17 @@ public class Bank {
      */
     public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amound) {
         boolean transfer = false;
-        if (map.containsKey(srcUser) && map.containsKey(dstUser)) {
-            Account srcAcc = this.getAccount(map.get(srcUser), srcAccount);
-            Account dstAcc = this.getAccount(map.get(dstUser), dstAccount);
-            if (srcAcc.getValue() >= amound) {
-                srcAcc.setValue(srcAcc.getValue() - amound);
-                dstAcc.setValue(dstAcc.getValue() + amound);
-                transfer = true;
-            }
+        List<Account> listSrc = map.computeIfPresent(srcUser, (k,v) -> v);
+        Account srcAcc = listSrc.get(listSrc.indexOf(srcAccount));
+
+        List<Account> listDst = map.computeIfPresent(dstUser, (k,v) -> v);
+        Account dstAcc = listDst.get(listDst.indexOf(dstAccount));
+
+        if (srcAcc.getValue() >= amound) {
+            srcAcc.setValue(srcAcc.getValue() - amound);
+            dstAcc.setValue(dstAcc.getValue() + amound);
+            transfer = true;
         }
         return transfer;
-    }
-
-    /**
-     * метод возвращает ищет Account из списка, если нашел то возвращает, иначе null.
-     * @param listAcc список аккаунтов
-     * @param account искомый аккаунт
-     * @return найденый аккаунт
-     */
-    private Account getAccount(List<Account> listAcc, Account account) {
-        Account acc = null;
-        for (Account value : listAcc) {
-            if (account.getRequisites() == value.getRequisites()){
-                acc = value;
-                break;
-            }
-        }
-        return acc;
     }
 }
