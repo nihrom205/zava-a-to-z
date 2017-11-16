@@ -22,13 +22,13 @@ public class SortUserTest {
         list.addAll(Arrays.asList(new User("zuma", 60),
                                     new User("petr", 30),
                                     new User("alex", 12),
-                                    new User("olga", 65)));
+                                    new User("olga", 60)));
 
         Set<User> except = new TreeSet<>();
         except.addAll(Arrays.asList(new User("alex", 12),
                                     new User("petr", 30),
                                     new User("zuma", 60),
-                                    new User("olga", 65)));
+                                    new User("olga", 60)));
 
         Set<User> rezult;
 
