@@ -18,8 +18,7 @@ public class ConvertList {
      * @return коллекция List
      */
     public List<Integer> toList(int[][] array) {
-        int lengthArray = array.length * array[0].length;
-        List<Integer> list = new ArrayList<>(lengthArray);
+        List<Integer> list = new ArrayList<>();
         for (int[] ints : array) {
             for (int value : ints) {
                 list.add(value);
