@@ -2,7 +2,6 @@ package ru.job4j.collections;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Клас конвектор из list в map.
