@@ -6,7 +6,7 @@ import java.util.Iterator;
  * Class <Name class>.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
- * @version 0.1
+ * @version 0.2
  * @since 19.11.2017
  */
 public class IteratorArray implements Iterator {
