@@ -28,7 +28,7 @@ public class IteratorArray implements Iterator {
     @Override
     public Integer next() {
         Integer value = 0;
-        if (indexColumn < mass[0].length) {
+        if (indexColumn < mass[indexRow].length) {
             value = mass[indexRow][indexColumn++];
         } else {
             indexRow++;
