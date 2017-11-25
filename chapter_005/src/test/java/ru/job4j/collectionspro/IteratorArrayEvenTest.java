@@ -18,7 +18,7 @@ public class IteratorArrayEvenTest {
 
     @Before
     public void setUp() {
-        it = new IteratorArrayEven(new int[]{1, 2, 3, 5, 4, 8, 9, 2});
+        it = new IteratorArrayEven(new int[]{1, 2, 3, 5, 4, 8, 9, 3});
     }
 
     @Test
@@ -27,5 +27,13 @@ public class IteratorArrayEvenTest {
         assertThat(it.next(), is(4));
         assertThat(it.next(), is(8));
         assertThat(it.next(), is(2));
+    }
+
+    @Test
+    public void whenNextEvenNumberArrayThenReturnTrue() {
+        it.next();
+        it.next();
+        it.next();
+        assertThat(it.hasNext(), is(false));
     }
 }

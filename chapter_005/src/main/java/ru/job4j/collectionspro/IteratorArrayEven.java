@@ -19,7 +19,15 @@ public class IteratorArrayEven implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return array.length > index;
+        int indexArray = this.index;
+        boolean isEven = false;
+        for (int i = index; i < array.length; i++) {
+            if (array[indexArray++] % 2 == 0) {
+                isEven = true;
+                break;
+            }
+        }
+        return isEven;
     }
 
     @Override
@@ -34,4 +42,5 @@ public class IteratorArrayEven implements Iterator {
         }
         return rezult;
     }
+
 }
