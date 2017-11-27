@@ -1,6 +1,7 @@
 package ru.job4j.collectionspro;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Описание клас возвращает из массива только простые числа.
@@ -21,22 +22,43 @@ public class IteratorSimpleNumber implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return mass.length > index;
+
+        return this.simpleNumber(true) != 0 ? true : false;
     }
 
     @Override
     public Object next() {
         int rezult = 0;
-        int endIndex = (int) Math.sqrt(mass[index]);
-        if (mass[index] == 1 || mass[index] == 2) {
-            rezult = mass[index++];
-        } else {
-            for (int i = 2; i < endIndex; i++) {
-                if (mass[index] % i == 0) {
-                    rezult = mass[index++];
+        rezult = this.simpleNumber(false);
+        if (rezult == 0) {
+            throw new NoSuchElementException();
+        }
+        return rezult;
+    }
+
+    private int simpleNumber( boolean isHashNext) {
+        int rezult = 0;
+        for (int i = index; i < mass.length; i++) {
+            boolean isSimple = true;
+            if (mass[i] == 1 || mass[i] == 2) {
+                rezult = mass[i];
+            } else {
+                for (int j = 2; j < mass[i]; j++) {
+                    if (mass[i] % j == 0) {
+                        isSimple = false;
+                        break;
+                    }
                 }
             }
+            if (isSimple == true && isHashNext == false) {
+                rezult = mass[i++];
+                index = i;
+                break;
+            } else if (isSimple == true && isHashNext == true){
+                rezult = mass[i];
+                break;
+            }
         }
-        return null;
+        return rezult;
     }
 }
