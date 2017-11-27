@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * Class возвращает только четные числа.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
- * @version 0.2
+ * @version 0.1
  * @since 19.11.2017
  */
 public class IteratorArrayEven implements Iterator {
@@ -20,9 +20,10 @@ public class IteratorArrayEven implements Iterator {
 
     @Override
     public boolean hasNext() {
+        int indexArray = this.index;
         boolean isEven = false;
         for (int i = index; i < array.length; i++) {
-            if (this.isEven(i)) {
+            if (this.isEven(indexArray++)) {
                 isEven = true;
                 break;
             }

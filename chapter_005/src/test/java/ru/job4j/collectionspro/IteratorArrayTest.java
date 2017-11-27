@@ -22,7 +22,6 @@ public class IteratorArrayTest {
         it.next();
         it.next();
         int rezult = it.next();
-        it.next();
 
         assertThat(rezult, is(3));
     }
