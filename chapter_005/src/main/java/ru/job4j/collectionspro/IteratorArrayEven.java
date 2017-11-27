@@ -20,10 +20,9 @@ public class IteratorArrayEven implements Iterator {
 
     @Override
     public boolean hasNext() {
-        int indexArray = this.index;
         boolean isEven = false;
         for (int i = index; i < array.length; i++) {
-            if (this.isEven(indexArray++)) {
+            if (this.isEven(i)) {
                 isEven = true;
                 break;
             }
