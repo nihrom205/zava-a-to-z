@@ -1,6 +1,7 @@
 package ru.job4j.collectionspro;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Class возвращает только четные числа.
@@ -22,7 +23,7 @@ public class IteratorArrayEven implements Iterator {
         int indexArray = this.index;
         boolean isEven = false;
         for (int i = index; i < array.length; i++) {
-            if (array[indexArray++] % 2 == 0) {
+            if (this.isEven(indexArray++)) {
                 isEven = true;
                 break;
             }
@@ -32,15 +33,26 @@ public class IteratorArrayEven implements Iterator {
 
     @Override
     public Integer next() {
-        int rezult = 0;
+        int rezult = -1;
         while (hasNext()) {
-            if (array[index] % 2 == 0) {
+            if (this.isEven(index)) {
                 rezult = array[index++];
                 break;
             }
             index++;
         }
+        if (rezult == -1) {
+            throw new NoSuchElementException();
+        }
         return rezult;
     }
 
+    /**
+     * мето проверяет четное число или нет.
+     * @param index позиция в массиве
+     * @return true and false
+     */
+    private boolean isEven(int index) {
+        return array[index] % 2 == 0;
+    }
 }

@@ -3,6 +3,8 @@ package ru.job4j.collectionspro;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -21,7 +23,7 @@ public class IteratorArrayEvenTest {
         it = new IteratorArrayEven(new int[]{1, 2, 3, 5, 4, 8, 9, 3});
     }
 
-    @Test
+    @Test (expected = NoSuchElementException.class)
     public void whenNextNumberArrayThenForward() {
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(4));
