@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.is;
@@ -23,7 +24,7 @@ public class IteratorSimpleNumberTest {
         it = new IteratorSimpleNumber(new int[]{4, 4, 5, 8, 11, 14});
     }
 
-    @Test
+    @Test (expected = NoSuchElementException.class)
     public void whenArrayNumberThenSimpleNumber() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.hasNext(), is(true));
@@ -31,6 +32,8 @@ public class IteratorSimpleNumberTest {
         assertThat(it.next(), is(5));
         assertThat(it.next(), is(11));
         assertThat(it.hasNext(), is(false));
+        assertThat(it.next(), is(11));
+
     }
 
 }
