@@ -1,6 +1,7 @@
 package ru.job4j.collectionspro;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Class <Name class>.
@@ -22,18 +23,29 @@ public class IteratorArray implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return sizeMass > indexColumn * indexRow;
+        return (checked(true) != null) ? true : false;
     }
 
     @Override
     public Integer next() {
-        Integer value = 0;
-        if (indexColumn < mass[indexRow].length) {
-            value = mass[indexRow][indexColumn++];
-        } else {
-            indexRow++;
-            indexColumn = 0;
-            value = mass[indexRow][indexColumn++];
+        return checked(false);
+    }
+
+    private Integer checked(boolean isHasNext) {
+        Integer value = null;
+        int col = indexColumn;
+        int row = indexRow;
+        if (col < mass[row].length) {
+            value = mass[row][col++];
+        } else if ((row += 1) < mass.length){
+            col = 0;
+            value = mass[row][col++];
+        } else if (!isHasNext){
+            throw new NoSuchElementException();
+        }
+        if (!isHasNext) {
+            indexColumn = col;
+            indexRow = row;
         }
         return value;
     }

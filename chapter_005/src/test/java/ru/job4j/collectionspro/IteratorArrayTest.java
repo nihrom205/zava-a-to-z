@@ -1,8 +1,10 @@
 package ru.job4j.collectionspro;
 
+import org.junit.Before;
 import org.junit.Test;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import java.util.NoSuchElementException;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Class <Name class>.
@@ -12,19 +14,27 @@ import static org.junit.Assert.*;
  * @since 19.11.2017
  */
 public class IteratorArrayTest {
+    private IteratorArray it;
 
-    @Test
-    public void whenNextCallThenForward() {
+    @Before
+    public void setUp() {
 //        IteratorArray it = new IteratorArray(new int[][] {{1, 2}, {3, 4}, {5, 6}, {7, 8}});
 //        IteratorArray it = new IteratorArray(new int[][] {{1}, {3}, {5}, {7}});
-        IteratorArray it = new IteratorArray(new int[][] {{1, 2}, {3}});
+        it = new IteratorArray(new int[][] {{1, 2, 3}, {7}});
+    }
 
-        it.next();
-        it.next();
-        int rezult = it.next();
-        it.next();
-
-        assertThat(rezult, is(3));
+    @Test (expected = NoSuchElementException.class)
+    public void whenNextCallThenForward() {
+        assertThat(it.next(), is(1));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(7));
+        assertThat(it.hasNext(), is(false));
+        assertThat(it.next(), is(10));
     }
 
     @Test
