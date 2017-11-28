@@ -4,8 +4,9 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Iterator;
-
-import static org.junit.Assert.*;
+import java.util.NoSuchElementException;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Class ConverterTest.
@@ -16,7 +17,7 @@ import static org.junit.Assert.*;
  */
 public class ConverterTest {
 
-    @Test
+    @Test (expected = NoSuchElementException.class)
     public void whenIteratorNextWhenNumber() {
         Iterator<Integer> i1 = Arrays.asList(4, 2, 0, 4, 6, 4, 9).iterator();
         Iterator<Integer> i2 = Arrays.asList(0, 9, 8, 7, 5).iterator();
@@ -25,11 +26,33 @@ public class ConverterTest {
 
         Converter converter = new Converter();
         Iterator<Integer> iterator = converter.convert(it);
-        System.out.println(iterator.next());
-        System.out.println(iterator.next());
-        System.out.println(iterator.next());
-        System.out.println(iterator.next());
-        System.out.println(iterator.next());
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(4));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(2));
+        assertThat(iterator.next(), is(0));
+        assertThat(iterator.next(), is(4));
+        assertThat(iterator.next(), is(6));
+        assertThat(iterator.next(), is(4));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(9));
+        assertThat(iterator.next(), is(0));
+        assertThat(iterator.next(), is(9));
+        iterator.next();
+        iterator.next();
+        assertThat(iterator.next(), is(5));
+        assertThat(iterator.next(), is(1));
+        iterator.next();
+        iterator.next();
+        assertThat(iterator.next(), is(6));
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        assertThat(iterator.next(), is(4));
+        assertThat(iterator.hasNext(), is(false));
+        assertThat(iterator.next(), is(100));
 
     }
 

@@ -1,9 +1,11 @@
 package ru.job4j.collectionspro;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Class Converter.
+ * конвертирует Iterator<Iterator<Integer>>   ->   Iterator<Integer>.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
@@ -13,38 +15,38 @@ public class Converter {
     private Iterator<Iterator<Integer>> iter = null;
     private Iterator<Integer> currentIter = null;
 
+    /**
+     * метод принимает Iterator<Iterator<Integer>> и преобразует в Iterator<Integer>.
+     * @param it Iterator<Iterator<Integer>>
+     * @return Iterator<Integer>
+     */
     Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         this.iter = it;
         this.currentIter = it.next();
         return new Iterator<Integer>() {
 
-            private void checked() {
-                if (!iter.hasNext()) {
-                    currentIter = it.next();
-                }
-            }
-
             @Override
             public boolean hasNext() {
-//                boolean isHasNext = false;
-//                if (it.hasNext()) {
-//                    Iterator iter = it.next();
-//                    isHasNext = iter.hasNext();
-//                }
-//                return isHasNext;
-                return false;
+                boolean isHasNext = false;
+                if (currentIter.hasNext()) {
+                    isHasNext = true;
+                }
+                if (!currentIter.hasNext() && iter.hasNext()) {
+                    isHasNext = true;
+                }
+                return isHasNext;
             }
 
             @Override
             public Integer next() {
-                if (it.hasNext())
-                while (true) {
-                    Iterator iterator = it.next();
-                    while (iterator.hasNext()) {
-                        return (Integer) iterator.next();
-                    }
+                Integer value = null;
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                } else if (!currentIter.hasNext()) {
+                    currentIter = iter.next();
                 }
-                return null;
+                value = currentIter.next();
+                return value;
             }
         };
     }
