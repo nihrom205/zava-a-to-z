@@ -61,9 +61,9 @@ public class SimpleArray<T> {
         boolean isDelete = false;
         int size = mass.length;
         for (int i = 0; i < size; i++) {
-            iterValue = (T)this.get(i);
+            iterValue = (T) this.get(i);
             if (value.equals(iterValue)) {
-                System.arraycopy(mass, i+1, mass, i, size - i - 1);
+                System.arraycopy(mass, i + 1, mass, i, size - i - 1);
                 mass[--size] = null;
                 isDelete = true;
                 break;

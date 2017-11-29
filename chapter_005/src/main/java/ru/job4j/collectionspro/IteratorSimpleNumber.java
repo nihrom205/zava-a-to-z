@@ -36,7 +36,7 @@ public class IteratorSimpleNumber implements Iterator {
         return rezult;
     }
 
-    private int simpleNumber( boolean isHashNext) {
+    private int simpleNumber(boolean isHashNext) {
         int rezult = 0;
         for (int i = index; i < mass.length; i++) {
             boolean isSimple = true;
@@ -50,11 +50,11 @@ public class IteratorSimpleNumber implements Iterator {
                     }
                 }
             }
-            if (isSimple == true && isHashNext == false) {
+            if (isSimple && !isHashNext) {
                 rezult = mass[i++];
                 index = i;
                 break;
-            } else if (isSimple == true && isHashNext == true){
+            } else if (isSimple && isHashNext) {
                 rezult = mass[i];
                 break;
             }
