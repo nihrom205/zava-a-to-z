@@ -66,6 +66,7 @@ public class SimpleArray<T> {
                 System.arraycopy(mass, i + 1, mass, i, size - i - 1);
                 mass[--size] = null;
                 isDelete = true;
+                index--;
                 break;
             }
         }
