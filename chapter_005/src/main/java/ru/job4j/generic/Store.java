@@ -1,7 +1,11 @@
 package ru.job4j.generic;
 
 /**
+<<<<<<< HEAD
  * Описание.
+=======
+ * Интерфейс мотодов добавления, обновления и удаления.
+>>>>>>> origin/master
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
