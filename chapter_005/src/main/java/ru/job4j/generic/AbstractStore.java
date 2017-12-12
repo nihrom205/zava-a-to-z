@@ -8,18 +8,18 @@ package ru.job4j.generic;
  * @version 0.1
  * @since 07.12.2017
  */
-public class AbstractStore<T extends Base> implements Store {
+public class AbstractStore<T extends Base> implements Store<T> {
 
     private SimpleArray<Base> simpleArray = new SimpleArray<>(5);
 
     @Override
-    public Base add(Base model) {
+    public T add(T model) {
         simpleArray.add(model);
         return model;
     }
 
     @Override
-    public Base update(Base model) {
+    public T update(T model) {
         T userRezult = null;
         String id = model.getId();
         T oldUser = (T) simpleArray.get(0);

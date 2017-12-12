@@ -1,12 +1,6 @@
 package ru.job4j.generic;
 
 /**
-<<<<<<< HEAD
- * Описание.
-=======
- * класс user.
->>>>>>> origin/master
- *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
  * @since 02.12.2017
