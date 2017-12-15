@@ -12,9 +12,9 @@ import java.util.NoSuchElementException;
  * @since 14.12.2017
  */
 public class SimpleList<E> implements SimpleContainer<E> {
-    private Node<E> first;
-    private Node<E> end;
-    private int index = 0;
+    protected Node<E> first;
+    protected Node<E> end;
+    protected int index = 0;
 
     /**
      * добавление элемента в конец.
@@ -86,7 +86,7 @@ public class SimpleList<E> implements SimpleContainer<E> {
      * class ячейка LinkedList.
      * @param <E> принимает обобщенный тип.
      */
-    private class Node<E> {
+    protected class Node<E> {
         int key;
         E eData;
         Node<E> next;
