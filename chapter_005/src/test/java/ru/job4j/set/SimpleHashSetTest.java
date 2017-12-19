@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
  * Class Testing SimpleHashSet.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
- * @version 0.1
+ * @version 0.2
  * @since 19.12.17
  */
 public class SimpleHashSetTest {

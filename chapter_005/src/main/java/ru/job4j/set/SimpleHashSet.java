@@ -4,7 +4,7 @@ package ru.job4j.set;
  * Class Set на базе хэш-таблицы.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
- * @version 0.1
+ * @version 0.2
  * @since 18.12.17
  */
 public class SimpleHashSet<E> implements SimpleHashTable<E> {
