@@ -22,30 +22,11 @@ public class SimpleLinkedListSet<T> implements SimpleContainerSet<T> {
      */
     @Override
     public void add(T value) {
-        boolean isEmpty = true;
-        Node<T> current = first;
-
-        /**
-         * в цикле проверяем  есть ли елемент который мы хотим добавить,
-         */
-        while (isEmpty) {
-            if (first == null) {
-                first = end = new Node<>(key++, value);
-                isEmpty = false;
-            } else if (((T)current.tDate).equals(value)) {
-                isEmpty = false;
-                break;
-            } else if (current.next == null) {
-                break;
-            } else {
-                current = current.next;
-            }
-        }
 
         /**
          * добавление элемента если к set-е нет такого элемента
          */
-        if (isEmpty) {
+        if (enlarge(value)) {
             end.next = new Node<T>(key++, value);
             end = end.next;
         }
@@ -90,5 +71,29 @@ public class SimpleLinkedListSet<T> implements SimpleContainerSet<T> {
             this.key = key;
             this.tDate = tDate;
         }
+    }
+
+    /**
+     * в цикле проверяем  есть ли елемент который мы хотим добавить,
+     * @param value искомое значение в списке
+     * @return true - не найден, иначе - false.
+     */
+    private boolean enlarge(T value) {
+        boolean isEmpty = true;
+        Node<T> current = first;
+        while (isEmpty) {
+            if (first == null) {
+                first = end = new Node<>(key++, value);
+                isEmpty = false;
+            } else if ((current.tDate).equals(value)) {
+                isEmpty = false;
+                break;
+            } else if (current.next == null) {
+                break;
+            } else {
+                current = current.next;
+            }
+        }
+        return isEmpty;
     }
 }
