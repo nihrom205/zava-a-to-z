@@ -35,26 +35,17 @@ public class SimpleSet<T> implements SimpleContainerSet<T> {
      */
     @Override
     public void add(T t) {
-        boolean isEmty = true;  // пустой - true.
+//        boolean isEmty = true;  // пустой - true.
 
         // в цикле проверяем есть ли значение t в массиве.
         // если есть меняем isEmpty на false и выходим из цикла.
         if (index == array.length) {
-            Object[] newArray = new Object[array.length * 2];
-            System.arraycopy(array, 0, newArray, 0, index);
-            array = newArray;
-        }
-
-        for (int i = 0; i < index ; i++) {
-            if (((T)array[i]).equals(t)) {
-                isEmty = false;
-                break;
-            }
+            enlarge();
         }
 
         // если isEmty = true, то в массиве нет значения t,
         // добавляем в массив значение t
-        if (isEmty) {
+        if (isEmpty(t)) {
             array[index++] = t;
         }
     }
@@ -82,5 +73,30 @@ public class SimpleSet<T> implements SimpleContainerSet<T> {
             }
             return rezult;
         }
+    }
+
+    /**
+     * метод проверяет есть ли элемент в массиве, если есть возвращает false, иначе true.
+     * @param t искомый элемент
+     * @return false - элемент есть в массиве, иначе - true.
+     */
+    private boolean isEmpty(T t) {
+        boolean isEmty = true;
+        for (int i = 0; i < index ; i++) {
+            if ((array[i]).equals(t)) {
+                isEmty = false;
+                break;
+            }
+        }
+        return isEmty;
+    }
+
+    /**
+     * метод увеличения массива в 2 раза от исходного.
+     */
+    private void enlarge() {
+        Object[] newArray = new Object[array.length * 2];
+        System.arraycopy(array, 0, newArray, 0, index);
+        array = newArray;
     }
 }
