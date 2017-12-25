@@ -33,21 +33,22 @@ public class SimpleHashSet<E> implements SimpleHashTable<E> {
     /**
      * метод добавления елементов в массив.
      * @param e елемент добавления
-     * @return treu - добавлено, false - не добавлено в массив.
+     * @return true - добавлено, false - не добавлено в массив.
      */
     @Override
     public boolean add(E e) {
         boolean isAdd = false;
 
+        // проверка достигнут ли массив предела. true вызывается метод для увеличения массива, false - пропускается.
+        if (count == mass.length) {
+            enlarge();
+        }
+
         // проверка есть ли элемент в колекции,
-        // если true то пропускаем, если false то записываем
+        // если false то пропускаем, если true то записываем
         if (!contains(e)) {
-            if (count == mass.length) {
-                Node[] newMass = new Node[2 * mass.length];
-                System.arraycopy(mass, 0, newMass, 0, mass.length);
-                mass = newMass;
-            }
-            int hCode = hf(e);
+            int hCode = e.hashCode();
+            hCode = (hCode < 0) ? Math.abs(hCode) : hCode;
             int position = hCode % mass.length;
             if (mass[position] == null) {
                 mass[position] = new Node<>(hCode, e);
@@ -65,10 +66,8 @@ public class SimpleHashSet<E> implements SimpleHashTable<E> {
      */
     @Override
     public boolean contains(E e) {
-        boolean isNotEmpty = false; // есть искомый элемент (false - нет)
-        if (isEmpty(e) != -1)
-            isNotEmpty = true;
-        return isNotEmpty;
+        int position = e.hashCode() % mass.length;
+        return (mass[position] != null) ? true : false;
     }
 
     /**
@@ -79,9 +78,9 @@ public class SimpleHashSet<E> implements SimpleHashTable<E> {
     @Override
     public boolean remove(E e) {
         boolean isRemove = false;
-        int rezult = isEmpty(e);
-        if (rezult != -1) {
-            mass[rezult] = null;
+        if (contains(e)) {
+            int position = e.hashCode() % mass.length;
+            mass[position] = null;
             isRemove = true;
         }
         return isRemove;
@@ -119,43 +118,16 @@ public class SimpleHashSet<E> implements SimpleHashTable<E> {
     }
 
     /**
-     * метод генерирует hashCode, от String и Integer
-     * @param e
-     * @return
+     * метод увеличения массива в 2 раза от исходного.
      */
-    private int hf(E e) {
-        int hash = 0;
-        int HashCode = 31;
-        String data = "";
-
-        if (e instanceof String) {
-            data = (String) e;
-        } else if (e instanceof Integer) {
-            data = String.valueOf((Integer) e);
-        } else {
-
-        }
-        for (int i = 0; i < data.length(); i++) {
-            hash += ((HashCode << 5) + HashCode) + data.codePointAt(i);
-        }
-        return hash;
-    }
-
-    /**
-     * метод проверяет есть ли элемент в массиве, если есть возвращает индекс, иначе -1;
-     * @param e элемент
-     * @return индекс элемента
-     */
-    private int isEmpty(E e) {
-        int rezult = -1;
-        int hash = hf(e);
+    private void enlarge() {
+        Node[] newMass = new Node[2 * mass.length];
+        int position = 0;
+        int newArraySize = newMass.length;
         for (int i = 0; i < mass.length; i++) {
-            if (mass[i] != null && mass[i].key == hash) {
-                rezult = i;  // нашли искомый элемент (true)
-                break;
-            }
-
+            position = mass[i].value.hashCode() % newArraySize;
+            newMass[position] = mass[i];
         }
-        return rezult;
+        mass = newMass;
     }
 }

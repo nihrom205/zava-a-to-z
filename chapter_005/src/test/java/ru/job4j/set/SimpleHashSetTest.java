@@ -19,10 +19,11 @@ public class SimpleHashSetTest {
         SimpleHashSet<String> arr = new SimpleHashSet<>(3);
 
         assertThat(arr.add("one"), is(true));
-        assertThat(arr.add("two"), is(true));
+        assertThat(arr.add("two1"), is(true));
+        assertThat(arr.add("tree"), is(true));
         assertThat(arr.add("tree"), is(false));
-        assertThat(arr.add("11"), is(true));
-        assertThat(arr.add("22"), is(true));
+        assertThat(arr.add("11123"), is(true));
+        assertThat(arr.add("223231"), is(true));
     }
 
     @Test
@@ -33,8 +34,8 @@ public class SimpleHashSetTest {
         assertThat(arr.add(2), is(true));
         assertThat(arr.add(3), is(true));
         assertThat(arr.add(2), is(false));
-        assertThat(arr.add(202), is(true));
-        assertThat(arr.add(303), is(true));
+        assertThat(arr.add(124), is(true));
+        assertThat(arr.add(432), is(true));
     }
 
     @Test
