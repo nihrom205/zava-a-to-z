@@ -62,6 +62,29 @@ public class SimpleTreeApp<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * проверка двоичное дерево или нет.
+     * @return true - двоичное, иначе - false.
+     */
+    public boolean isBinary() {
+        boolean rezult = true;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            int count = 0;
+            Node<E> el = data.poll();
+            for (Node<E> child : el.leaves()) {
+                data.offer(child);
+                count++;
+            }
+            if (count > 2) {
+                rezult = false;
+                break;
+            }
+        }
+        return rezult;
+    }
+
+    /**
      * итератор.
      * @return итератор на дерево.
      */
