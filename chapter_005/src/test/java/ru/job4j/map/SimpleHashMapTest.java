@@ -3,6 +3,7 @@ package ru.job4j.map;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.*;
 
 /**
@@ -31,7 +32,7 @@ public class SimpleHashMapTest {
 
         assertThat(arr.get("two"), is(2));
         assertThat(arr.get("tree"), is(3));
-//        assertThat(arr.get("bad"), is(null));
+        assertThat(arr.get("bad"), is(nullValue()));
     }
 
     @Test
