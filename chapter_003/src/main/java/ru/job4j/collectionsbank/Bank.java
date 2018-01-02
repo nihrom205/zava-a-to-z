@@ -34,7 +34,7 @@ public class Bank {
      * @param account аккаунт пользователя
      */
     public void addAccountToUser(User user, Account account) {
-        map.computeIfPresent(user, (k,v) -> {
+        map.computeIfPresent(user, (k, v) -> {
            v.add(account);
            return v;
         });
@@ -47,7 +47,7 @@ public class Bank {
      * @param account аккаунт
      */
     public void deleteAccountFromUser(User user, Account account) {
-        map.computeIfPresent(user, (k,v) -> {
+        map.computeIfPresent(user, (k, v) -> {
             v.remove(v.indexOf(account));
             return v;
         });
@@ -59,7 +59,7 @@ public class Bank {
      * @return список счетов
      */
     public List<Account> getUserAccounts(User user) {
-        return map.computeIfPresent(user, (k,v) -> v);
+        return map.computeIfPresent(user, (k, v) -> v);
     }
 
     /**
@@ -73,10 +73,10 @@ public class Bank {
      */
     public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amound) {
         boolean transfer = false;
-        List<Account> listSrc = map.computeIfPresent(srcUser, (k,v) -> v);
+        List<Account> listSrc = map.computeIfPresent(srcUser, (k, v) -> v);
         Account srcAcc = listSrc.get(listSrc.indexOf(srcAccount));
 
-        List<Account> listDst = map.computeIfPresent(dstUser, (k,v) -> v);
+        List<Account> listDst = map.computeIfPresent(dstUser, (k, v) -> v);
         Account dstAcc = listDst.get(listDst.indexOf(dstAccount));
 
         if (srcAcc.getValue() >= amound) {
