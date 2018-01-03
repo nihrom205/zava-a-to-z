@@ -38,16 +38,16 @@ public class SimpleTreeAppTest {
     @Test
     public void when6ElFindNotExitThenOptionEmpty() {
         SimpleTreeApp<Integer> tree = new SimpleTreeApp<>(1);
-        tree.add(1,2);
+        tree.add(1, 2);
         assertThat(tree.findBy(7).isPresent(), is(false));
     }
 
     @Test
     public void whenIterTrueWhenTrue() {
         SimpleTreeApp<Integer> tree = new SimpleTreeApp<>(1);
-        tree.add(1,2);
-        tree.add(1,3);
-        tree.add(1,4);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
         Iterator it = tree.iterator();
         assertThat(it.hasNext(), is(true));
         assertThat(((Node<Integer>) it.next()).eqValue(1), is(true));
@@ -62,13 +62,13 @@ public class SimpleTreeAppTest {
     @Test
     public void whenBinaryThenTrueBinary() {
         SimpleTreeApp<Integer> tree = new SimpleTreeApp<>(1);
-        tree.add(1,2);
-        tree.add(1,3);
-        tree.add(2,4);
-        tree.add(2,5);
-        tree.add(3,6);
-        tree.add(3,7);
-        tree.add(3,8);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        tree.add(2, 5);
+        tree.add(3, 6);
+        tree.add(3, 7);
+        tree.add(3, 8);
         assertThat(tree.isBinary(), is(false));
     }
 

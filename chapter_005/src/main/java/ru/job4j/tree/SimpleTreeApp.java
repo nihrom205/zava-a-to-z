@@ -31,7 +31,7 @@ public class SimpleTreeApp<E extends Comparable<E>> implements SimpleTree<E> {
         boolean isAdding = false;
         Optional<Node<E>> op = Optional.empty();
         op = findBy(parent);
-        if (op.isPresent()){
+        if (op.isPresent()) {
             op.get().add(new Node<>(child));
         }
         return isAdding;
@@ -56,7 +56,6 @@ public class SimpleTreeApp<E extends Comparable<E>> implements SimpleTree<E> {
             for (Node<E> child : el.leaves()) {
                 data.offer(child);
             }
-
         }
         return rsl;
     }

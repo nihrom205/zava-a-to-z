@@ -48,21 +48,18 @@ public class AbstractStore<T extends Base> implements Store<T> {
     @Override
     public boolean delete(String id) {
         boolean isDelete = false;
-        T rezult = null;
         T delUser = null;
-        int idInt = Integer.valueOf(id);
         delUser = (T) simpleArray.get(0);
         int index = 1;
         while (delUser != null) {
             if (id.equals(delUser.getId())) {
-                isDelete = simpleArray.delete(delUser);;
+                isDelete = simpleArray.delete(delUser);
                 break;
             }
 
             try {
                 delUser = (T) simpleArray.get(index);
             } catch (ArrayIndexOutOfBoundsException e) {
-//                e.printStackTrace();
             }
             index++;
         }

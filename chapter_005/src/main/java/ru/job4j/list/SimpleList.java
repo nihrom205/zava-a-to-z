@@ -24,9 +24,11 @@ public class SimpleList<E> implements SimpleContainer<E> {
     public void add(E e) {
         Node<E> newNode = new Node<>(index++, e);
         if (first == null) {
-            first = end = newNode;
+            first = newNode;
+            end = newNode;
         } else {
-            end.next = end = newNode;
+            end.next = newNode;
+            end = newNode;
         }
     }
 
@@ -47,7 +49,7 @@ public class SimpleList<E> implements SimpleContainer<E> {
                 curenPosition = curenPosition.next;
             }
         }
-        return (E)rezult.eData;
+        return (E) rezult.eData;
     }
 
     /**

@@ -21,7 +21,9 @@ public class ChekedNodeCycle {
      */
     static <T> boolean hasCycle(Node<T> first) {
         boolean rezult = false;
-        if (first == null) {throw new NoSuchElementException();}
+        if (first == null) {
+            throw new NoSuchElementException();
+        }
         Node<T> currentNode = first;
         Node<T> nextNode = null;
         if (currentNode.next != null) {

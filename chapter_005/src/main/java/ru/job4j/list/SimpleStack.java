@@ -30,7 +30,9 @@ public class SimpleStack<E> extends SimpleList<E> {
      * @return возвращает элемен.
      */
     public E poll() {
-        if (first == null) {throw new NoSuchElementException();}
+        if (first == null) {
+            throw new NoSuchElementException();
+        }
         E rezult = first.eData;
         first = first.next;
         return rezult;

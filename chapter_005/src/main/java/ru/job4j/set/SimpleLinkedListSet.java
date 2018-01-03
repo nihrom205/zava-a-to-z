@@ -83,7 +83,8 @@ public class SimpleLinkedListSet<T> implements SimpleContainerSet<T> {
         Node<T> current = first;
         while (isEmpty) {
             if (first == null) {
-                first = end = new Node<>(key++, value);
+                first = new Node<>(key++, value);
+                end = new Node<>(key++, value);
                 isEmpty = false;
             } else if ((current.tDate).equals(value)) {
                 isEmpty = false;

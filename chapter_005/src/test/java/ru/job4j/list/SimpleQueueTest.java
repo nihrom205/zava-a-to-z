@@ -27,9 +27,9 @@ public class SimpleQueueTest {
         mass.push("two");
         mass.push("tree");
 
-        assertThat(mass.poll(), is("one"));
-        assertThat(mass.poll(), is("two"));
         assertThat(mass.poll(), is("tree"));
+        assertThat(mass.poll(), is("two"));
+        assertThat(mass.poll(), is("one"));
     }
 
     /**

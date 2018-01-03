@@ -67,7 +67,7 @@ public class SimpleSet<T> implements SimpleContainerSet<T> {
         public T next() {
             T rezult = null;
             if (hasNext()) {
-                rezult = (T)array[cursor++];
+                rezult = (T) array[cursor++];
             } else {
                 throw new NoSuchElementException();
             }
@@ -82,7 +82,7 @@ public class SimpleSet<T> implements SimpleContainerSet<T> {
      */
     private boolean isEmpty(T t) {
         boolean isEmty = true;
-        for (int i = 0; i < index ; i++) {
+        for (int i = 0; i < index; i++) {
             if ((array[i]).equals(t)) {
                 isEmty = false;
                 break;
