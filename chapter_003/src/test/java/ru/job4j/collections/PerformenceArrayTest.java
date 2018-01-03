@@ -23,7 +23,8 @@ public class PerformenceArrayTest {
         PerformanceArray performance = new PerformanceArray();
         long time = 0;
         ArrayList<String> arr = new ArrayList<>();
-        time = performance.add(arr, 10_000_000);
+//        time = performance.add(arr, 10_000_000);
+        time = performance.add(arr, 10_000);
         System.out.println("ArrayList adding: " + time);
         time = performance.delete(arr, 10_000);
         System.out.println("ArrayList delete: " + time);
