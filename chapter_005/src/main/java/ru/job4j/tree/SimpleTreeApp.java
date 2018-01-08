@@ -24,7 +24,7 @@ public class SimpleTreeApp<E extends Comparable<E>> implements SimpleTree<E> {
      * метод добавления элемента в дерево ищется parent и в него добавляется child.
      * @param parent родительский элемент
      * @param child дочерний элемент
-     * @return
+     * @return true - добавлено, наче - false
      */
     @Override
     public boolean add(E parent, E child) {
@@ -32,7 +32,10 @@ public class SimpleTreeApp<E extends Comparable<E>> implements SimpleTree<E> {
         Optional<Node<E>> op = Optional.empty();
         op = findBy(parent);
         if (op.isPresent()) {
-            op.get().add(new Node<>(child));
+            if (!op.get().leaves().contains(new Node<>(child))) {
+                op.get().add(new Node<>(child));
+                isAdding = true;
+            }
         }
         return isAdding;
     }

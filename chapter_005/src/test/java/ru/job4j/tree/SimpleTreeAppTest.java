@@ -62,13 +62,14 @@ public class SimpleTreeAppTest {
     @Test
     public void whenBinaryThenTrueBinary() {
         SimpleTreeApp<Integer> tree = new SimpleTreeApp<>(1);
-        tree.add(1, 2);
-        tree.add(1, 3);
-        tree.add(2, 4);
-        tree.add(2, 5);
-        tree.add(3, 6);
-        tree.add(3, 7);
-        tree.add(3, 8);
+        assertThat(tree.add(1, 2), is(true));
+        assertThat(tree.add(1, 3), is(true));
+        assertThat(tree.add(1, 2), is(false));
+        assertThat(tree.add(2, 4), is(true));
+        assertThat(tree.add(2, 5), is(true));
+        assertThat(tree.add(3, 6), is(true));
+        assertThat(tree.add(3, 7), is(true));
+        assertThat(tree.add(3, 8), is(true));
         assertThat(tree.isBinary(), is(false));
     }
 
