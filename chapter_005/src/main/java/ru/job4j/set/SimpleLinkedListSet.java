@@ -26,9 +26,15 @@ public class SimpleLinkedListSet<T> implements SimpleContainerSet<T> {
         /**
          * добавление элемента если к set-е нет такого элемента
          */
-        if (enlarge(value)) {
-            end.next = new Node<T>(key++, value);
-            end = end.next;
+        if (isFind(value)) {
+            if (first == null) {
+                first = new Node<T>(key++, value);
+                end = first;
+            } else {
+                end.next = new Node<T>(key++, value);
+                end = end.next;
+            }
+
         }
     }
 
@@ -78,18 +84,12 @@ public class SimpleLinkedListSet<T> implements SimpleContainerSet<T> {
      * @param value искомое значение в списке
      * @return true - не найден, иначе - false.
      */
-    private boolean enlarge(T value) {
+    private boolean isFind(T value) {
         boolean isEmpty = true;
         Node<T> current = first;
-        while (isEmpty) {
-            if (first == null) {
-                first = new Node<>(key++, value);
-                end = new Node<>(key++, value);
+        while (current != null) {
+            if ((current.tDate).equals(value)) {
                 isEmpty = false;
-            } else if ((current.tDate).equals(value)) {
-                isEmpty = false;
-                break;
-            } else if (current.next == null) {
                 break;
             } else {
                 current = current.next;
