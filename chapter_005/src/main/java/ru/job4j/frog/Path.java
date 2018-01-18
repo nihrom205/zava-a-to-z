@@ -24,8 +24,12 @@ public class Path implements Comparable<Path> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Path path = (Path) o;
 
@@ -44,9 +48,6 @@ public class Path implements Comparable<Path> {
 
     @Override
     public String toString() {
-        return "Path{" +
-                "count=" + count +
-                ", " + pathStr  +
-                '}';
+        return "Path{" + "count=" + count + ", " + pathStr  + '}';
     }
 }

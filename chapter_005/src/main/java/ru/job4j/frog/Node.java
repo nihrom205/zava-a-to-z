@@ -44,20 +44,23 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "Node{" + "x=" + x + ", y=" + y + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Node node = (Node) o;
 
-        if (x != node.x) return false;
+        if (x != node.x) {
+            return false;
+        }
         return y == node.y;
     }
 
