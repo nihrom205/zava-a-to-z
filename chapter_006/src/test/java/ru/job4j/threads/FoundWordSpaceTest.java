@@ -2,10 +2,12 @@ package ru.job4j.threads;
 
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 /**
- * Class <Name class>.
+ * Class FoundWordSpaceTest.
+ * Тестирование класса FoundWordSpace.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
@@ -14,17 +16,14 @@ import static org.junit.Assert.*;
 public class FoundWordSpaceTest {
     @Test
     public void whenFindWordAndSpaceThenCountWordAndSpace() {
-//        FoundWordSpace fount = new FoundWordSpace(" AZaza vv dd");
-//        fount.runFind();
-
-
-        String text = " AZaza vv dd";
-        int countSpace = 0;
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == 32) {
-                countSpace++;
-            }
+        FoundWordSpace found = new FoundWordSpace("AZaza vv dd");
+        found.runFind();
+        try {
+            Thread.sleep(1000);
+            assertThat(found.getCountWord(), is(3));
+            assertThat(found.getCountSpace(), is(2));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("Кол-во пробелов = " + countSpace);
     }
 }
