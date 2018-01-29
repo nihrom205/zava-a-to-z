@@ -21,11 +21,14 @@ public class FoundToTextTest {
         Runnable runnable2 = new FoundToText("aa bb cc dddd eeeeeee");
         Thread  t2 = new Thread(runnable2);
 
+
         t1.start();
         t2.start();
+        while (t1.isAlive() & t2.isAlive()) {
+        }
 
-        Thread.sleep(1000);
         assertThat(((FoundToText) runnable1).getCountWord(), is(3));
+
     }
 
 }
