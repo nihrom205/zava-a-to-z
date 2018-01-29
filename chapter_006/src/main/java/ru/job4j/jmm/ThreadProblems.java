@@ -21,8 +21,8 @@ public class ThreadProblems extends Thread {
 
     @Override
     public void run() {
-        while (count == 0){
-//            System.out.println(0);
+        while (count == 0) {
+            System.out.println(0);
         }
     }
 

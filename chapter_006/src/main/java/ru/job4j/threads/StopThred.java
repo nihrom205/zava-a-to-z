@@ -9,26 +9,21 @@ package ru.job4j.threads;
  */
 public class StopThred {
     private String text;
-    private Thread threadTime;
-    private Thread threadChar;
     private int countWord = 0;
-    private boolean cancel = true;
-    private int ms = 0;
+    private int time = 0;
+    private Thread t1 = null;
+    private Thread t2 = null;
 
-    public StopThred(String text, int ms) {
+    public StopThred(String text, int time) {
         this.text = text;
-        this.ms = ms;
-        threadTime = new Thread(new Time());
-        threadChar = new Thread(new CountChar());
+        this.time = time;
+    }
 
-        threadChar.start();
-        threadTime.start();
-
-        try {
-            threadTime.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void start() {
+        t1 = new Thread(new Time());
+        t1.start();
+        t2 = new Thread(new CountChar());
+        t2.start();
     }
 
     /**
@@ -37,12 +32,10 @@ public class StopThred {
     private class Time implements Runnable {
         @Override
         public void run() {
-            try {
-                Thread.sleep(ms * 1000);
-                cancel = false;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            long ms = System.currentTimeMillis();
+            while ((System.currentTimeMillis() - ms) < (time * 1000)) {
             }
+            t2.interrupt();
         }
     }
 
@@ -53,28 +46,30 @@ public class StopThred {
         @Override
         public void run() {
             boolean isWord = false;
-            // flag - cancel прерывает поток
-            for (int i = 0; i < text.length() && cancel; i++) {
-                if (text.charAt(i) >= 65 && text.charAt(i) <= 122) {
-                    isWord = true;
-                } else if (text.charAt(i) == 32 && isWord) {
+            try {
+                for (int i = 0; i < text.length(); i++) {
+                    if (text.charAt(i) >= 65 && text.charAt(i) <= 122) {
+                        isWord = true;
+                    } else if (text.charAt(i) == 32 && isWord) {
+                        countWord++;
+                        isWord = false;
+                    }
+                }
+                if (isWord) {
                     countWord++;
-                    isWord = false;
                 }
-
-                // задержка для отработки алгоритма
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(i);
-
+            } catch (Exception e) {
+//                e.printStackTrace();
             }
-            if (isWord) {
-                countWord++;
-            }
-            System.out.println("Кол-во: " + countWord);
+//            System.out.println("Кол-во: " + countWord);
         }
+    }
+
+    public int getCountWord() {
+        return countWord;
+    }
+
+    public Thread getT1() {
+        return t1;
     }
 }
