@@ -1,29 +1,47 @@
 package ru.job4j.jmm;
 
 /**
- * Class <Name class>.
+ * Class ThreadProblems.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
  * @since 27.01.2018
  */
 public class ThreadProblems extends Thread {
-    private int count = 0;
+    public Boolean cancel = true;
 
     public static void main(String[] args) throws InterruptedException {
-        ThreadProblems t = new ThreadProblems();
-        t.start();
-        Thread.sleep(1000);
-        t.count = 2;
+        ThreadProblems t1 = new ThreadProblems();
+        t1.start();
 
-        System.out.println(System.currentTimeMillis() + ": keepRunning is false");
+        Thread.sleep(1000);
+//        t1.cancel = false;
+        System.out.println("buy");
     }
 
     @Override
     public void run() {
-        while (count == 0) {
-            System.out.println(0);
-        }
+
+        Thread thread1 = new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+                cancel = false;
+            }
+        };
+
+        Thread thread2 = new Thread() {
+            public void run() {
+                while (cancel) {
+                }
+            }
+        };
+
+        thread1.start();
+        thread2.start();
+
     }
 
 
