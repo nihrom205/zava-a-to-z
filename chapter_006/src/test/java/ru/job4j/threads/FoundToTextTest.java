@@ -25,6 +25,7 @@ public class FoundToTextTest {
         t1.start();
         t2.start();
         while (t1.isAlive() & t2.isAlive()) {
+            int temp = 0;
         }
 
         assertThat(((FoundToText) runnable1).getCountWord(), is(3));

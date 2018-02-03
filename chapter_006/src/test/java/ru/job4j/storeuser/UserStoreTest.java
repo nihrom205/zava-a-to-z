@@ -1,4 +1,4 @@
-package ru.job4j.storeUser;
+package ru.job4j.storeuser;
 
 import org.junit.Test;
 

@@ -34,6 +34,7 @@ public class StopThred {
         public void run() {
             long ms = System.currentTimeMillis();
             while ((System.currentTimeMillis() - ms) < (time * 1000)) {
+                int temp = 0;
             }
             t2.interrupt();
         }

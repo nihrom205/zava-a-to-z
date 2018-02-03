@@ -35,6 +35,7 @@ public class ThreadProblems extends Thread {
         Thread thread2 = new Thread() {
             public void run() {
                 while (cancel) {
+                    int temp = 0;
                 }
             }
         };

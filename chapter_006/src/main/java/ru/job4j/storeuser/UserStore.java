@@ -1,8 +1,7 @@
-package ru.job4j.storeUser;
+package ru.job4j.storeuser;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
