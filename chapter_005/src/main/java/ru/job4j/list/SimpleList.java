@@ -2,6 +2,9 @@ package ru.job4j.list;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.NotThreadSafe;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * Class SimpleList.
@@ -11,7 +14,10 @@ import java.util.NoSuchElementException;
  * @version 0.1
  * @since 14.12.2017
  */
+@SuppressWarnings("ALL")
+@ThreadSafe
 public class SimpleList<E> implements SimpleContainer<E> {
+    @GuardedBy("this")
     protected Node<E> first;
     protected Node<E> end;
     protected int index = 0;
@@ -21,7 +27,7 @@ public class SimpleList<E> implements SimpleContainer<E> {
      * @param e элемент для добавления в колекцию
      */
     @Override
-    public void add(E e) {
+    public synchronized void add(E e) {
         Node<E> newNode = new Node<>(index++, e);
         if (first == null) {
             first = newNode;
@@ -38,7 +44,7 @@ public class SimpleList<E> implements SimpleContainer<E> {
      * @return элемент
      */
     @Override
-    public E get(int index) {
+    public synchronized E get(int index) {
         Node<E> rezult = null;
         Node<E> curenPosition = first;
         while (curenPosition != null) {
@@ -64,7 +70,9 @@ public class SimpleList<E> implements SimpleContainer<E> {
     /**
      * class обхода колекции.
      */
+    @NotThreadSafe
     class SimpleListIter implements Iterator<E> {
+        @SuppressWarnings("FieldAccessNotGuarded")
         Node<E> position = first;
         @Override
         public boolean hasNext() {

@@ -2,6 +2,8 @@ package ru.job4j.list;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import net.jcip.annotations.ThreadSafe;
+import net.jcip.annotations.GuardedBy;
 
 /**
  * Class SimpleArray.
@@ -10,7 +12,9 @@ import java.util.NoSuchElementException;
  * @version 0.1
  * @since 13.12.2017
  */
+@ThreadSafe
 public class SimpleArray<E> implements SimpleContainer<E> {
+    @GuardedBy("this")
     private Object[] array;
     private int index = 0;
 
@@ -28,7 +32,7 @@ public class SimpleArray<E> implements SimpleContainer<E> {
      * @param e элемент для добавления элемента.
      */
     @Override
-    public void add(E e) {
+    public synchronized void add(E e) {
         if (index == array.length) {
             Object[] arr = new Object[array.length * 2];
             System.arraycopy(array, 0, arr, 0, index);
@@ -43,7 +47,7 @@ public class SimpleArray<E> implements SimpleContainer<E> {
      * @return возвращает элемент обобщенного типа
      */
     @Override
-    public E get(int index) {
+    public synchronized E get(int index) {
         return (E) array[index];
     }
 
@@ -64,6 +68,7 @@ public class SimpleArray<E> implements SimpleContainer<E> {
             return rezult;
         }
 
+        @SuppressWarnings("FieldAccessNotGuarded")
         @Override
         public E next() {
             Object value = null;
