@@ -52,13 +52,13 @@ public class FrogApp {
         Node temp = null;
 
         // проверка  1 шаг в перед и 2 по бокам
-        stepLeftRight(1, 2, current);
+        step(1, 2, current);
 
         // проверка 2 шага в перед и 1 по бокам
-        stepLeftRight(2, 1, current);
+        step(2, 1, current);
 
         // шаг 3-ий прыжок на 3 клетки в перед
-        stepForward(3, current);
+        step(3, 0, current);
 
         // проверка достигли ли мы в финишную точку, если true то добаляем точку в список пути, false - пропускаем
         if (current.allListNode().contains(finish)) {
@@ -120,7 +120,7 @@ public class FrogApp {
      * @param leftRight прыжок в лево и право
      * @param current текущая позиция (текущие координаты)
      */
-    private void stepLeftRight(int forward, int leftRight, Node current) {
+    private void step(int forward, int leftRight, Node current) {
         int startX = current.getX();
         int startY = current.getY();
         int finishY = finish.getY();
@@ -135,7 +135,7 @@ public class FrogApp {
                     }
                 }
 
-                if ((startX - leftRight) >= forward) {
+                if ((startX - leftRight) >= forward && leftRight != 0) {
                     temp = new Node(startX - leftRight, startY + forward);
                     if (!tree.contains(temp) && temp != null) {
                         current.addNode(temp);
@@ -152,7 +152,7 @@ public class FrogApp {
                         current.addNode(temp);
                     }
                 }
-                if ((startX - leftRight) >= forward) {
+                if ((startX - leftRight) >= forward  && leftRight != 0) {
                     temp = new Node(startX - leftRight, startY + forward);
                     if (!tree.contains(temp) && temp != null) {
                         current.addNode(temp);
@@ -165,7 +165,7 @@ public class FrogApp {
                         current.addNode(temp);
                     }
                 }
-                if ((startX - leftRight) >= forward) {
+                if ((startX - leftRight) >= forward  && leftRight != 0) {
                     temp = new Node(startX - leftRight, (startY + forward) % 16);
                     if (!tree.contains(temp) && temp != null) {
                         current.addNode(temp);
@@ -173,35 +173,6 @@ public class FrogApp {
                 }
             }
 
-        }
-    }
-
-    /**
-     * метод проверяет прыжок лягушки прямо на "forward" клеток
-     * @param forward кол-во прышков
-     * @param current текущая позиция
-     */
-    private void stepForward(int forward, Node current) {
-        int startX = current.getX();
-        int startY = current.getY();
-        int finishY = finish.getY();
-        Node temp = null;
-        if (startY <= finishY) {
-            if (startY + forward <= finishY) {
-                temp = new Node(startX, startY + forward);
-                if (!tree.contains(temp) && temp != null) {
-                    current.addNode(temp);
-                }
-            }
-        } else {
-            if (startY + forward <= 16) {
-                temp = new Node(startX, startY + forward);
-            } else if ((startY + forward) % 16 <= finishY) {
-                temp = new Node(startX, (startY + forward) % 16);
-            }
-            if (!tree.contains(temp) && temp != null) {
-                current.addNode(temp);
-            }
         }
     }
 }

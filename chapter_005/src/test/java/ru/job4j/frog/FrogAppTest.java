@@ -16,6 +16,7 @@ public class FrogAppTest {
     @Test
     public void whenAddStartAndEndThenPath() {
         int[] arg = {7, 11, 10, 9, 2, 9, 14, 8, 5};
+//        int[] arg = {2, 1, 2, 14, 2, 9, 14, 8, 5};
         FrogApp frog = new FrogApp(arg);
         frog.run();
     }
