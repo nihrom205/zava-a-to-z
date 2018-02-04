@@ -17,7 +17,8 @@ public class FoundWordSpaceTest {
     @Test
     public void whenFindWordAndSpaceThenCountWordAndSpace() {
         FoundWordSpace found = new FoundWordSpace("AZaza vv dd");
-        found.runFind();
+        found.findWord();
+        found.findSpace();
         try {
             Thread.sleep(1000);
             assertThat(found.getCountWord(), is(3));

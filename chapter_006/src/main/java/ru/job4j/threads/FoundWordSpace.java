@@ -31,7 +31,7 @@ public class FoundWordSpace {
     /**
      * метод подчета слов и пробелов
      */
-    public void runFind() {
+    public void findWord() {
         new Thread("thredWord") {
             @Override
             public void run() {
@@ -47,10 +47,11 @@ public class FoundWordSpace {
                 if (isWord) {
                     countWord++;
                 }
-//                System.out.println("Кол-во букв = " + countWord);
             }
         }.start();
+    }
 
+    public void findSpace() {
         new Thread("thredSpace") {
             @Override
             public void run() {
