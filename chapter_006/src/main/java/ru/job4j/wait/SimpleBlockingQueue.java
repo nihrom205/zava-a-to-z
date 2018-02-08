@@ -7,7 +7,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Class <Name class>.
+ * Class SimpleBlockingQueue.
+ *
+ * потокобезопасная очередь (потокобезопасная)
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
@@ -15,29 +17,46 @@ import java.util.Queue;
  */
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
-    @GuardedBy("this")
-    private Queue<T> queue = new LinkedList<>();
-    @GuardedBy("this")
-    private int size = 10;
-    @GuardedBy("this")
-    private int pozition = 0;
+    private final Queue<T> queue = new LinkedList<>();
 
+    @GuardedBy("queue")
+    private int size = 3;
+    private int pozition = 1;
+
+    /**
+     * метод позволяет добавлять значение в очередь.
+     * @param value добавляемый элемент
+     * @throws InterruptedException
+     */
     public void offer(T value) throws InterruptedException {
-        synchronized (queue) {
-            if (pozition >= size) {
-                this.wait();
+        synchronized (this.queue) {
+            if (this.pozition == this.size) {
+                this.queue.wait();
             }
-            queue.offer(value);
+            this.queue.offer(value);
+            pozition++;
+            this.queue.notify();
         }
     }
 
+    /**
+     * метод извлекает из вершины очереди элемент.
+     * @return извелченный элемент
+     * @throws InterruptedException
+     */
     public T peek() throws InterruptedException {
-        synchronized (queue) {
-            if (queue.isEmpty()) {
-                this.wait();
+        synchronized (this.queue) {
+//            System.out.println("blok peek, size =" + queue.size());
+            if (this.queue.isEmpty()) {
+                this.queue.wait();
             }
+            pozition--;
+            this.queue.notify();
         }
-        pozition--;
-        return queue.poll();
+        return this.queue.poll();
+    }
+
+    public Queue<T> getQueue() {
+        return queue;
     }
 }
