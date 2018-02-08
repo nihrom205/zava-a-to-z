@@ -49,11 +49,15 @@ public class StopThred {
             boolean isWord = false;
             try {
                 for (int i = 0; i < text.length(); i++) {
-                    if (text.charAt(i) >= 65 && text.charAt(i) <= 122) {
-                        isWord = true;
-                    } else if (text.charAt(i) == 32 && isWord) {
-                        countWord++;
-                        isWord = false;
+                    if (!t2.isInterrupted()) {
+                        if (text.charAt(i) >= 65 && text.charAt(i) <= 122) {
+                            isWord = true;
+                        } else if (text.charAt(i) == 32 && isWord) {
+                            countWord++;
+                            isWord = false;
+                        }
+                    } else {
+                        break;
                     }
                 }
                 if (isWord) {
