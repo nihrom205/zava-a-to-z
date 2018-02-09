@@ -2,6 +2,8 @@ package ru.job4j.list;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import net.jcip.annotations.NotThreadSafe;
 import net.jcip.annotations.ThreadSafe;
 import net.jcip.annotations.GuardedBy;
 
@@ -56,6 +58,7 @@ public class SimpleArray<E> implements SimpleContainer<E> {
         return new Iter<E>();
     }
 
+    @NotThreadSafe
     class Iter<E> implements Iterator<E> {
         int cursor = 0;
 
@@ -68,7 +71,6 @@ public class SimpleArray<E> implements SimpleContainer<E> {
             return rezult;
         }
 
-        @SuppressWarnings("FieldAccessNotGuarded")
         @Override
         public E next() {
             Object value = null;

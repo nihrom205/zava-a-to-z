@@ -96,6 +96,7 @@ public class SimpleList<E> implements SimpleContainer<E> {
      * class ячейка LinkedList.
      * @param <E> принимает обобщенный тип.
      */
+    @NotThreadSafe
     protected class Node<E> {
         int key;
         E eData;
