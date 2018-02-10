@@ -47,7 +47,7 @@ public class WorkQueue {
     public void add(Work work) {
         synchronized (this.workQueue) {
             this.workQueue.add(work);
-            this.workQueue.notifyAll();
+            this.workQueue.notify();
         }
     }
 

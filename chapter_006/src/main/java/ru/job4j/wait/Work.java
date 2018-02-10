@@ -16,8 +16,6 @@ public class Work {
 
     @Override
     public String toString() {
-        return "Work{" +
-                "name='" + name + '\'' +
-                '}';
+        return "Work{" + "name='" + name + '\'' + '}';
     }
 }

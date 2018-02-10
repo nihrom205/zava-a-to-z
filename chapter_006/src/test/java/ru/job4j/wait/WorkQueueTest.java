@@ -18,8 +18,8 @@ public class WorkQueueTest {
 
         work.run();
 
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 10000000; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 10; j++) {
                 work.add(new Work("stream-" + i + " work-" + j));
             }
             Thread.sleep(3000);
