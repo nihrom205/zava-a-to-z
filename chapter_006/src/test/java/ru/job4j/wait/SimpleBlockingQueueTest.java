@@ -1,10 +1,8 @@
 package ru.job4j.wait;
 
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -16,15 +14,15 @@ import static org.junit.Assert.*;
  * @since 08.02.2018
  */
 public class SimpleBlockingQueueTest {
-    Thread procedure;
-    Thread consumer;
-    ArrayList<Integer> rezult = new ArrayList<>();
+    private Thread procedure;
+    private Thread consumer;
+    private final ArrayList<Integer> rezult = new ArrayList<>();
 
     // помещает данные в очередь.
     private class Procedure extends Thread {
-        SimpleBlockingQueue queue;
+        final SimpleBlockingQueue queue;
 
-        public Procedure(SimpleBlockingQueue queue) {
+        private Procedure(SimpleBlockingQueue queue) {
             this.queue = queue;
         }
 
@@ -32,7 +30,7 @@ public class SimpleBlockingQueueTest {
         public void run() {
             for (int i = 1; i <= 10; i++) {
                 try {
-                    queue.offer(i);
+                    this.queue.offer(i);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -43,9 +41,9 @@ public class SimpleBlockingQueueTest {
 
     // извлекает данные из очереди.
     private class Consumer extends Thread {
-        SimpleBlockingQueue queue;
+        final SimpleBlockingQueue queue;
 
-        public Consumer(SimpleBlockingQueue queue) {
+        private Consumer(SimpleBlockingQueue queue) {
             this.queue = queue;
         }
 
@@ -53,10 +51,12 @@ public class SimpleBlockingQueueTest {
         public void run() {
             while (procedure.isAlive()) {
                 addArr();
+                System.out.println("proc");
             }
 
-            while (!queue.getQueue().isEmpty()) {
+            while (!queue.isEmptyQue()) {
                 addArr();
+                System.out.println("isEmptyQue");
             }
         }
 
@@ -93,7 +93,7 @@ public class SimpleBlockingQueueTest {
         }
 
         Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        ArrayList arrInt = new ArrayList<Integer>(Arrays.asList(array));
+        ArrayList<Integer> arrInt = new ArrayList<>(Arrays.asList(array));
 
         assertThat(arrInt, is(rezult));
     }

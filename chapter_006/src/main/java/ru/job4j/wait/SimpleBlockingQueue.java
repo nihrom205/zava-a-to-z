@@ -17,11 +17,11 @@ import java.util.Queue;
  */
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
+    @GuardedBy("queue")
     private final Queue<T> queue = new LinkedList<>();
 
     @GuardedBy("queue")
-    private int size = 3;
-    private int pozition = 1;
+    private int limit = 3;
 
     /**
      * метод позволяет добавлять значение в очередь.
@@ -30,11 +30,10 @@ public class SimpleBlockingQueue<T> {
      */
     public void offer(T value) throws InterruptedException {
         synchronized (this.queue) {
-            if (this.pozition == this.size) {
+            if (this.queue.size() == this.limit) {
                 this.queue.wait();
             }
             this.queue.offer(value);
-            pozition++;
             this.queue.notify();
         }
     }
@@ -46,17 +45,17 @@ public class SimpleBlockingQueue<T> {
      */
     public T peek() throws InterruptedException {
         synchronized (this.queue) {
-//            System.out.println("blok peek, size =" + queue.size());
             if (this.queue.isEmpty()) {
                 this.queue.wait();
             }
-            pozition--;
             this.queue.notify();
+            return this.queue.poll();
         }
-        return this.queue.poll();
     }
 
-    public Queue<T> getQueue() {
-        return queue;
+    public boolean isEmptyQue() {
+        synchronized (this.queue) {
+            return this.queue.isEmpty();
+        }
     }
 }
