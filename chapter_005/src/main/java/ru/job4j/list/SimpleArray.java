@@ -18,6 +18,7 @@ import net.jcip.annotations.GuardedBy;
 public class SimpleArray<E> implements SimpleContainer<E> {
     @GuardedBy("this")
     private Object[] array;
+    @GuardedBy("this")
     private int index = 0;
 
     public SimpleArray() {

@@ -19,7 +19,9 @@ import net.jcip.annotations.ThreadSafe;
 public class SimpleList<E> implements SimpleContainer<E> {
     @GuardedBy("this")
     protected Node<E> first;
+    @GuardedBy("this")
     protected Node<E> end;
+    @GuardedBy("this")
     protected int index = 0;
 
     /**
