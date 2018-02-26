@@ -32,7 +32,7 @@ public class WorkQueue {
             thredPull[i] = new Thread("thred" + i) {
                 @Override
                 public void run() {
-                    while (true) {
+                    while (Thread.currentThread().isAlive()) {
                         pr();
                     }
                 }
@@ -57,7 +57,7 @@ public class WorkQueue {
      */
     private void pr() {
         synchronized (this.workQueue) {
-            if (this.workQueue.isEmpty()) {
+            while (this.workQueue.isEmpty()) {
                 try {
                     this.workQueue.wait();
                 } catch (InterruptedException e) {

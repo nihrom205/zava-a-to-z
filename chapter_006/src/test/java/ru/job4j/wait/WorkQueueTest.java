@@ -22,7 +22,7 @@ public class WorkQueueTest {
             for (int j = 0; j < 10; j++) {
                 work.add(new Work("stream-" + i + " work-" + j));
             }
-            Thread.sleep(3000);
+            Thread.sleep(2000);
 
         }
     }
