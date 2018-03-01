@@ -32,7 +32,7 @@ public class WorkQueue {
             thredPull[i] = new Thread("thred" + i) {
                 @Override
                 public void run() {
-                    while (Thread.currentThread().isAlive()) {
+                    while (true) {
                         pr();
                     }
                 }
