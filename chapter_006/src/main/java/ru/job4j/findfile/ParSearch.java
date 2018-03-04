@@ -17,7 +17,7 @@ import net.jcip.annotations.ThreadSafe;
  * @since 26.02.2018
  */
 @ThreadSafe
-public class ParallerSearch {
+public class ParSearch {
     private final String root;
     private final String text;
     private final List<String> exts;
@@ -29,7 +29,7 @@ public class ParallerSearch {
     @GuardedBy("this")
     private final List<String> paths = new ArrayList<>();
 
-    public ParallerSearch(String root, String text, List<String> exts) {
+    public ParSearch(String root, String text, List<String> exts) {
         this.root = root;
         this.text = text;
         this.exts = exts;

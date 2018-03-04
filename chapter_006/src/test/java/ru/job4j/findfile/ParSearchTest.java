@@ -1,9 +1,13 @@
 package ru.job4j.findfile;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * Class <Name class>.
@@ -12,19 +16,21 @@ import java.util.List;
  * @version 0.1
  * @since 28.02.2018
  */
-public class ParallerSearchTest {
+public class ParSearchTest {
     @Test
     public void whenFindFile() {
+        ParSearch par;
         String path = "c:\\tools";
         String text = "Монитор";
-        List<String> exts = new LinkedList<>();
-        exts.add("txt");
-        ParallerSearch parall = new ParallerSearch(path, text, exts);
-        parall.init();
+        List<String> ext = new LinkedList<>();
+        ext.add("txt");
+        par = new ParSearch(path, text, ext);
+        par.init();
 
-        for (String s : parall.result()) {
+        for (String s : par.result()) {
             System.out.println(s);
         }
+//        assertThat(1, is(1));
 
 
     }
