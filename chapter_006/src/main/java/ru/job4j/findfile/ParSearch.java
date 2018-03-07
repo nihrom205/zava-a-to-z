@@ -55,9 +55,6 @@ public class ParSearch {
             public void run() {
                 while (!files.isEmpty()) {
                     findText(files.poll());
-//                    if (!files.isEmpty()) {
-//
-//                    }
                 }
             }
         };
@@ -86,8 +83,8 @@ public class ParSearch {
      * @param file файл
      */
     private void findText(String file) {
-        synchronized ("files") {
-            Scanner sc;
+        synchronized ("this") {
+            Scanner sc = null;
             try {
                 sc = new Scanner(new File(file));
                 while (sc.hasNext()) {
@@ -101,6 +98,7 @@ public class ParSearch {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            sc.close();
         }
     }
 
@@ -108,16 +106,12 @@ public class ParSearch {
      * метод обхода каталога
      */
     private void findExts() {
-        synchronized ("files") {
+        synchronized ("this") {
             try {
                 Files.walkFileTree(Paths.get(root), new MyVisit());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-//            for (String file : files) {
-//                System.out.println("files= " + file);
-//            }
         }
     }
 
@@ -133,9 +127,7 @@ public class ParSearch {
                 if (attrs.isRegularFile()) {
                     String[] parsFile = file.getFileName().toString().split("\\.");
                     if (parsFile.length > 1 && exts.contains(parsFile[1].toLowerCase())) {
-//                        files.add(file.getFileName().toString());
                         files.add(file.toAbsolutePath().toString());
-//                        files.notify();
                     }
                 }
                 return FileVisitResult.CONTINUE;
