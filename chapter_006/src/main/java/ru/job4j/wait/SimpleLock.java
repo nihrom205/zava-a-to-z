@@ -10,23 +10,30 @@ package ru.job4j.wait;
  */
 public class SimpleLock {
     private boolean block = false;
+    private Thread lockThred = null;
+    private int lockCount = 0;
 
     public void lock() {
-        if (block) {
+        Thread curThread = Thread.currentThread();
+        while (block && lockThred != curThread) {
             try {
-                Thread.currentThread().wait();
+                wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        } else {
-            block = true;
         }
+        block = true;
+        lockCount++;
+        lockThred = curThread;
     }
 
     public void unlock() {
-        if (block) {
+        if (Thread.currentThread() == this.lockThred) {
+            lockCount--;
+        }
+        if (lockCount == 0) {
             block = false;
-            Thread.currentThread().notifyAll();
+            notify();
         }
     }
 
