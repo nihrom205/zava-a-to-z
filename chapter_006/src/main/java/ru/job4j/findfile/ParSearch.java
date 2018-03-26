@@ -21,7 +21,7 @@ public class ParSearch {
     private final String root;
     private final String text;
     private final List<String> exts;
-    private volatile boolean finish = false;
+    private boolean finish = false;
 
     @GuardedBy("this")
     private final Queue<String> files = new LinkedList<>();
@@ -53,13 +53,20 @@ public class ParSearch {
         Thread read = new Thread() {
             @Override
             public void run() {
-                while (!files.isEmpty()) {
-                    findText(files.poll());
+                synchronized (files) {
+                    while (!files.isEmpty() & finish) {
+                        findText(files.poll());
+                    }
                 }
             }
         };
 
         search.start();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         read.start();
         try {
             search.join();
@@ -84,9 +91,8 @@ public class ParSearch {
      */
     private void findText(String file) {
         synchronized ("this") {
-            Scanner sc = null;
-            try {
-                sc = new Scanner(new File(file));
+            try ( Scanner sc = new Scanner(new File(file))){
+//                ;
                 while (sc.hasNext()) {
                     String st = sc.nextLine();
                     if (st.indexOf(text) != -1) {
@@ -98,7 +104,6 @@ public class ParSearch {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            sc.close();
         }
     }
 
@@ -106,7 +111,7 @@ public class ParSearch {
      * метод обхода каталога
      */
     private void findExts() {
-        synchronized ("this") {
+        synchronized (this) {
             try {
                 Files.walkFileTree(Paths.get(root), new MyVisit());
             } catch (IOException e) {

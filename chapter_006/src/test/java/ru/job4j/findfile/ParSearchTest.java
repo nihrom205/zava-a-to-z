@@ -20,7 +20,7 @@ public class ParSearchTest {
     @Test
     public void whenFindFile() {
         ParSearch par;
-        String path = "c:\\tools";
+        String path = "/home/user/tmp";
         String text = "Монитор";
         List<String> ext = new LinkedList<>();
         ext.add("txt");
