@@ -9,11 +9,11 @@ package ru.job4j.wait;
  * @since 11.02.2018
  */
 public class SimpleLock {
-    private boolean block = false;
-    private Thread lockThred = null;
-    private int lockCount = 0;
+    private volatile boolean block = false;
+    private volatile Thread lockThred = null;
+    private volatile int lockCount = 0;
 
-    public void lock() {
+    public synchronized void lock() {
         Thread curThread = Thread.currentThread();
         while (block && lockThred != curThread) {
             try {
@@ -27,7 +27,7 @@ public class SimpleLock {
         lockThred = curThread;
     }
 
-    public void unlock() {
+    public synchronized void unlock() {
         if (Thread.currentThread() == this.lockThred) {
             lockCount--;
         }
