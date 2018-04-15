@@ -3,7 +3,7 @@ package ru.job4j.collectionssort;
 import java.util.*;
 
 /**
- * Class <Name class>.
+ * Class SortUser.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1

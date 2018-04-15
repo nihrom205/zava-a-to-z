@@ -26,7 +26,7 @@ public class SimpleBlockingQueue<T> {
     /**
      * метод позволяет добавлять значение в очередь.
      * @param value добавляемый элемент
-     * @throws InterruptedException
+     * @throws InterruptedException исключение
      */
     public void offer(T value) throws InterruptedException {
         synchronized (this.queue) {
@@ -41,7 +41,7 @@ public class SimpleBlockingQueue<T> {
     /**
      * метод извлекает из вершины очереди элемент.
      * @return извелченный элемент
-     * @throws InterruptedException
+     * @throws InterruptedException исключение
      */
     public T peek() throws InterruptedException {
         synchronized (this.queue) {

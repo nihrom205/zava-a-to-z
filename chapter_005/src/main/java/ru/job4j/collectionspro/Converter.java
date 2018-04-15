@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Class Converter.
- * конвертирует Iterator<Iterator<Integer>>   ->   Iterator<Integer>.
+ * конвертирует {@code Iterator<Iterator<Integer>>}   в   {@code Iterator<Integer>}.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1

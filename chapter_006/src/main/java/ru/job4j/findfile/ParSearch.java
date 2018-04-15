@@ -10,7 +10,7 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 /**
- * Class <Name class>.
+ * Class ParSearch.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
@@ -91,7 +91,7 @@ public class ParSearch {
      */
     private void findText(String file) {
         synchronized ("this") {
-            try ( Scanner sc = new Scanner(new File(file))){
+            try (Scanner sc = new Scanner(new File(file))) {
 //                ;
                 while (sc.hasNext()) {
                     String st = sc.nextLine();

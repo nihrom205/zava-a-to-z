@@ -1,7 +1,7 @@
 package ru.job4j.threads;
 
 /**
- * Class <Name class>.
+ * Class FoundToText.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1

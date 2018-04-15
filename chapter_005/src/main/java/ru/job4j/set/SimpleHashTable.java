@@ -1,7 +1,7 @@
 package ru.job4j.set;
 
 /**
- * Class <Name>.
+ * Interface SimpleHashTable.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.2

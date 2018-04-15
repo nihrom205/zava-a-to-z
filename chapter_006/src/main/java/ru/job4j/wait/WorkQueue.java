@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Class <Name class>.
+ * Class WorkQueue.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1

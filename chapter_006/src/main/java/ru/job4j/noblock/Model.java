@@ -1,7 +1,7 @@
-package ru.job4j.noBlock;
+package ru.job4j.noblock;
 
 /**
- * Class <Name class>.
+ * Class Model, описывает сущность в которой есть поля id, version и name.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
@@ -18,9 +18,10 @@ public class Model {
         this.version = 1;
     }
 
-    /**
-     * Геттеры и сеииеры
-     */
+    //
+    //Геттеры и сеттеры.
+    //
+
     public int getId() {
         return id;
     }

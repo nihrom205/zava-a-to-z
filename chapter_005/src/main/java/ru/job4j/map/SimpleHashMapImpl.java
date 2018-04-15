@@ -1,7 +1,7 @@
 package ru.job4j.map;
 
 /**
- * Class <Name class>.
+ * Interface SimpleHashMapImpl.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1

@@ -1,12 +1,9 @@
-package ru.job4j.noBlock;
+package ru.job4j.noblock;
 
-import sun.security.pkcs11.Secmod;
-
-import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Class <Name class>.
+ * Хранилище моделей.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
@@ -22,7 +19,7 @@ public class Cache implements ICache {
      */
     @Override
     public void add(Model model) {
-        store.put(model.getId(),model);
+        store.put(model.getId(), model);
     }
 
     /**

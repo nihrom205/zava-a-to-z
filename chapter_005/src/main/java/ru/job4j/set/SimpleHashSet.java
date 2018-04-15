@@ -24,7 +24,7 @@ public class SimpleHashSet<E> implements SimpleHashTable<E> {
     /**
      * конструктор,
      * можно задать размер массива.
-     * @param value
+     * @param value размер массива
      */
     public SimpleHashSet(int value) {
         mass = new Node[value];

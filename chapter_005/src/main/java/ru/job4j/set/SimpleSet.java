@@ -23,7 +23,8 @@ public class SimpleSet<T> implements SimpleContainerSet<T> {
     }
 
     /**
-     * Конструктор с пораметром, создает массива размером value.
+     * Конструктор с параметром, создает массива размером value.
+     * @param value размер массива
      */
     public SimpleSet(int value) {
         array = new Object[value];
@@ -31,7 +32,7 @@ public class SimpleSet<T> implements SimpleContainerSet<T> {
 
     /**
      * метод для добавления в масив элементов.
-     * @param t
+     * @param t элемент
      */
     @Override
     public void add(T t) {

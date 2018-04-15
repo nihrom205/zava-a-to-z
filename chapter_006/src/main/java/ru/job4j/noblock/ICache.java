@@ -1,7 +1,7 @@
-package ru.job4j.noBlock;
+package ru.job4j.noblock;
 
 /**
- * Class <Name class>.
+ * Interface ICache.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1

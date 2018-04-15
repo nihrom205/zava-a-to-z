@@ -62,7 +62,7 @@ public class SimpleList<E> implements SimpleContainer<E> {
 
     /**
      * передает итератор.
-     * @return
+     * @return итератор
      */
     @Override
     public Iterator<E> iterator() {

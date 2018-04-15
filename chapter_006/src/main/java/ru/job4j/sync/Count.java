@@ -4,7 +4,7 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 /**
- * Class <Name class>.
+ * Class Count.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1

@@ -2,7 +2,7 @@ package ru.job4j.wait;
 
 
 /**
- * Class <Name class>.
+ * Class SimpleLock.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1

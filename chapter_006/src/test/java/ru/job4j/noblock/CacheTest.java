@@ -1,4 +1,4 @@
-package ru.job4j.noBlock;
+package ru.job4j.noblock;
 
 import org.junit.After;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Class <Name class>.
+ * Class Test Cache.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
@@ -31,17 +31,17 @@ public class CacheTest {
         cache.add(model2);
         cache.add(model3);
 
-        Model model2_new = new Model(2, "bla-bla-bla");
-        Model model2_old = new Model(2, "oldData");
-        model2_old.setVersion(4);
+        Model model2New = new Model(2, "bla-bla-bla");
+        Model model2Old = new Model(2, "oldData");
+        model2Old.setVersion(4);
 
-        Model rezult = cache.update(model2_new);
-        cache.update(model2_old);
+        Model rezult = cache.update(model2New);
+        cache.update(model2Old);
 
-        model2_new.setName("temp");
+        model2New.setName("temp");
 
         cache.delete(model3);
-        assertThat(rezult.getName(),is("bla-bla-bla"));
+        assertThat(rezult.getName(), is("bla-bla-bla"));
 
 
     }

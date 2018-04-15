@@ -1,7 +1,7 @@
 package ru.job4j.xml;
 
 /**
- * Class <Name class>.
+ * Class XML parser.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1

@@ -1,7 +1,7 @@
 package ru.job4j.list;
 
 /**
- * Class Node<T>.
+ * Class {@code Node<T>}.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
