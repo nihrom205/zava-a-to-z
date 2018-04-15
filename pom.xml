@@ -46,6 +46,14 @@
 
 	<build>
 		<plugins>
+			<!-- Javadoc generate -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.0</version>
+			</plugin>
+
+			<!-- Maven compiler-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -54,6 +62,8 @@
 					<compilerVersion>1.8</compilerVersion>
 				</configuration>
 			</plugin>
+
+			<!--Maven checkstyle-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
@@ -75,6 +85,8 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Jacoco-->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
