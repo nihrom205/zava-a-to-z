@@ -3,6 +3,5 @@
 
 # java-a-to-z
 
-http://job4j.ru/
 устроиться на работу java junior
 май 2018 год
