@@ -1,78 +1,101 @@
 package ru.job4j.tracker;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.io.FileInputStream;
+import java.sql.*;
+import java.sql.Date;
+import java.util.*;
 
 /**
  * Class Tracker.
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
- * @version $1d$
- * @since 19.10.2017
+ * @version 0.2
+ * @since 19.06.2018
  */
-public class Tracker {
-    /**
-     * переменная для хранения всех заявок.
-     */
-//    private Item[] items = new Item[100];
-    private List<Item> items = new ArrayList<>();
-    /**
-     * переменная текущей свободной позиции в массиве.
-     */
-    private int position = 0;
-    /**
-     *
-     */
-    private static final Random RN = new Random();
+public class Tracker implements AutoCloseable {
+
+    private Connection conn = null;
+
+    public Tracker(String f) {
+        Properties pr = new Properties();
+        try (FileInputStream fis = new FileInputStream(f)) {
+            pr.load(fis);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String url = pr.getProperty("db.host");
+        String username = pr.getProperty("db.username");
+        String password = pr.getProperty("db.password");
+
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            Statement st = conn.createStatement();
+            st.execute("CREATE TABLE IF NOT EXISTS items (id serial primary key, name varchar(100), description varchar(2000), create_date timestamp, comments varchar(2000));");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
-     * метод для добавление заявки в массив.
+     * метод для добавление заявки в БД.
      * @param item заяка
      * @return заявка
      */
     public Item add(Item item) {
-        item.setId(this.generateId());
-        this.items.add(item);
+        try (PreparedStatement st = conn.prepareStatement("INSERT INTO items(name, description, create_date) values(?, ?, ?)")) {
+            st.setString(1, item.getName());
+            st.setString(2, item.getDesc());
+            st.setDate(3, new Date(item.getCreated()));
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return item;
     }
 
     /**
-     * обновляет заявку.
+     * Обновление заявки.
      * @param item заявка
      */
     public void update(Item item) {
-        for (int i = 0; i < position; i++) {
-            if (this.items.get(i) != null && this.items.get(i).getId().equals(item.getId())) {
-                this.items.add(item);
-                break;
-            }
+        try (PreparedStatement st = conn.prepareStatement("UPDATE items SET name = ?, description = ?, create_date = ? WHERE id = ?")) {
+            st.setString(1, item.getName());
+            st.setString(2, item.getDesc());
+            st.setDate(3, new Date(item.getCreated()));
+            st.setInt(4, Integer.valueOf(item.getId()));
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     /**
-     * удаляет заявку.
+     * Удаление заявки.
      * @param item заявка
      */
     public void delete(Item item) {
-        Iterator<Item> it = items.iterator();
-        while (it.hasNext()) {
-            Item value = it.next();
-            if (value != null && value.getId().equals(item.getId())) {
-                it.remove();
-                break;
-            }
+        try (PreparedStatement st = conn.prepareStatement("DELETE FROM items WHERE id = ?")) {
+            st.setInt(1, Integer.valueOf(item.getId()));
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     /**
-     * возвращает все заявки все заявки.
+     * возвращает все заявки.
      * @return массив заявок
      */
     public List<Item> findAll() {
-//        Item[] itemArray = new Item[position];
-//        System.arraycopy(this.items, 0, itemArray, 0, position);
-        return this.items;
+        List<Item> listItems = new LinkedList<>();
+        try (Statement st = conn.createStatement()) {
+            ResultSet rs = st.executeQuery("SELECT * FROM items");
+            while (rs.next()) {
+                listItems.add(new Item(String.valueOf(rs.getInt("id")), rs.getString("name"), rs.getString("description"), (rs.getDate("create_date")).getTime()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listItems;
     }
 
     /**
@@ -81,13 +104,17 @@ public class Tracker {
      * @return массив заявок
      */
     public List<Item> findByName(String key) {
-        List<Item> arrayName = new ArrayList<>();
-        for (Item item : items) {
-            if (item != null && item.getName().equals(key)) {
-                arrayName.add(item);
+        List<Item> listItems = new LinkedList<>();
+        try (PreparedStatement st = conn.prepareStatement("SELECT * FROM items WHERE name = ?")) {
+            st.setString(1, key);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                listItems.add(new Item(String.valueOf(rs.getInt("id")), rs.getString("name"), rs.getString("description"), (rs.getDate("create_date")).getTime()));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return arrayName;
+        return listItems;
     }
 
     /**
@@ -97,20 +124,22 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
-                break;
+        try (PreparedStatement st = conn.prepareStatement("SELECT * FROM items WHERE id = ?")) {
+            st.setInt(1, Integer.valueOf(id));
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                result = new Item(String.valueOf(rs.getInt("id")), rs.getString("name"), rs.getString("description"), (rs.getDate("create_date")).getTime());
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return result;
     }
 
-    /**
-     * генератор id.
-     * @return id
-     */
-    String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
+    @Override
+    public void close() throws Exception {
+        if (conn != null) {
+            conn.close();
+        }
     }
 }

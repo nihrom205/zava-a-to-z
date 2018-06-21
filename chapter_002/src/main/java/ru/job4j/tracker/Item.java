@@ -40,6 +40,13 @@ public class Item {
         this.created = created;
     }
 
+    public Item(String id, String name, String desc, long created) {
+        this(name, desc, created);
+        this.id = id;
+    }
+
+
+
     /**
      * возвращает уникальный номер.
      * @return уникальный номер
@@ -51,9 +58,6 @@ public class Item {
      * устанавливается уникальный номер.
      * @param id  уникальный номер
      */
-    public void setId(String id) {
-        this.id = id;
-    }
 
     /**
      * возвращается наименование заявки.

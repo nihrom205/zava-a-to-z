@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.2
- * @since 12.11.2017
+ * @since 19.06.2018
  */
 public class MenuTracker {
     /**
@@ -104,7 +104,7 @@ public class MenuTracker {
             String name = input.ask("Please enter the task name: ");
             String desc = input.ask("Please enter the task desc: ");
             long data = Calendar.getInstance().getTimeInMillis();
-            tracker.add(new Item(name, desc, data));
+            tracker.add(new Item("1", name, desc, data));
         }
     }
 

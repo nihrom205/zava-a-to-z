@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,132 +15,25 @@ import static org.junit.Assert.assertThat;
  * Test.
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
- * @version $Id$
- * @since 19.10.2017
+ * @version 0.2
+ * @since 19.06.2018
  */
 public class TrackerTest {
+
     /**
      * tests method add.
      */
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
-        Item item = new Item("test1", "testDescription", 123L);
-        tracker.add(item);
-        assertThat(tracker.findAll().get(0), is(item));
-    }
+        try (Tracker tracker = new Tracker("config.properties")){
+            tracker.add(new Item("test1", "testDescription1", 123L));
+            tracker.add(new Item("test2", "testDescription2", 100L));
+            tracker.add(new Item("test3", "testDescription3", 111L));
+            tracker.add(new Item("test4", "testDescription4", 124L));
 
-    /**
-     * test method delete.
-     */
-    @Test
-    public void whenArrayDeleteOneItemThenTrackerArrayItem() {
-        Tracker tracker = new Tracker();
-        Item itemOne = new Item("test1", "testDescription", 123L);
-        Item itemTwo = new Item("test2", "testDescription", 123L);
-        Item itemTree = new Item("test3", "testDescription", 123L);
-        Item itemFour = new Item("test4", "testDescription", 123L);
-        Item itemFive = new Item("test5", "testDescription", 123L);
-        Item itemSex = new Item("test6", "testDescription", 123L);
-
-        List<Item> arrayItem = new ArrayList<>();
-        arrayItem.addAll(Arrays.asList(itemOne, itemTwo, itemTree, itemFive, itemSex));
-
-        tracker.add(itemOne);
-        tracker.add(itemTwo);
-        tracker.add(itemTree);
-        tracker.add(itemFour);
-        tracker.add(itemFive);
-        tracker.add(itemSex);
-
-        tracker.delete(itemFour);
-
-        assertThat(tracker.findAll(), is(arrayItem));
-    }
-
-    /**
-     * tests method update.
-     */
-    @Test
-    public void whenUpdatetemThenTrackerUpdatingItem() {
-        Tracker tracker = new Tracker();
-        tracker.add(new Item("test1", "testDescription", 123L));
-        tracker.add(new Item("test2", "testDescription", 123L));
-        tracker.add(new Item("test3", "testDescription", 123L));
-
-        Item item = tracker.findAll().get(1);
-        item.setName("XXXXX");
-        item.setDesc("YYYYYYYYYY");
-        item.setCreated(444L);
-        assertThat(tracker.findAll().get(1), is(item));
-    }
-
-    /**
-     * tests method findAll.
-     */
-    @Test
-    public void whenFindAllThenTrackerGetItems() {
-        Tracker tracker = new Tracker();
-        Item itemOne = new Item("test1", "testDescription", 123L);
-        Item itemTwo = new Item("test2", "testDescription", 123L);
-        Item itemTree = new Item("test3", "testDescription", 123L);
-
-        tracker.add(itemOne);
-        tracker.add(itemTwo);
-        tracker.add(itemTree);
-
-        List<Item> arrayItem = new ArrayList<>();
-        arrayItem.addAll(Arrays.asList(itemOne, itemTwo, itemTree));
-
-        assertThat(tracker.findAll(), is(arrayItem));
-    }
-
-    /**
-     * tests method findByName.
-     */
-    @Test
-    public void whenFindByNameThenTrackerNameItems() {
-        Tracker tracker = new Tracker();
-        Item itemOne = new Item("test1", "testDescription", 123L);
-        Item itemTwo = new Item("test2", "testDescription2222", 123L);
-        Item itemTree = new Item("test3", "testDescription", 123L);
-        Item itemFour = new Item("test2", "testDescription00", 123L);
-
-        List<Item> result = new ArrayList<>();
-        result.addAll(Arrays.asList(itemTwo, itemFour));
-        //---------------------------
-
-        tracker.add(itemOne);
-        tracker.add(itemTwo);
-        tracker.add(itemTree);
-        tracker.add(itemFour);
-
-        List<Item> arrayItem = tracker.findByName("test2");
-
-        assertThat(arrayItem, is(result));
-    }
-
-    /**
-     * tests method findById.
-     */
-    @Test
-    public void whenFindByIdThenTrackerIdItem() {
-        Tracker tracker = new Tracker();
-        Item itemOne = new Item("test1", "testDescription", 123L);
-        Item itemTwo = new Item("test2", "testDescription", 123L);
-        Item itemTree = new Item("test3", "testDescription", 123L);
-        Item itemFour = new Item("test4", "testDescription00", 123L);
-
-        tracker.add(itemOne);
-        tracker.add(itemTwo);
-        tracker.add(itemTree);
-        tracker.add(itemFour);
-
-        String id = tracker.findAll().get(3).getId();
-        Item result = tracker.findById(id);
-        assertThat(tracker.findAll().get(3), is(result));
-
-//        String id = "11";
-//        assertThat(null, is(result));         // проверка null
+            assertThat(tracker.findAll().size(), is(4));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
