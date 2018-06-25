@@ -88,9 +88,12 @@ public class Tracker implements AutoCloseable {
     public List<Item> findAll() {
         List<Item> listItems = new LinkedList<>();
         try (Statement st = conn.createStatement()) {
-            ResultSet rs = st.executeQuery("SELECT * FROM items");
-            while (rs.next()) {
-                listItems.add(new Item(String.valueOf(rs.getInt("id")), rs.getString("name"), rs.getString("description"), (rs.getDate("create_date")).getTime()));
+            try (ResultSet rs = st.executeQuery("SELECT * FROM items")) {
+                while (rs.next()) {
+                    listItems.add(new Item(String.valueOf(rs.getInt("id")), rs.getString("name"), rs.getString("description"), (rs.getDate("create_date")).getTime()));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
