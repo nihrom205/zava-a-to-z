@@ -10,12 +10,12 @@ import java.util.Objects;
  * @version 0.1
  * @since 09.08.2018
  */
-public class Job {
+public class Vakancy {
     private String subject;
     private String url;
     private Calendar calendar;
 
-    public Job(String subject, String url, Calendar calendar) {
+    public Vakancy(String subject, String url, Calendar calendar) {
         this.subject = subject;
         this.url = url;
         this.calendar = calendar;
@@ -49,10 +49,10 @@ public class Job {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Job job = (Job) o;
-        return Objects.equals(subject, job.subject) &&
-                Objects.equals(url, job.url) //&&
-                //Objects.equals(calendar, job.calendar);
+        Vakancy vakancy = (Vakancy) o;
+        return Objects.equals(subject, vakancy.subject) &&
+                Objects.equals(url, vakancy.url) //&&
+                //Objects.equals(calendar, vakancy.calendar);
                 ;
     }
 
@@ -63,7 +63,7 @@ public class Job {
 
     @Override
     public String toString() {
-        return "Job{" +
+        return "Vakancy{" +
                 "\nsubject='" + subject + '\'' +
                 ", \nurl='" + url + '\'' +
                 ", \ncalendar= " + calendar.getTime().toString() +
