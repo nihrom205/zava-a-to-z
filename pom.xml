@@ -20,7 +20,8 @@
 		<module>chapter_005</module>
 		<module>chapter_006</module>
         <module>chapter_007</module>
-    </modules>
+		<module>chapter_008</module>
+	</modules>
 
 	<dependencies>
 		<!--Testing-->
@@ -48,7 +49,6 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.25</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
