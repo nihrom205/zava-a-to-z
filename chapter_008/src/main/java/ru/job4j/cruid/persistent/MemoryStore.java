@@ -1,6 +1,5 @@
 package ru.job4j.cruid.persistent;
 
-import org.apache.log4j.Logger;
 import ru.job4j.cruid.dao.User;
 
 import java.util.LinkedList;
@@ -15,21 +14,20 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 30.08.18
  */
 public class MemoryStore implements Store {
-    private static final Logger logger = Logger.getLogger(MemoryStore.class);
-    private static final MemoryStore memoryStore = new MemoryStore();
-    private final ConcurrentHashMap<Integer, User> store = new ConcurrentHashMap();
+    private static final MemoryStore STORE = new MemoryStore();
+    private final ConcurrentHashMap<Integer, User> storeUsers = new ConcurrentHashMap();
 
     private MemoryStore() {
 
     }
 
     public static MemoryStore getInstance() {
-        return memoryStore;
+        return STORE;
     }
 
     @Override
     public void add(User user) {
-        store.put(user.getId(), user);
+        storeUsers.put(user.getId(), user);
     }
 
     @Override
@@ -40,14 +38,14 @@ public class MemoryStore implements Store {
 
     @Override
     public void delete(int id) {
-        store.remove(id);
+        storeUsers.remove(id);
 
     }
 
     @Override
     public List<User> findAll() {
         List<User> list = new LinkedList<>();
-        for (User value : store.values()) {
+        for (User value : storeUsers.values()) {
             list.add(value);
         }
         return list;
@@ -55,6 +53,6 @@ public class MemoryStore implements Store {
 
     @Override
     public User findById(int id) {
-        return store.get(id);
+        return storeUsers.get(id);
     }
 }

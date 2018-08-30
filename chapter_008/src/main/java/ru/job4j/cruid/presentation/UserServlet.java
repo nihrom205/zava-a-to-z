@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import ru.job4j.cruid.dao.User;
 import ru.job4j.cruid.logic.ValidateService;
 
@@ -20,7 +19,6 @@ import ru.job4j.cruid.logic.ValidateService;
  * @since 26.08.18
  */
 public class UserServlet extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(UserServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +42,6 @@ public class UserServlet extends HttpServlet {
                 ValidateService.getInstance().add(name);
                 break;
             case "update":
-                logger.info("добвлен: " + action + ", " + name + ", " + id);
                 ValidateService.getInstance().update(id, name);
                 break;
             case "delete":

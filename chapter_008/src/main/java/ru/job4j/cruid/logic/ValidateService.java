@@ -1,6 +1,5 @@
 package ru.job4j.cruid.logic;
 
-import org.apache.log4j.Logger;
 import ru.job4j.cruid.dao.User;
 import ru.job4j.cruid.persistent.MemoryStore;
 
@@ -14,15 +13,14 @@ import java.util.List;
  * @since 30.08.18
  */
 public class ValidateService {
-    private static final Logger logger = Logger.getLogger(ValidateService.class);
-    private static volatile ValidateService volidateService = new ValidateService();
+    private static volatile ValidateService service = new ValidateService();
     private int id = 0;
 
     private ValidateService() {
     }
 
     public static ValidateService getInstance() {
-        return volidateService;
+        return service;
     }
 
     /**
