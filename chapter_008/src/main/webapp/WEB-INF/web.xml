@@ -13,13 +13,44 @@
     <servlet-name>EchoServlet</servlet-name>
     <url-pattern>/echo</url-pattern>
   </servlet-mapping>
+  
   <servlet>
-    <servlet-name>UserServelt</servlet-name>
-    <servlet-class>ru.job4j.cruid.presentation.UserServlet</servlet-class>
+    <servlet-name>UsersServelt</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.UsersServlet</servlet-class>
     <load-on-startup>2</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UserServelt</servlet-name>
-    <url-pattern>/users</url-pattern>
+    <servlet-name>UsersServelt</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>UserCreateServlet</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.UserCreateServlet</servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserCreateServlet</servlet-name>
+    <url-pattern>/create</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>UserUpdateServlet</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.UserUpdateServlet</servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserUpdateServlet</servlet-name>
+    <url-pattern>/edit</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>UserDeleteServlet</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.UserDeleteServlet</servlet-class>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserDeleteServlet</servlet-name>
+    <url-pattern>/delete</url-pattern>
   </servlet-mapping>
 </web-app>
