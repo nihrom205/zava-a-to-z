@@ -16,7 +16,7 @@ import java.util.List;
 public class ParserTest {
     @Test
     public void whenParser() {
-        Parser parse = new Parser("app.properties");
+        Parser parse = new Parser();
         parse.parse("http://www.sql.ru/forum/job-offers");
 
 //        Calendar calendar = Calendar.getInstance();
