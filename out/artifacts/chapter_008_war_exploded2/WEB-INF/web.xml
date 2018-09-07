@@ -14,15 +14,15 @@
     <url-pattern>/echo</url-pattern>
   </servlet-mapping>
   
-  <!--<servlet>-->
-    <!--<servlet-name>UsersServelt</servlet-name>-->
-    <!--<servlet-class>ru.job4j.cruid.presentation.UsersServlet</servlet-class>-->
-    <!--<load-on-startup>2</load-on-startup>-->
-  <!--</servlet>-->
-  <!--<servlet-mapping>-->
-    <!--<servlet-name>UsersServelt</servlet-name>-->
-    <!--<url-pattern>/list</url-pattern>-->
-  <!--</servlet-mapping>-->
+  <servlet>
+    <servlet-name>UsersServelt</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.UsersServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UsersServelt</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>UserCreateServlet</servlet-name>

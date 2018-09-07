@@ -20,6 +20,6 @@ public class UserDeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.valueOf(req.getParameter("id"));
         ValidateService.getInstance().delete(id);
-        resp.sendRedirect("/chapter_008/list");
+        resp.sendRedirect(String.format("%s", req.getContextPath()));
     }
 }
