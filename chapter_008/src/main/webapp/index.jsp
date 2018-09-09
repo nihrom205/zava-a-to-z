@@ -22,21 +22,21 @@
         <col width="150">
         <col width="150">
         <% for (User user: ValidateService.getInstance().findAll()) { %>
-        <tr>
-            <td><%=user.getId()%></td>
-            <td><%=user.getName()%></td>
-            <td><%=user.getEmail()%></td>
-            <td>
-                <form action="<%=request.getContextPath()%>/edit.jsp" method="post">
-                    <input type="hidden" name="id" value="<%=user.getId()%>">
-                    <input type="submit" value="Edit"> <br/>
-                </form>
-                <form action="<%=request.getContextPath()%>/delete" method="post">
-                    <input type="hidden" name="id" value="<%=user.getId()%>">
-                    <input type="submit" value="Del">
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <td><%=user.getId()%></td>
+                <td><%=user.getName()%></td>
+                <td><%=user.getEmail()%></td>
+                <td>
+                    <form action="<%=request.getContextPath()%>/edit.jsp" method="post">
+                        <input type="hidden" name="id" value="<%=user.getId()%>">
+                        <input type="submit" value="Edit"> <br/>
+                    </form>
+                    <form action="<%=request.getContextPath()%>/delete" method="post">
+                        <input type="hidden" name="id" value="<%=user.getId()%>">
+                        <input type="submit" value="Del">
+                    </form>
+                </td>
+            </tr>
         <% } %>
     </table>
 </body>

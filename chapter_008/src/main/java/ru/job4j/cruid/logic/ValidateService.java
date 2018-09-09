@@ -1,7 +1,9 @@
 package ru.job4j.cruid.logic;
 
 import ru.job4j.cruid.dao.User;
+import ru.job4j.cruid.persistent.DBStore;
 import ru.job4j.cruid.persistent.MemoryStore;
+import ru.job4j.cruid.persistent.Store;
 
 import java.util.List;
 
@@ -14,6 +16,8 @@ import java.util.List;
  */
 public class ValidateService {
     private static volatile ValidateService service = new ValidateService();
+//    private Store<User> store = MemoryStore.getInstance();
+    private Store<User> store = DBStore.getInstance();
     private int id = 0;
 
     private ValidateService() {
@@ -28,25 +32,25 @@ public class ValidateService {
      * @param name
      */
     public void add(String name, String email) {
-        if (name.equals("") || MemoryStore.getInstance().findAll().contains(new User(0, name, email))) {
+        if (name.equals("") || store.findAll().contains(new User(0, name, email))) {
             return;
         }
-        MemoryStore.getInstance().add(new User(id++, name, email));
+        store.add(new User(id++, name, email));
     }
 
     public void update(int id, String name, String email) {
-        MemoryStore.getInstance().update(new User(id, name, email));
+        store.update(new User(id, name, email));
     }
 
     public void delete(int id) {
-        MemoryStore.getInstance().delete(id);
+        store.delete(id);
     }
 
     public List<User> findAll() {
-        return MemoryStore.getInstance().findAll();
+        return store.findAll();
     }
 
     public User findById(int id) {
-        return MemoryStore.getInstance().findById(id);
+        return store.findById(id);
     }
 }

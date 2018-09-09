@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 0.1
  * @since 30.08.18
  */
-public class MemoryStore implements Store {
+public class MemoryStore implements Store<User> {
     private static final MemoryStore STORE = new MemoryStore();
     private final ConcurrentHashMap<Integer, User> storeUsers = new ConcurrentHashMap();
 

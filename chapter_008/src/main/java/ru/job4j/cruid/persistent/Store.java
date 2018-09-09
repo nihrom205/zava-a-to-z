@@ -10,7 +10,7 @@ import java.util.List;
  * @version 0.1
  * @since 30.08.18
  */
-public interface Store {
+public interface Store<User> {
     void add(User user);
     void update(User user);
     void delete(int id);
