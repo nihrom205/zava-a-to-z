@@ -1,7 +1,6 @@
 package ru.job4j.cruid.persistent;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.apache.log4j.Logger;
 import ru.job4j.cruid.dao.User;
 
 import java.sql.*;

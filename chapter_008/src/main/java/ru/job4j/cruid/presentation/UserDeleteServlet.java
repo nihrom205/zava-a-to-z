@@ -16,6 +16,7 @@ import java.io.IOException;
  * @since 03.09.18
  */
 public class UserDeleteServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.valueOf(req.getParameter("id"));

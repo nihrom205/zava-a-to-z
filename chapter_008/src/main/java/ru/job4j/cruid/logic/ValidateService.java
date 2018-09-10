@@ -16,7 +16,6 @@ import java.util.List;
  */
 public class ValidateService {
     private static volatile ValidateService service = new ValidateService();
-//    private Store<User> store = MemoryStore.getInstance();
     private Store<User> store = DBStore.getInstance();
     private int id = 0;
 
