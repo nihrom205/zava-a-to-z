@@ -12,13 +12,13 @@ import java.util.logging.Logger;
  */
 public class User {
     private int id;
-    private String login;
+    private String name;
     private String email;
     private Date createDate;
 
     public User(int id, String name, String email) {
         this.id = id;
-        this.login = name;
+        this.name = name;
         this.email = email;
     }
 
@@ -27,7 +27,7 @@ public class User {
     }
 
     public String getName() {
-        return login;
+        return name;
     }
 
     public String getEmail() {
@@ -41,13 +41,13 @@ public class User {
 
         User user = (User) o;
 
-        if (login != null ? !login.equals(user.login) : user.login != null) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
         return email != null ? email.equals(user.email) : user.email == null;
     }
 
     @Override
     public int hashCode() {
-        int result = login != null ? login.hashCode() : 0;
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }

@@ -1,6 +1,5 @@
-<%@ page import="ru.job4j.cruid.logic.ValidateService" %>
-<%@ page import="ru.job4j.cruid.dao.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>List Users</title>
@@ -27,7 +26,7 @@
 </head>
 <body>
     <h2>List Users</h2>
-    <form action="<%=request.getContextPath()%>/create" method="post">
+    <form action="${pageContext.servletContext.contextPath}/create" method="post">
         Login : <input class="add" type="text" name="login"> <br/>
         Email : <input class="add" type="text" name="email"> <br/>
         <input type="submit" value="Add user">
@@ -42,27 +41,27 @@
         <col width="150">
         <col width="150">
         <col width="110">
-        <% for (User user: ValidateService.getInstance().findAll()) { %>
+        <c:forEach items="${users}" var="user">
             <tr>
-                <td><%=user.getId()%></td>
-                <td><%=user.getName()%></td>
-                <td><%=user.getEmail()%></td>
+                <td><c:out value="${user.id}"></c:out></td>
+                <td><c:out value="${user.name}"></c:out></td>
+                <td><c:out value="${user.email}"></c:out></td>
                 <td>
                     <div>
-                        <form action="<%=request.getContextPath()%>/edit.jsp" method="post">
-                            <input class="edit" type="hidden" name="id" value="<%=user.getId()%>">
+                        <form action="${pageContext.servletContext.contextPath}/edit" method="get">
+                            <input class="edit" type="hidden" name="id" value="${user.id}">
                             <input class="edit" type="submit" value="Edit"> <br/>
                         </form>
                     </div>
                     <div>
-                        <form action="<%=request.getContextPath()%>/delete" method="post">
-                            <input class="edit" type="hidden" name="id" value="<%=user.getId()%>">
+                        <form action="${pageContext.servletContext.contextPath}/delete" method="post">
+                            <input class="edit" type="hidden" name="id" value="${user.id}">
                             <input class="edit" type="submit" value="Del">
                         </form>
                     </div>
                 </td>
             </tr>
-        <% } %>
+        </c:forEach>
     </table>
 </body>
 </html>
