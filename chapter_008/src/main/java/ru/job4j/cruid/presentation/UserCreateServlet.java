@@ -38,6 +38,8 @@ public class UserCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("textName");
         ValidateService.getInstance().add(name);
-        resp.sendRedirect(req.getContextPath() + "/list");
+//        resp.sendRedirect(req.getContextPath() + "/list");
+        req.getRequestDispatcher( "/list").forward(req, resp);
+//        resp.
     }
 }

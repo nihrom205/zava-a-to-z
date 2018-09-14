@@ -13,7 +13,7 @@ import java.util.List;
  * @since 30.08.18
  */
 public class ValidateService {
-    private static volatile ValidateService service = new ValidateService();
+    private static final ValidateService service = new ValidateService();
     private int id = 0;
 
     private ValidateService() {
