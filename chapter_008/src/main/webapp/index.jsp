@@ -4,11 +4,32 @@
 <html>
 <head>
     <title>List Users</title>
+    <style>
+        h2 {
+            color: black;
+        }
+        input.add {
+            margin: 5px;
+        }
+        div {
+            margin: 5px;
+            float: left;
+            padding: 0px;
+        }
+        div form {
+            margin: 0px;
+            padding:  0px;
+        }
+        th {
+            background: darkgrey;
+        }
+    </style>
 </head>
 <body>
+    <h2>List Users</h2>
     <form action="<%=request.getContextPath()%>/create" method="post">
-        Login : <input type="text" name="login"> <br/>
-        Email : <input type="text" name="email"> <br/>
+        Login : <input class="add" type="text" name="login"> <br/>
+        Email : <input class="add" type="text" name="email"> <br/>
         <input type="submit" value="Add user">
     </form>
     <br>
@@ -20,23 +41,27 @@
         <col width="50">
         <col width="150">
         <col width="150">
-        <col width="150">
+        <col width="110">
         <% for (User user: ValidateService.getInstance().findAll()) { %>
-        <tr>
-            <td><%=user.getId()%></td>
-            <td><%=user.getName()%></td>
-            <td><%=user.getEmail()%></td>
-            <td>
-                <form action="<%=request.getContextPath()%>/edit.jsp" method="post">
-                    <input type="hidden" name="id" value="<%=user.getId()%>">
-                    <input type="submit" value="Edit"> <br/>
-                </form>
-                <form action="<%=request.getContextPath()%>/delete" method="post">
-                    <input type="hidden" name="id" value="<%=user.getId()%>">
-                    <input type="submit" value="Del">
-                </form>
-            </td>
-        </tr>
+            <tr>
+                <td><%=user.getId()%></td>
+                <td><%=user.getName()%></td>
+                <td><%=user.getEmail()%></td>
+                <td>
+                    <div>
+                        <form action="<%=request.getContextPath()%>/edit.jsp" method="post">
+                            <input class="edit" type="hidden" name="id" value="<%=user.getId()%>">
+                            <input class="edit" type="submit" value="Edit"> <br/>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="<%=request.getContextPath()%>/delete" method="post">
+                            <input class="edit" type="hidden" name="id" value="<%=user.getId()%>">
+                            <input class="edit" type="submit" value="Del">
+                        </form>
+                    </div>
+                </td>
+            </tr>
         <% } %>
     </table>
 </body>

@@ -18,33 +18,6 @@ import java.io.PrintWriter;
  * @since 31.08.18
  */
 public class UserUpdateServlet extends HttpServlet {
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        int id = Integer.valueOf(req.getParameter("id"));
-//        User user = ValidateService.getInstance().findById(id);
-//        resp.setContentType("text/html;charset=utf-8");
-////        req.getSession().setAttribute("1", user);
-//        PrintWriter pr = resp.getWriter();
-//        pr.write("<!DOCTYPE html>" +
-//                "<html lang='en'>" +
-//                "<head>" +
-//                "<meta charset='UTF-8'>" +
-//                "<title>Список пользователей</title>" +
-//                "</head>" +
-//                "<body>" +
-//                    "<form action='/chapter_008/edit' method='post'>" +
-//                        "<label>id:</label>" +
-//                        "<input type='text' name='id' value='" + user.getId() +"' size='10' readonly>" +
-//                        "<label>name:</label>" +
-//                        "<input type='text' name='name' value='" + user.getName() + "'>" +
-//                        "<input type='submit' value='Update'>" +
-//                    "</form>" +
-//                "</body>" +
-//                "</html>");
-//        pr.flush();
-//
-//
-//    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
