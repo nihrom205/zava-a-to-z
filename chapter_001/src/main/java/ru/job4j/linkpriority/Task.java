@@ -1,4 +1,4 @@
-package ru.job4j.linkPriority;
+package ru.job4j.linkpriority;
 
 /**
  * Class <Name class>.
@@ -26,9 +26,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "desc='" + desc + '\'' +
-                ", priority=" + priority +
-                '}';
+        return "Task{" + "desc='" + desc + ", priority=" + priority + '}';
     }
 }

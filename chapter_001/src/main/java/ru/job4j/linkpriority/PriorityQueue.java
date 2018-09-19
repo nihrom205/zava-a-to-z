@@ -1,7 +1,7 @@
-package ru.job4j.linkPriority;
+package ru.job4j.linkpriority;
 
-import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 /**
  * Class <Name class>.
@@ -22,6 +22,8 @@ public class PriorityQueue {
         }
         tasks.add(task);
     }
+
+
 
     public Task take() {
         return this.tasks.poll();

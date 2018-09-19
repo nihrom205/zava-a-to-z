@@ -1,4 +1,4 @@
-package ru.job4j.linkPriority;
+package ru.job4j.linkpriority;
 
 import org.junit.Test;
 
