@@ -2,6 +2,7 @@ package ru.job4j.phone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Class хранения и поиска.
@@ -27,12 +28,7 @@ public class PhoneDictonary {
      * @return список пользователей
      */
     public List<Persone> find(String key) {
-        List<Persone> result = new ArrayList<>();
-        for (Persone persone : this.storage) {
-            if (persone.getName().contains(key) || persone.getSurname().contains(key) || persone.getAddress().contains(key) || persone.getPhone().contains(key)) {
-                result.add(persone);
-            }
-        }
-        return result;
+        return storage.stream().filter(person -> person.getName().contains(key) || person.getSurname().contains(key) || person.getPhone().contains(key) || person.getAddress().contains(key))
+                .collect(Collectors.toList());
     }
 }
