@@ -18,6 +18,11 @@ import java.io.PrintWriter;
  * @since 31.08.18
  */
 public class UserUpdateServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("user", ValidateService.getInstance().findById(Integer.valueOf(req.getParameter("id"))));
+        req.getRequestDispatcher("WEB-INF/views/edit.jsp").forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
