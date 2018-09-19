@@ -12,25 +12,15 @@ import java.util.logging.Logger;
  */
 public class User {
     private int id;
-    private String name;
     private String login;
     private String email;
     private Date createDate;
 
-    public User(int id, String name) {
+    public User(int id, String name, String email) {
         this.id = id;
-        this.name = name;
+        this.login = name;
+        this.email = email;
     }
-
-
-//    public User(int id, String name, String login, String email, Date createDate) {
-//
-//        this.id = id;
-//        this.name = name;
-//        this.login = login;
-//        this.email = email;
-//        this.createDate = createDate;
-//    }
 
     public int getId() {
         return id;
@@ -41,6 +31,28 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return login;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (login != null ? !login.equals(user.login) : user.login != null) return false;
+        return email != null ? email.equals(user.email) : user.email == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = login != null ? login.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        return result;
     }
 }

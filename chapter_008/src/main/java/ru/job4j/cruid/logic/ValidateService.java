@@ -27,12 +27,15 @@ public class ValidateService {
      * Метод добавляет
      * @param name
      */
-    public void add(String name) {
-        MemoryStore.getInstance().add(new User(id++, name));
+    public void add(String name, String email) {
+        if (name.equals("") || MemoryStore.getInstance().findAll().contains(new User(0, name, email))) {
+            return;
+        }
+        MemoryStore.getInstance().add(new User(id++, name, email));
     }
 
-    public void update(int id, String name) {
-        MemoryStore.getInstance().update(new User(id, name));
+    public void update(int id, String name, String email) {
+        MemoryStore.getInstance().update(new User(id, name, email));
     }
 
     public void delete(int id) {
