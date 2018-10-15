@@ -1,5 +1,6 @@
 package ru.job4j.cruid.persistent;
 
+import ru.job4j.cruid.dao.Role;
 import ru.job4j.cruid.dao.User;
 
 import java.util.LinkedList;
@@ -54,5 +55,25 @@ public class MemoryStore implements Store<User> {
     @Override
     public User findById(int id) {
         return storeUsers.get(id);
+    }
+
+    @Override
+    public void addRole(String name, String description) {
+
+    }
+
+    @Override
+    public List<Role> findAllRoles() {
+        return null;
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        return null;
+    }
+
+    @Override
+    public void delRole(String id) {
+
     }
 }

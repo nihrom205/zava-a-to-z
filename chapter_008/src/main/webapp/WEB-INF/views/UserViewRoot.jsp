@@ -26,11 +26,22 @@
 </head>
 <body>
     <h2>List Users</h2>
+    <form action="${pageContext.servletContext.contextPath}/create" method="post">
+        Login : <input class="add" type="text" name="login"> <br/>
+        Email : <input class="add" type="text" name="email"> <br/>
+        <input type="submit" value="Add user">
+    </form>
+    <form action="" method="post">
+        <input type="submit" value="Edit roles">
+    </form>
+
+    <br>
     <table border="1">
         <th>id</th>
         <th>login</th>
         <th>email</th>
         <th>password</th>
+        <th>role</th>
         <th>editing</th>
         <col width="50">
         <col width="150">
@@ -42,6 +53,7 @@
                 <td><c:out value="${user.name}"></c:out></td>
                 <td><c:out value="${user.email}"></c:out></td>
                 <td><c:out value="${user.password}"></c:out></td>
+                <td><c:out value="${user.role}"></c:out></td>
                 <td>
                     <div>
                         <form action="${pageContext.servletContext.contextPath}/edit" method="get">

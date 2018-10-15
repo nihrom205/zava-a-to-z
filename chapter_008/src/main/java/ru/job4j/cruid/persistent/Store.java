@@ -1,4 +1,5 @@
 package ru.job4j.cruid.persistent;
+import ru.job4j.cruid.dao.Role;
 import ru.job4j.cruid.dao.User;
 
 import java.util.List;
@@ -16,4 +17,8 @@ public interface Store<User> {
     void delete(int id);
     List<User> findAll();
     User findById(int id);
+    User findByLogin(String login);
+    List<Role> findAllRoles();
+    void addRole(String name, String description);
+    void delRole(String id);
 }

@@ -4,20 +4,19 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
-  <servlet>
-    <servlet-name>EchoServlet</servlet-name>
-    <servlet-class>ru.job4j.servlets.EchoServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EchoServlet</servlet-name>
-    <url-pattern>/echo</url-pattern>
-  </servlet-mapping>
-  
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>ru.job4j.cruid.presentation.AuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <servlet>
     <servlet-name>UsersViewServelt</servlet-name>
     <servlet-class>ru.job4j.cruid.presentation.UsersViewServlet</servlet-class>
-    <load-on-startup>2</load-on-startup>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>UsersViewServelt</servlet-name>
@@ -52,5 +51,51 @@
   <servlet-mapping>
     <servlet-name>UserDeleteServlet</servlet-name>
     <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SigninController</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.SigninController</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SigninController</servlet-name>
+    <url-pattern>/signin</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ListRoleServlets</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.ListRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListRoleServlets</servlet-name>
+    <url-pattern>/listrole</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CreateRoleServlet</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.RoleCreateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateRoleServlet</servlet-name>
+    <url-pattern>/createRole</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteRoleServlet</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.RoleDeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteRoleServlet</servlet-name>
+    <url-pattern>/deleteRole</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+  <servlet-name>EditRoleServlet</servlet-name>
+  <servlet-class>ru.job4j.cruid.presentation.RoleUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>EditRoleServlet</servlet-name>
+  <url-pattern>/editRole</url-pattern>
   </servlet-mapping>
 </web-app>
