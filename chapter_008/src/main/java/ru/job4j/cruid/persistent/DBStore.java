@@ -34,7 +34,7 @@ public class DBStore implements Store<User> {
     }
 
     @Override
-    public void add(User user) {
+    public User add(User user) {
         try(Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("insert into users(login, email) values(?, ?)")) {
             pr.setString(1, user.getName());
@@ -43,6 +43,7 @@ public class DBStore implements Store<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return user;
     }
 
     @Override
@@ -61,10 +62,10 @@ public class DBStore implements Store<User> {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(User user) {
         try(Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("DELETE FROM users WHERE id= ?")) {
-            pr.setInt(1, id);
+            pr.setInt(1, user.getId());
             pr.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,11 +88,11 @@ public class DBStore implements Store<User> {
     }
 
     @Override
-    public User findById(int id) {
+    public User findById(User user) {
         User result = null;
         try(Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("select users.id, users.login, users.email, users.password, r.role from users  left join roles r on users.role = r.id where users.id=?")) {
-            pr.setInt(1, id);
+            pr.setInt(1, user.getId());
             ResultSet rs = pr.executeQuery();
             while(rs.next()) {
                 result = new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email"), rs.getString("password"), rs.getString("role"));
@@ -103,10 +104,10 @@ public class DBStore implements Store<User> {
     }
 
     @Override
-    public User findByLogin(String login) {
+    public User findByLogin(User user) {
         User result = null;
         try(Connection con = SOURCE.getConnection(); PreparedStatement pr = con.prepareStatement("select users.id, users.login, users.email, users.password, r.role from users  left join roles r on users.role = r.id where users.login = ?")) {
-            pr.setString(1, login);
+            pr.setString(1, user.getName());
             ResultSet rs = pr.executeQuery();
             while(rs.next()) {
                 result = new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email"), rs.getString("password"), rs.getString("role"));
@@ -133,11 +134,11 @@ public class DBStore implements Store<User> {
     }
 
     @Override
-    public void addRole(String name, String description) {
+    public void addRole(Role role) {
         try(Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("insert into roles(role, description) values(?, ?)")) {
-            pr.setString(1, name);
-            pr.setString(2, description);
+            pr.setString(1, role.getName());
+            pr.setString(2, role.getDescription());
             pr.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,10 +146,10 @@ public class DBStore implements Store<User> {
     }
 
     @Override
-    public void delRole(String id) {
+    public void delRole(Role role) {
         try(Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("delete from roles where id=?")) {
-            pr.setInt(1, Integer.valueOf(id));
+            pr.setInt(1, role.getId());
             pr.execute();
         } catch (Exception e) {
             e.printStackTrace();

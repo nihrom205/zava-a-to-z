@@ -3,7 +3,6 @@ package ru.job4j.cruid.logic;
 import ru.job4j.cruid.dao.Role;
 import ru.job4j.cruid.dao.User;
 import ru.job4j.cruid.persistent.DBStore;
-import ru.job4j.cruid.persistent.MemoryStore;
 import ru.job4j.cruid.persistent.Store;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
  * @version 0.1
  * @since 30.08.18
  */
-public class ValidateService {
+public class ValidateService implements Validate {
     private static volatile ValidateService service = new ValidateService();
     private Store<User> store = DBStore.getInstance();
     private int id = 0;
@@ -30,48 +29,48 @@ public class ValidateService {
 
     /**
      * Метод добавляет
-     * @param name
+     * @param user
      */
-    public void add(String name, String email) {
-        if (name.equals("") || store.findAll().contains(new User(0, name, email, ""))) {
-            return;
+    public User add(User user) {
+        if (user.getName().equals("") || store.findAll().contains(user)) {
+            return null;
         }
-        store.add(new User(id++, name, email, ""));
+        return store.add(user);
     }
 
-    public void update(int id, String name, String email, String pass, String role) {
-        store.update(new User(id, name, email, pass, role));
+    public void update(User user) {
+        store.update(user);
     }
 
-    public void delete(int id) {
-        store.delete(id);
+    public void delete(User user) {
+        store.delete(user);
     }
 
     public List<User> findAll() {
         return store.findAll();
     }
 
-    public User findById(int id) {
-        return store.findById(id);
+    public User findById(User user) {
+        return store.findById(user);
     }
 
-    public boolean isCreated(String login, String password) {
-        return store.findByLogin(login).equals(new User(0, login, null, password));
+    public boolean isCreated(User user ) {
+        return store.findByLogin(user).equals(user);
     }
 
-    public User findByLogin(String login, String password) {
-        return store.findByLogin(login);
+    public User findByLogin(User user) {
+        return store.findByLogin(user);
     }
 
     public List<Role> findAllRoles() {
         return store.findAllRoles();
     }
 
-    public void addRole(String name, String description) {
-        store.addRole(name, description);
+    public void addRole(Role role) {
+        store.addRole(role);
     }
 
-    public void delRole(String id) {
-        store.delRole(id);
+    public void delRole(Role role) {
+        store.delRole(role);
     }
 }

@@ -1,5 +1,6 @@
 package ru.job4j.cruid.presentation;
 
+import ru.job4j.cruid.dao.Role;
 import ru.job4j.cruid.logic.ValidateService;
 
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ public class RoleCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String desc = req.getParameter("desc");
-        ValidateService.getInstance().addRole(name, desc);
+        ValidateService.getInstance().addRole(new Role(0, name, desc));
         resp.sendRedirect(String.format("%s", req.getContextPath()));
     }
 }

@@ -1,5 +1,6 @@
 package ru.job4j.cruid.presentation;
 
+import ru.job4j.cruid.dao.User;
 import ru.job4j.cruid.logic.ValidateService;
 
 import javax.servlet.ServletException;
@@ -21,7 +22,8 @@ public class UserCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("login");
         String email = req.getParameter("email");
-        ValidateService.getInstance().add(name, email);
+        String password = req.getParameter("pass");
+        ValidateService.getInstance().add(new User(0 , name, email, password));
         resp.sendRedirect(String.format("%s", req.getContextPath()));
     }
 }

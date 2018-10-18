@@ -27,8 +27,9 @@ public class MemoryStore implements Store<User> {
     }
 
     @Override
-    public void add(User user) {
+    public User add(User user) {
         storeUsers.put(user.getId(), user);
+        return user;
     }
 
     @Override
@@ -38,8 +39,8 @@ public class MemoryStore implements Store<User> {
     }
 
     @Override
-    public void delete(int id) {
-        storeUsers.remove(id);
+    public void delete(User user) {
+        storeUsers.remove(user.getId());
 
     }
 
@@ -53,12 +54,12 @@ public class MemoryStore implements Store<User> {
     }
 
     @Override
-    public User findById(int id) {
-        return storeUsers.get(id);
+    public User findById(User user) {
+        return storeUsers.get(user.getId());
     }
 
     @Override
-    public void addRole(String name, String description) {
+    public void addRole(Role role) {
 
     }
 
@@ -68,12 +69,12 @@ public class MemoryStore implements Store<User> {
     }
 
     @Override
-    public User findByLogin(String login) {
+    public User findByLogin(User user) {
         return null;
     }
 
     @Override
-    public void delRole(String id) {
+    public void delRole(Role role) {
 
     }
 }

@@ -26,13 +26,12 @@ public class SigninController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        if (ValidateService.getInstance().isCreated(login, password)) {
-            User user = ValidateService.getInstance().findByLogin(login, password);
+        User curentUser = new User(0, login, "", password, "");
+        if (ValidateService.getInstance().isCreated(curentUser)) {
+            User user = ValidateService.getInstance().findByLogin(curentUser);
             HttpSession session = req.getSession();
-            synchronized (session) {
-                session.setAttribute("login", login);
-                session.setAttribute("curentUser", user);
-            }
+            session.setAttribute("login", login);
+            session.setAttribute("curentUser", user);
             resp.sendRedirect(String.format("%s/view", req.getContextPath()));
         } else {
             req.setAttribute("error", "Credentional invalid");

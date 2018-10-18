@@ -24,16 +24,13 @@ public class UsersViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User curentUser;
-        synchronized (session) {
-            curentUser = (User)session.getAttribute("curentUser");
-        }
+        User curentUser = (User)session.getAttribute("curentUser");
         if (curentUser.getRole().equals("administrator")) {
             req.setAttribute("users", ValidateService.getInstance().findAll());
             req.getRequestDispatcher("WEB-INF/views/UserViewRoot.jsp").forward(req, resp);
         } else {
             List<User> list = new LinkedList<>();
-            list.add(ValidateService.getInstance().findByLogin(curentUser.getName(), curentUser.getPassword()));
+            list.add(ValidateService.getInstance().findByLogin(curentUser));
             req.setAttribute("users", list);
             req.getRequestDispatcher("WEB-INF/views/UserView.jsp").forward(req, resp);
         }
