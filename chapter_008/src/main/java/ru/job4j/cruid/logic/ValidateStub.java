@@ -1,7 +1,7 @@
 package ru.job4j.cruid.logic;
 
-import ru.job4j.cruid.dao.Role;
 import ru.job4j.cruid.dao.User;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,35 +38,5 @@ public class ValidateStub implements Validate{
     @Override
     public List<User> findAll() {
         return new ArrayList<>(this.store.values());
-    }
-
-    @Override
-    public User findById(User user) {
-        return null;
-    }
-
-    @Override
-    public boolean isCreated(User user) {
-        return false;
-    }
-
-    @Override
-    public User findByLogin(User user) {
-        return null;
-    }
-
-    @Override
-    public List<Role> findAllRoles() {
-        return null;
-    }
-
-    @Override
-    public void addRole(Role role) {
-
-    }
-
-    @Override
-    public void delRole(Role role) {
-
     }
 }

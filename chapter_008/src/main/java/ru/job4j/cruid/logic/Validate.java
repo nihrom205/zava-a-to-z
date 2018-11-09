@@ -1,6 +1,5 @@
 package ru.job4j.cruid.logic;
 
-import ru.job4j.cruid.dao.Role;
 import ru.job4j.cruid.dao.User;
 
 import java.util.List;
@@ -18,11 +17,4 @@ public interface Validate {
     void update(User user);
     void delete(User user);
     List<User> findAll();
-    User findById(User user);
-    boolean isCreated(User user);
-    User findByLogin(User user);
-    List<Role> findAllRoles();
-    void addRole(Role role);
-    void delRole(Role role);
-
 }
