@@ -14,7 +14,15 @@
             } else if ($('#lastName').val() == '') {
                 alert($('#lastName').attr('placeholder'));
             }
+        }
+        
+        function addRow() {
+            var name = $('#name').val();
+            var lastName = $('#lastName').val();
+            var gender = (document.getElementById("gen").checked) ? 'Male' : 'Female';
+            var description = document.getElementById("disc").value;
 
+            $('#table tr:last').after('<tr><td>' + name + '</td><td>' + lastName + '</td><td>' + gender + '</td><td>' + description  +'</td></tr>')
         }
     </script>
 </head>
@@ -23,7 +31,7 @@
         <h1>Страница добавления пользователей</h1>
         <p>Добавление и отображение таблицы с пользователями.</p>
     </div>
-    <form class="form-horizontal" action="/action_page.php">
+    <form class="form-horizontal">
         <div class="form-group">
             <label class="control-label col-sm-2" for="name">Имя:</label>
             <div class="col-sm-4">
@@ -39,27 +47,33 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Пол:</label>
             <div class="col-sm-2">
-                <input type="radio" name="gender" value="male" checked/> Муж.<br>
+                <input type="radio" name="gender" value="male" id="gen" checked/> Муж.<br>
                 <input type="radio" name="gender" value="female"/> Жен.<br>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" >Описание:</label>
+            <label class="control-label col-sm-2">Описание:</label>
             <div class="col-sm-4">
-                <textarea rows="4" cols="50">
-                </textarea>
+                <textarea rows="4" cols="50" id="disc"></textarea>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-1">
                 <button type="submit" class="btn btn-default" onclick="validate()">Submit</button>
             </div>
         </div>
     </form>
 
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-1">
+                <button type="submit" class="btn btn-default" onclick="addRow()">addRow</button>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <h2>Таблица пользователей</h2>
-        <table class="table table-hover">
+        <table class="table table-hover" id="table">
             <thead>
             <tr>
                 <th>Имя</th>
