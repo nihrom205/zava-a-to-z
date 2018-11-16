@@ -78,11 +78,8 @@ public class MenuTracker {
      * вывод в консоль названий у меню.
      */
     public void show() {
-        for (UserAction action : this.actions) {
-            if (action != null) {
-                System.out.println(action.info());
-            }
-        }
+
+        this.actions.forEach( actions -> System.out.println(actions.info()));
     }
 
     /**
