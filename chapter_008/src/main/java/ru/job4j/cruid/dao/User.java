@@ -14,16 +14,31 @@ public class User {
     private int id;
     private String name;
     private String email;
+    private String password;
     private Date createDate;
+    private String role;
 
-    public User(int id, String name, String email) {
+    public User(int id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.password = password;
+
     }
+
+    public User(int id, String name, String email, String password, String role) {
+        this(id, name, email, password);
+        this.role = role;
+    }
+
+
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,6 +49,14 @@ public class User {
         return email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,13 +65,13 @@ public class User {
         User user = (User) o;
 
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        return email != null ? email.equals(user.email) : user.email == null;
+        return password != null ? password.equals(user.password) : user.password == null;
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
     }
 }

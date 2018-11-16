@@ -1,6 +1,7 @@
 package ru.job4j.cruid.persistent;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import ru.job4j.cruid.dao.Role;
 import ru.job4j.cruid.dao.User;
 
 import java.sql.*;
@@ -33,22 +34,27 @@ public class DBStore implements Store<User> {
     }
 
     @Override
-    public void add(User user) {
-        try(Connection con = SOURCE.getConnection(); PreparedStatement pr = con.prepareStatement("insert into users(login, email) values(?, ?)")) {
+    public User add(User user) {
+        try(Connection con = SOURCE.getConnection();
+            PreparedStatement pr = con.prepareStatement("insert into users(login, email) values(?, ?)")) {
             pr.setString(1, user.getName());
             pr.setString(2, user.getEmail());
             pr.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return user;
     }
 
     @Override
     public void update(User user) {
-        try(Connection con = SOURCE.getConnection(); PreparedStatement pr = con.prepareStatement("UPDATE users SET login=?, email=? WHERE id=?")) {
+        try(Connection con = SOURCE.getConnection();
+            PreparedStatement pr = con.prepareStatement("UPDATE users SET login=?, email=?, password=?, role=? WHERE id=?")) {
             pr.setString(1, user.getName());
             pr.setString(2, user.getEmail());
-            pr.setInt(3, user.getId());
+            pr.setString(3, user.getPassword());
+            pr.setInt(4, Integer.valueOf(user.getRole()));
+            pr.setInt(5, user.getId());
             pr.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,9 +62,10 @@ public class DBStore implements Store<User> {
     }
 
     @Override
-    public void delete(int id) {
-        try(Connection con = SOURCE.getConnection(); PreparedStatement pr = con.prepareStatement("DELETE FROM users WHERE id= ?")) {
-            pr.setInt(1, id);
+    public void delete(User user) {
+        try(Connection con = SOURCE.getConnection();
+            PreparedStatement pr = con.prepareStatement("DELETE FROM users WHERE id= ?")) {
+            pr.setInt(1, user.getId());
             pr.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,9 +75,11 @@ public class DBStore implements Store<User> {
     @Override
     public List<User> findAll() {
         List<User> list = new LinkedList<>();
-        try(Connection con = SOURCE.getConnection(); Statement st = con.createStatement(); ResultSet rs = st.executeQuery("SELECT * FROM users")) {
+        try(Connection con = SOURCE.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select users.id, users.login, users.email, users.password, r.role from users  left join roles r on users.role = r.id")) {
             while(rs.next()) {
-                list.add(new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email")));
+                list.add(new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email"), rs.getString("password"), rs.getString("role")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,17 +88,71 @@ public class DBStore implements Store<User> {
     }
 
     @Override
-    public User findById(int id) {
+    public User findById(User user) {
         User result = null;
-        try(Connection con = SOURCE.getConnection(); PreparedStatement pr = con.prepareStatement("SELECT * FROM users where id = ?")) {
-            pr.setInt(1, id);
+        try(Connection con = SOURCE.getConnection();
+            PreparedStatement pr = con.prepareStatement("select users.id, users.login, users.email, users.password, r.role from users  left join roles r on users.role = r.id where users.id=?")) {
+            pr.setInt(1, user.getId());
             ResultSet rs = pr.executeQuery();
             while(rs.next()) {
-                result = new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email"));
+                result = new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email"), rs.getString("password"), rs.getString("role"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public User findByLogin(User user) {
+        User result = null;
+        try(Connection con = SOURCE.getConnection(); PreparedStatement pr = con.prepareStatement("select users.id, users.login, users.email, users.password, r.role from users  left join roles r on users.role = r.id where users.login = ?")) {
+            pr.setString(1, user.getName());
+            ResultSet rs = pr.executeQuery();
+            while(rs.next()) {
+                result = new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email"), rs.getString("password"), rs.getString("role"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public List<Role> findAllRoles() {
+        List<Role> listRole = new LinkedList<>();
+        try(Connection con = SOURCE.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select * from roles")) {
+                while(rs.next()) {
+                    listRole.add(new Role(Integer.valueOf(rs.getString("id")), rs.getString("role"), rs.getString("description")));
+                }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return listRole;
+    }
+
+    @Override
+    public void addRole(Role role) {
+        try(Connection con = SOURCE.getConnection();
+            PreparedStatement pr = con.prepareStatement("insert into roles(role, description) values(?, ?)")) {
+            pr.setString(1, role.getName());
+            pr.setString(2, role.getDescription());
+            pr.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delRole(Role role) {
+        try(Connection con = SOURCE.getConnection();
+            PreparedStatement pr = con.prepareStatement("delete from roles where id=?")) {
+            pr.setInt(1, role.getId());
+            pr.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

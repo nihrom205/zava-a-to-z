@@ -1,6 +1,6 @@
 package ru.job4j.cruid.presentation;
 
-import ru.job4j.cruid.dao.User;
+import ru.job4j.cruid.dao.Role;
 import ru.job4j.cruid.logic.ValidateService;
 
 import javax.servlet.ServletException;
@@ -14,14 +14,14 @@ import java.io.IOException;
  *
  * @author Alexey Rastorguev (rastorguev00@gmail.com)
  * @version 0.1
- * @since 03.09.18
+ * @since 15.10.18
  */
-public class UserDeleteServlet extends HttpServlet {
-
+public class RoleCreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.valueOf(req.getParameter("id"));
-        ValidateService.getInstance().delete(new User(id, "", "", ""));
+        String name = req.getParameter("name");
+        String desc = req.getParameter("desc");
+        ValidateService.getInstance().addRole(new Role(0, name, desc));
         resp.sendRedirect(String.format("%s", req.getContextPath()));
     }
 }
