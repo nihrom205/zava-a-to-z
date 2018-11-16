@@ -25,7 +25,7 @@ public class UsersViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User curentUser = (User)session.getAttribute("curentUser");
-        if (curentUser.getRole().equals("administrator")) {
+        if (curentUser.getRole().equals("admin")) {
             req.setAttribute("users", ValidateService.getInstance().findAll());
             req.getRequestDispatcher("WEB-INF/views/UserViewRoot.jsp").forward(req, resp);
         } else {

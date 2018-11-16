@@ -35,7 +35,7 @@ public class UserCreateServletTest {
     public void whenAddUser() throws ServletException, IOException {
         Validate validate = new ValidateStub();
         PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn(validate);
+        Mockito.when(ValidateService.getInstance()).thenReturn((ValidateService) validate);
         HttpServletResponse res = PowerMockito.mock(HttpServletResponse.class);
         HttpServletRequest req = PowerMockito.mock(HttpServletRequest.class);
 
