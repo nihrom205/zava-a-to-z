@@ -13,15 +13,15 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-  <servlet>
-    <servlet-name>UsersViewServelt</servlet-name>
-    <servlet-class>ru.job4j.cruid.presentation.UsersViewServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UsersViewServelt</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
+  <!--<servlet>-->
+    <!--<servlet-name>UsersViewServelt</servlet-name>-->
+    <!--<servlet-class>ru.job4j.cruid.presentation.UsersViewServlet</servlet-class>-->
+    <!--<load-on-startup>1</load-on-startup>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>UsersViewServelt</servlet-name>-->
+    <!--<url-pattern>/</url-pattern>-->
+  <!--</servlet-mapping>-->
 
   <servlet>
     <servlet-name>UserCreateServlet</servlet-name>
@@ -97,5 +97,14 @@
   <servlet-mapping>
   <servlet-name>EditRoleServlet</servlet-name>
   <url-pattern>/editRole</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ReaderJsonServlet</servlet-name>
+    <servlet-class>ru.job4j.cruid.presentation.ReadJsonServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReaderJsonServlet</servlet-name>
+    <url-pattern>/json</url-pattern>
   </servlet-mapping>
 </web-app>
