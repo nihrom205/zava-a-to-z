@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bootstrap Example</title>
+    <title>Добавление пользователей</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -21,8 +21,8 @@
 
             var name = $('#name').val();
             var lastName = $('#lastName').val();
-            var gender = (document.getElementById("gen").checked) ? 'Male' : 'Female';
-            var description = document.getElementById("disc").value;
+            var gender = ($('#gen').checked) ? 'Male' : 'Female';
+            var description = $('#disc').val();
 
             $.ajax('/items/json', {
                 method : 'post',
@@ -36,11 +36,15 @@
                     var rezult = "";
                     var users = JSON.parse(data.responseText);
                     for (let i = 0; i < users.length; i++) {
-                        rezult += '<tr><td>' + users[i].lastName + '</td><td>' + users[i].firstNmae + '</td><td>' + users[i].gender + '</td><td>' + users[i].description  +'</td></tr>';
+                        rezult += '<tr><td>' + users[i].name + '</td><td>' + users[i].lastName + '</td><td>' + users[i].gender + '</td><td>' + users[i].description  +'</td></tr>';
                     }
                     $('#table tr:last').after(rezult);
+                    $('#name').val("");
+                    $('#lastName').val("");
+                    $('#disc').val("");
                 }
             });
+
         }
     </script>
 </head>

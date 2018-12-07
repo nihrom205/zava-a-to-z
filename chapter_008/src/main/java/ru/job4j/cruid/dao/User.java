@@ -13,10 +13,13 @@ import java.util.logging.Logger;
 public class User {
     private int id;
     private String name;
+    private String lastName;
     private String email;
     private String password;
     private Date createDate;
     private String role;
+    private String description;
+    private String gender;
 
     public User(int id, String name, String email, String password) {
         this.id = id;
@@ -29,6 +32,13 @@ public class User {
     public User(int id, String name, String email, String password, String role) {
         this(id, name, email, password);
         this.role = role;
+    }
+
+    public User(String name, String lastName, String gender, String description) {
+        this.name = name;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.description = description;
     }
 
 
@@ -57,14 +67,32 @@ public class User {
         return role;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         User user = (User) o;
 
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) {
+            return false;
+        }
         return password != null ? password.equals(user.password) : user.password == null;
     }
 
