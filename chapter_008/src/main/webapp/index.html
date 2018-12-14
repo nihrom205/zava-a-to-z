@@ -19,18 +19,15 @@
         function addRow() {
             validate();
 
-            var name = $('#name').val();
-            var lastName = $('#lastName').val();
-            var gender = ($('#gen').checked) ? 'Male' : 'Female';
-            var description = $('#disc').val();
+            var user = {};
+            user.name = $('#name').val();
+            user.lastName = $('#lastName').val();
+            user.gender = ($('#gen').checked) ? 'Male' : 'Female';
+            user.description = $('#disc').val();
 
             $.ajax('/items/json', {
                 method : 'post',
-                data: {name,
-                    lastName,
-                    gender,
-                    description
-                },
+                data: user,
                 dateType : "json",
                 complete : function(data) {
                     var rezult = "";
@@ -38,7 +35,7 @@
                     for (let i = 0; i < users.length; i++) {
                         rezult += '<tr><td>' + users[i].name + '</td><td>' + users[i].lastName + '</td><td>' + users[i].gender + '</td><td>' + users[i].description  +'</td></tr>';
                     }
-                    $('#table tr:last').after(rezult);
+                    $('#table tbody').append(rezult);
                     $('#name').val("");
                     $('#lastName').val("");
                     $('#disc').val("");
@@ -93,38 +90,16 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <h2>Таблица пользователей</h2>
-        <table class="table table-hover" id="table">
-            <thead>
-            <tr>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Пол</th>
-                <th>Описание</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>Male</td>
-                <td>111</td>
-            </tr>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>Female</td>
-                <td>222</td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>Female</td>
-                <td>333</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <script>
+        (function() {
+            var div = $('<div>').addClass('container');
+            var table = $('<table>').addClass('table table-hover').attr('id', 'table');
+
+            table.append($('<thead><tr><th>Имя</th><th>Фамилия</th><th>Пол</th><th>Описание</th></tr></thead>'));
+            table.append($('<tbody>'));
+            div.append(table);
+            $('body').append(div);
+        }());
+    </script>
 </body>
 </html>

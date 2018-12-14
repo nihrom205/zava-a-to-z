@@ -6,6 +6,7 @@ import ru.job4j.cruid.dao.User;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Class для оаботы с бд.
@@ -17,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MemoryStore implements Store<User> {
     private static final MemoryStore STORE = new MemoryStore();
     private final ConcurrentHashMap<Integer, User> storeUsers = new ConcurrentHashMap();
+    private AtomicInteger id = new AtomicInteger(0);
 
     private MemoryStore() {
 
@@ -28,6 +30,7 @@ public class MemoryStore implements Store<User> {
 
     @Override
     public User add(User user) {
+        user.setId(id.getAndIncrement());
         storeUsers.put(user.getId(), user);
         return user;
     }
