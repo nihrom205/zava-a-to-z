@@ -21,7 +21,7 @@ public class UserUpdateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("user", ValidateService.getInstance().findById(new User(Integer.valueOf(req.getParameter("id")), "", "", "")));
         req.setAttribute("roles", ValidateService.getInstance().findAllRoles());
-        req.setAttribute("sessiaUser", (User)req.getSession().getAttribute("curentUser"));
+        req.setAttribute("sessiaUser", (User) req.getSession().getAttribute("curentUser"));
         req.getRequestDispatcher("WEB-INF/views/edit.jsp").forward(req, resp);
     }
 

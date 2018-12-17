@@ -1,4 +1,4 @@
-package ru.job4j.storeXml;
+package ru.job4j.storexml;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;

@@ -79,7 +79,7 @@ public class MenuTracker {
      */
     public void show() {
 
-        this.actions.forEach( actions -> System.out.println(actions.info()));
+        this.actions.forEach(actions -> System.out.println(actions.info()));
     }
 
     /**

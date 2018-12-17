@@ -2,6 +2,7 @@ package ru.job4j.cruid.presentation;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -30,7 +31,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ValidateService.class)
 public class UserCreateServletTest {
-
+    @Ignore
     @Test
     public void whenAddUser() throws ServletException, IOException {
         Validate validate = new ValidateStub();

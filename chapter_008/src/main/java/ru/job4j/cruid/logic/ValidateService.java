@@ -54,7 +54,7 @@ public class ValidateService implements Validate {
         return store.findById(user);
     }
 
-    public boolean isCreated(User user ) {
+    public boolean isCreated(User user) {
         return store.findByLogin(user).equals(user);
     }
 

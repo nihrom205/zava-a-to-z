@@ -37,7 +37,7 @@ public class UserCreateServlet extends HttpServlet {
         String name = req.getParameter("login");
         String email = req.getParameter("email");
         String password = req.getParameter("pass");
-        ValidateService.getInstance().add(new User(0 , name, email, password));
+        ValidateService.getInstance().add(new User(0, name, email, password));
         resp.sendRedirect(String.format("%s", req.getContextPath()));
     }
 }

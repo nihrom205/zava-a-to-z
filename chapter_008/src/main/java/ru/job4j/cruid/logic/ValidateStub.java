@@ -14,7 +14,7 @@ import java.util.Map;
  * @version 0.1
  * @since 16.10.18
  */
-public class ValidateStub implements Validate{
+public class ValidateStub implements Validate {
     private final Map<Integer, User> store = new HashMap<>();
     private int ids = 0;
 

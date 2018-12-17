@@ -1,4 +1,4 @@
-package ru.job4j.parserSql;
+package ru.job4j.parsersql;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -47,13 +47,16 @@ public class Vakancy {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Vakancy vakancy = (Vakancy) o;
-        return Objects.equals(subject, vakancy.subject) &&
-                Objects.equals(url, vakancy.url) //&&
+        return Objects.equals(subject, vakancy.subject) && Objects.equals(url, vakancy.url);
+                //&&
                 //Objects.equals(calendar, vakancy.calendar);
-                ;
     }
 
     @Override
@@ -63,10 +66,6 @@ public class Vakancy {
 
     @Override
     public String toString() {
-        return "Vakancy{" +
-                "\nsubject='" + subject + '\'' +
-                ", \nurl='" + url + '\'' +
-                ", \ncalendar= " + calendar.getTime().toString() +
-                '}' + "\n";
+        return "Vakancy{" + "\nsubject='" + subject + '\'' + ", \nurl='" + url + '\'' + ", \ncalendar= " + calendar.getTime().toString() + '}' + "\n";
     }
 }

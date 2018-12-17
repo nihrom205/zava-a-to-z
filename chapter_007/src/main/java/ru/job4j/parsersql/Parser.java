@@ -1,4 +1,4 @@
-package ru.job4j.parserSql;
+package ru.job4j.parsersql;
 
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -25,7 +25,7 @@ import java.util.Calendar;
  * @since 22.07.2018
  */
 public class Parser implements Job {
-    private static final Logger logger = Logger.getLogger(Parser.class);
+    private static final Logger LOGGER = Logger.getLogger(Parser.class);
     private Connection connect = null;
     private List<Vakancy> listVakancy;
     private Calendar lastRecordDate;
@@ -51,7 +51,7 @@ public class Parser implements Job {
             e.printStackTrace();
         }
 
-        try(Statement st = connect.createStatement()) {
+        try (Statement st = connect.createStatement()) {
             st.execute("CREATE TABLE IF NOT EXISTS job_bd (id serial primary key, subject character(200), url character(200), dateJob TIMESTAMP(14))");
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,7 +102,7 @@ public class Parser implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         new Parser().parse("http://www.sql.ru/forum/job-offers");
-        logger.info("задание выполнилось");
+        LOGGER.info("задание выполнилось");
     }
 
     /**
@@ -150,7 +150,7 @@ public class Parser implements Job {
                             Vakancy newVakancy = new Vakancy(subject, url, calendar);
 
                             if (!listVakancy.contains(newVakancy)) {
-//                                logger.info(newVakancy.toString() + "\n");
+//                                LOGGER.info(newVakancy.toString() + "\n");
                                 addBase(newVakancy);
                                 listVakancy.add(newVakancy);
                             }
@@ -205,11 +205,11 @@ public class Parser implements Job {
      */
     private void addBase(Vakancy vakancy) {
         StringBuilder sbDate = new StringBuilder();
-        try(PreparedStatement st = connect.prepareStatement("INSERT INTO job_bd(subject, url, dateJob) values(?, ?, ?)")) {
+        try (PreparedStatement st = connect.prepareStatement("INSERT INTO job_bd(subject, url, dateJob) values(?, ?, ?)")) {
             st.setString(1, vakancy.getSubject());
             st.setString(2, vakancy.getUrl());
             Calendar calendar = vakancy.getCalendar();
-            sbDate.append(calendar.get(Calendar.YEAR)).append("-").append(calendar.get(Calendar.MONTH)+1).append("-").append(calendar.get(Calendar.DAY_OF_MONTH)).append(" ");
+            sbDate.append(calendar.get(Calendar.YEAR)).append("-").append(calendar.get(Calendar.MONTH) + 1).append("-").append(calendar.get(Calendar.DAY_OF_MONTH)).append(" ");
             sbDate.append(calendar.get(Calendar.HOUR_OF_DAY)).append(":").append(calendar.get(Calendar.MINUTE)).append(":").append(calendar.get(Calendar.SECOND));
             st.setTimestamp(3, Timestamp.valueOf(sbDate.toString()));
             sbDate.delete(0, sbDate.length());
@@ -233,9 +233,9 @@ public class Parser implements Job {
         String dateFormat = "yyyy-MM-dd H:mm:ss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 
-        try(Statement st = connect.createStatement()) {
+        try (Statement st = connect.createStatement()) {
             ResultSet rs = st.executeQuery("SELECT * FROM job_bd;");
-            while(rs.next()) {
+            while (rs.next()) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(simpleDateFormat.parse(rs.getString("datejob")));
                 list.add(new Vakancy(rs.getString("subject").trim(), rs.getString("url").trim(), calendar));

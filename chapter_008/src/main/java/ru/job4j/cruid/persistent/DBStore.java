@@ -35,7 +35,7 @@ public class DBStore implements Store<User> {
 
     @Override
     public User add(User user) {
-        try(Connection con = SOURCE.getConnection();
+        try (Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("insert into users(login, email) values(?, ?)")) {
             pr.setString(1, user.getName());
             pr.setString(2, user.getEmail());
@@ -48,7 +48,7 @@ public class DBStore implements Store<User> {
 
     @Override
     public void update(User user) {
-        try(Connection con = SOURCE.getConnection();
+        try (Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("UPDATE users SET login=?, email=?, password=?, role=? WHERE id=?")) {
             pr.setString(1, user.getName());
             pr.setString(2, user.getEmail());
@@ -63,7 +63,7 @@ public class DBStore implements Store<User> {
 
     @Override
     public void delete(User user) {
-        try(Connection con = SOURCE.getConnection();
+        try (Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("DELETE FROM users WHERE id= ?")) {
             pr.setInt(1, user.getId());
             pr.execute();
@@ -75,10 +75,10 @@ public class DBStore implements Store<User> {
     @Override
     public List<User> findAll() {
         List<User> list = new LinkedList<>();
-        try(Connection con = SOURCE.getConnection();
+        try (Connection con = SOURCE.getConnection();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select users.id, users.login, users.email, users.password, r.role from users  left join roles r on users.role = r.id")) {
-            while(rs.next()) {
+            while (rs.next()) {
                 list.add(new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email"), rs.getString("password"), rs.getString("role")));
             }
         } catch (Exception e) {
@@ -90,11 +90,11 @@ public class DBStore implements Store<User> {
     @Override
     public User findById(User user) {
         User result = null;
-        try(Connection con = SOURCE.getConnection();
+        try (Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("select users.id, users.login, users.email, users.password, r.role from users  left join roles r on users.role = r.id where users.id=?")) {
             pr.setInt(1, user.getId());
             ResultSet rs = pr.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 result = new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email"), rs.getString("password"), rs.getString("role"));
             }
         } catch (Exception e) {
@@ -106,10 +106,10 @@ public class DBStore implements Store<User> {
     @Override
     public User findByLogin(User user) {
         User result = null;
-        try(Connection con = SOURCE.getConnection(); PreparedStatement pr = con.prepareStatement("select users.id, users.login, users.email, users.password, r.role from users  left join roles r on users.role = r.id where users.login = ?")) {
+        try (Connection con = SOURCE.getConnection(); PreparedStatement pr = con.prepareStatement("select users.id, users.login, users.email, users.password, r.role from users  left join roles r on users.role = r.id where users.login = ?")) {
             pr.setString(1, user.getName());
             ResultSet rs = pr.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 result = new User(Integer.valueOf(rs.getString("id")), rs.getString("login"), rs.getString("email"), rs.getString("password"), rs.getString("role"));
             }
         } catch (Exception e) {
@@ -121,10 +121,10 @@ public class DBStore implements Store<User> {
     @Override
     public List<Role> findAllRoles() {
         List<Role> listRole = new LinkedList<>();
-        try(Connection con = SOURCE.getConnection();
+        try (Connection con = SOURCE.getConnection();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from roles")) {
-                while(rs.next()) {
+                while (rs.next()) {
                     listRole.add(new Role(Integer.valueOf(rs.getString("id")), rs.getString("role"), rs.getString("description")));
                 }
         } catch (Exception ex) {
@@ -135,7 +135,7 @@ public class DBStore implements Store<User> {
 
     @Override
     public void addRole(Role role) {
-        try(Connection con = SOURCE.getConnection();
+        try (Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("insert into roles(role, description) values(?, ?)")) {
             pr.setString(1, role.getName());
             pr.setString(2, role.getDescription());
@@ -147,7 +147,7 @@ public class DBStore implements Store<User> {
 
     @Override
     public void delRole(Role role) {
-        try(Connection con = SOURCE.getConnection();
+        try (Connection con = SOURCE.getConnection();
             PreparedStatement pr = con.prepareStatement("delete from roles where id=?")) {
             pr.setInt(1, role.getId());
             pr.execute();

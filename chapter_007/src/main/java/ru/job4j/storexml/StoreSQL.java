@@ -1,4 +1,4 @@
-package ru.job4j.storeXml;
+package ru.job4j.storexml;
 
 import java.io.FileInputStream;
 import java.sql.*;
@@ -51,7 +51,7 @@ public class StoreSQL {
      * @param i количество элементо для генерирования данных.
      */
     public void generate(int i) {
-        try(Statement st = conn.createStatement()){
+        try (Statement st = conn.createStatement()) {
             st.execute("CREATE TABLE IF NOT EXISTS entry (field INTEGER);");
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,7 +67,7 @@ public class StoreSQL {
                 st.setInt(1, j);
                 st.executeUpdate();
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             try {
                 conn.rollback();
@@ -84,9 +84,9 @@ public class StoreSQL {
      */
     public List<Entry> getList() {
         List<Entry> list = new ArrayList<>();
-        try(Statement st = conn.createStatement()) {
+        try (Statement st = conn.createStatement()) {
             ResultSet rs = st.executeQuery("SELECT * FROM entry");
-            while(rs.next()) {
+            while (rs.next()) {
                 list.add(new Entry(rs.getInt("field")));
             }
             rs.close();

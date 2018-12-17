@@ -45,9 +45,9 @@ public class StartUI {
      * Инициализация программы.
      */
     public void init() {
-        if (tracker == null) {
+//        if (tracker == null){
             //tracker = new Tracker();
-        }
+//        }
 
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillAction();

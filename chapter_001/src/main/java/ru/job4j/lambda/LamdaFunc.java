@@ -15,7 +15,7 @@ public class LamdaFunc {
     List<Double> diapazon(int start, int end, Function<Double, Double> func) {
         List<Double> data = new ArrayList<>();
         for (int i = start; i < end; i++) {
-            data.add(func.apply((double)i));
+            data.add(func.apply((double) i));
         }
         return data;
     }

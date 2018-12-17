@@ -35,7 +35,7 @@ public class PrintInfoEnd {
     private class ThredPrintInfo implements Runnable {
         @Override
         public void run() {
-            for (int i = 20; i > 0; i--) {
+            for (int i = 5; i > 0; i--) {
                 System.out.println(i);
                 try {
                     Thread.sleep(1000);
