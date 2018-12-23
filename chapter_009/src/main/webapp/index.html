@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <!--<meta charset="UTF-8">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Заявки</title>
+</head>
+<body>
+    <script>
+        resultSet();
+
+        function add() {
+            var item = {};
+            item.id = "";
+            item.desc = $('#desc').val();
+            item.created = $('#created').val();
+            item.done = $('#done').prop('checked');
+            console.log(item);
+
+            $.ajax('/item/json', {
+                method : 'post',
+                data : JSON.stringify(item),
+                contentType: "application/json",
+                dateType : 'json',
+                complete : function (data) {
+                    $('#desc').val("");
+                    $('#created').val("");
+                    $('#done').prop('checked', false);
+                    resultSet();
+                }
+            });
+        }
+
+        function resultSet() {
+            var viewAll;
+            $.ajax('/item/json', {
+                method: 'get',
+                data: viewAll,
+                dateType: 'json',
+                complete : function (data) {
+                    var rezult = "";
+                    var items = JSON.parse(data.responseText);
+                    for (let i = 0; i < items.length; i++) {
+                        var dateString = (new Date(items[i].created)).toLocaleDateString();
+                        rezult += '<tr><td>' + items[i].id + '</td><td>' + items[i].desc + '</td><td>' + dateString + '</td><td>' + items[i].done  +'</td></tr>';
+                    }
+                    $('#table tbody > tr').remove();
+                    $('#table tbody').append(rezult);
+                }
+            });
+        }
+        function hidden2() {
+            if ($('#done2').is(':checked')) {
+                resultSet();
+            } else {
+                hiddenRowsItems();
+            }
+        }
+
+        function hiddenRowsItems() {
+            $('tbody > tr').each(function () {
+                var hide = false;
+                $('td:last', this).each(function () {
+                   if ($(this).text() === 'true') {
+                       hide = true;
+                   }
+                });
+                if (hide) {
+                    $(this).hide();
+                }
+            });
+        }
+
+        
+    </script>
+
+    <div class="container-fluid">
+        <h2>Страница добавления заявок.</h2>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-4">
+                <input type="text" name="ferstName" class="form-control" id="desc" placeholder="Введите заявку:">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2">
+                <input type="date" name="Dateitem" class="form-control" id="created" placeholder="Введите дату:">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="done" onclick="doneNotDoneItem()">
+                    <label class="custom-control-label" for="done">
+                        <div id="donaLabel" class="bg-danger text-white" onclick="doneNotDoneItem()">Заявка (не выполнена)</div>
+                    </label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="done2" onclick="hidden2_()">
+                    <label class="custom-control-label" for="done2">
+                        <div id="donaItemsAll" class="text-dark" onclick="hidden2()">Скрыть выполненые</div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-1">
+                <button type="submit" class="btn btn-default" onclick="add()">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            var div = $('<div>').addClass('container');
+            var table = $('<table>').addClass('table table-hover').attr('id', 'table');
+
+            table.append($('<thead><tr><th>id</th><th>Заявка</th><th>Дата заявки</th><th>Статус</th></tr></thead>'));
+            table.append($('<tbody>'));
+            div.append(table);
+            $('body').append(div);
+        }());
+
+        function doneNotDoneItem() {
+            if ($('#done').is  (':checked')) {
+                $('#donaLabel').removeClass("bg-danger text-white").addClass("bg-success text-white").text("Заявка (выполнена)");
+            } else {
+                $('#donaLabel').removeClass("bg-success text-white").addClass("bg-danger text-white").text("Заявка (не выполнена)");
+            }
+        }
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
