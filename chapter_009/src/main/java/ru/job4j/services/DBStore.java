@@ -2,6 +2,7 @@ package ru.job4j.services;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import ru.job4j.models.Item;
 
@@ -16,11 +17,12 @@ import java.util.List;
  */
 public class DBStore implements DBStoreImpl {
     private static DBStore dbStore = null;
-    private Session session = null;
     private SessionFactory factory = null;
 
     private DBStore() {
-        factory = new Configuration().configure().buildSessionFactory();
+        factory = new Configuration()
+                .configure()
+                .buildSessionFactory();
     }
 
     public static DBStore getInstance() {
@@ -32,20 +34,31 @@ public class DBStore implements DBStoreImpl {
 
     @Override
     public void addItem(Item item) {
-        session = factory.openSession();
-        session.beginTransaction();
-        session.save(item);
-        session.getTransaction().commit();
-        session.close();
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
+            session.save(item);
+        } catch (Exception e) {
+            tx.rollback();
+            throw e;
+        } finally {
+            tx.commit();
+            session.close();
+        }
     }
 
     @Override
     public List<Item> getAllItems() {
-        List<Item> result = null;
-        session = factory.openSession();
-        session.beginTransaction();
-        result = session.createQuery("from Item").list();
-        session.close();
-        return result;
+        final Session session = factory.openSession();
+        final Transaction tx = session.beginTransaction();
+        try {
+            return session.createQuery("from Item").list();
+        } catch (Exception e) {
+            tx.rollback();
+            throw e;
+        } finally {
+            tx.commit();
+            session.close();
+        }
     }
 }
