@@ -18,13 +18,11 @@ public class CheckByteStream {
             while ((num = in.read()) != -1) {
                 char bt = (char) num;
                 if (Character.isDigit(bt) && (Character.getNumericValue(bt) % 2 == 0)) {
-//                    System.out.println("rezult = " + );
                     rezult = true;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
-
         }
         return rezult;
     }

@@ -2,7 +2,6 @@ package ru.job4j.io;
 
 import org.junit.Test;
 import java.io.ByteArrayInputStream;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -20,7 +19,6 @@ public class CheckByteStreamTest {
         CheckByteStream check = new CheckByteStream();
         byte[] array = new String("34abcd").getBytes();
         ByteArrayInputStream byteArray = new ByteArrayInputStream(array);
-
         assertThat(check.isNumber(byteArray), is(true));
     }
 
@@ -29,7 +27,6 @@ public class CheckByteStreamTest {
         CheckByteStream check = new CheckByteStream();
         byte[] array = new String("3ab7cd").getBytes();
         ByteArrayInputStream byteArray = new ByteArrayInputStream(array);
-
         assertThat(check.isNumber(byteArray), is(false));
     }
 
