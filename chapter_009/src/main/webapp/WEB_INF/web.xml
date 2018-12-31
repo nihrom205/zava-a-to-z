@@ -5,6 +5,14 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
+    <filter>
+        <filter-name>Filter</filter-name>
+        <filter-class>ru.job4j.servlets.FilterServlet</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filter</filter-name>
+        <url-pattern>/json</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>ServletJson</servlet-name>
         <servlet-class>ru.job4j.servlets.ServletJson</servlet-class>

@@ -16,22 +16,20 @@ import java.util.List;
  * @since 19.12.2018
  */
 public class DBStore implements DBStoreImpl {
-    private static DBStore dbStore = null;
-    private SessionFactory factory = null;
+    private static final DBStore DB_STORE = new DBStore();
+    private final SessionFactory factory = new Configuration().configure().buildSessionFactory();
 
     private DBStore() {
-        factory = new Configuration()
-                .configure()
-                .buildSessionFactory();
     }
 
     public static DBStore getInstance() {
-        if (dbStore == null) {
-            dbStore = new DBStore();
-        }
-        return dbStore;
+        return DB_STORE;
     }
 
+    /**
+     * Метод добавляет 1 заявку в бд.
+     * @param item заявка
+     */
     @Override
     public void addItem(Item item) {
         final Session session = factory.openSession();
@@ -39,7 +37,7 @@ public class DBStore implements DBStoreImpl {
         try {
             session.save(item);
         } catch (Exception e) {
-            tx.rollback();
+            session.getTransaction().rollback();
             throw e;
         } finally {
             tx.commit();
@@ -47,6 +45,10 @@ public class DBStore implements DBStoreImpl {
         }
     }
 
+    /**
+     * Метод возвращает все заявки из базы.
+     * @return Список заявок
+     */
     @Override
     public List<Item> getAllItems() {
         final Session session = factory.openSession();
@@ -54,7 +56,7 @@ public class DBStore implements DBStoreImpl {
         try {
             return session.createQuery("from Item").list();
         } catch (Exception e) {
-            tx.rollback();
+            session.getTransaction().rollback();
             throw e;
         } finally {
             tx.commit();
