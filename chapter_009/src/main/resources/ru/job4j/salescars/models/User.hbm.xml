@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="ru.job4j.salescars.models.User" table="user_car">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="firstName" column="FIRST_NAME"/>
+        <property name="lastName" column="LAST_NAME"/>
+        <many-to-one name="role" class="ru.job4j.salescars.models.Role">
+            <column name="role_id" not-null="true"/>
+        </many-to-one>
+
+        <bag name="cars" inverse="true" lazy="false">
+            <key column="user_id"/>
+            <one-to-many class="ru.job4j.salescars.models.Car"/>
+        </bag>
+    </class>
+</hibernate-mapping>

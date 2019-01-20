@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+    <!--<filter>-->
+        <!--<filter-name>Filter</filter-name>-->
+        <!--<filter-class>ru.job4j.items.servlets.FilterServlet</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>Filter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+    <!--<filter>-->
+        <!--<filter-name>FilterSingleIn</filter-name>-->
+        <!--<filter-class>ru.job4j.salescars.servlets.Filter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>FilterSingleIn</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+    <servlet>
+        <servlet-name>ViewAllServlet</servlet-name>
+        <servlet-class>ru.job4j.salescars.servlets.ViewAllServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewAllServlet</servlet-name>
+        <url-pattern>/view</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReadViewAllJsonServlet</servlet-name>
+        <servlet-class>ru.job4j.salescars.servlets.ReadViewAllJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReadViewAllJsonServlet</servlet-name>
+        <url-pattern>/json</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewAutorizUserCarJsonServlet</servlet-name>
+        <servlet-class>ru.job4j.salescars.servlets.ViewAutorizUserCarJsonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewAutorizUserCarJsonServlet</servlet-name>
+        <url-pattern>/jsonAutoriz</url-pattern>
+    </servlet-mapping>
+
+
+    <!--<servlet>-->
+        <!--<servlet-name>ServletJson</servlet-name>-->
+        <!--<servlet-class>ru.job4j.items.servlets.ServletJson</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>ServletJson</servlet-name>-->
+        <!--<url-pattern>/json</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>SignInController</servlet-name>
+        <servlet-class>ru.job4j.salescars.servlets.SignInController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignInController</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+</web-app>
