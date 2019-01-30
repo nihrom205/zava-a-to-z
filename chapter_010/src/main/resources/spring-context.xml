@@ -9,7 +9,14 @@
 
     <!--<bean id="memory" class="ru.job4j.MemoryStorage"/>-->
     <!--<bean id="storage" class="ru.job4j.UserStorage">-->
-        <!--<constructor-arg name="storage" ref="memory"></constructor-arg>-->
+    <!--<constructor-arg name="storage" ref="memory"></constructor-arg>-->
     <!--</bean>-->
+
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
     <context:component-scan base-package="ru.job4j"/>
 </beans>
