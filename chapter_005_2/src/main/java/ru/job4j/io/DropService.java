@@ -1,8 +1,8 @@
 package ru.job4j.io;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+//import sun.nio.cs.UTF_8;
+
+import java.io.*;
 
 /**
  * Class <Name class>.
@@ -13,45 +13,18 @@ import java.io.OutputStream;
  */
 public class DropService {
     public void dropAbuses(InputStream in, OutputStream out, String[] abuse) {
-        int num;
-        StringBuilder sb = new StringBuilder();
         String rezult = "";
         try {
-            while ((num = in.read()) != -1) {
-                if (' ' != (char)num) {
-                    sb.append((char)num);
-                } else {
-                    rezult = sb.toString();
-                    if (!isBloc(rezult, abuse)) {
-                        out.write(rezult.getBytes());
-                        out.write(' ');
-                    }
-                    sb.delete(0, sb.length());
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            while (br.ready()) {
+                rezult = br.readLine();
+                for (String s : abuse) {
+                    rezult = rezult.replaceAll(s, "");
                 }
-            }
-            rezult = sb.toString();
-            if (!isBloc(rezult, abuse)) {
                 out.write(rezult.getBytes());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * checked String to block list
-     * @param s rezult String ti stram
-     * @param bloc list block String
-     * @return true String find, else false
-     */
-    private boolean isBloc(String s, String[] bloc) {
-        boolean isFind = false;
-        for (String str : bloc) {
-            if (s.equals(str)) {
-                isFind = true;
-                break;
-            }
-        }
-        return isFind;
     }
 }

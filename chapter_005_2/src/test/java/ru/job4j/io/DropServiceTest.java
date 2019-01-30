@@ -21,14 +21,12 @@ public class DropServiceTest {
     public void whenSimpleStringThen() {
         DropService dropService = new DropService();
         String[] backList = {"aaa", "bbb", "ccc"};
-        byte[] byteIn = new String("zz vv aaa rr").getBytes();
+        byte[] byteIn = new String("zz ccc vv aaa rr").getBytes();
         ByteArrayInputStream in = new ByteArrayInputStream(byteIn);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-
         dropService.dropAbuses(in, out, backList);
-
         byte[] byteOut = out.toByteArray();
-        assertThat(new String(byteOut).equals("zz vv rr"), is(true));
+        assertThat(new String(byteOut).equals("zz  vv  rr"), is(true));
     }
 
 }
