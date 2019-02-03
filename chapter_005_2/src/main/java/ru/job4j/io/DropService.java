@@ -2,11 +2,9 @@ package ru.job4j.io;
 
 //import sun.nio.cs.UTF_8;
 
-import javafx.print.Collation;
 
 import java.io.*;
 import java.util.Arrays;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
