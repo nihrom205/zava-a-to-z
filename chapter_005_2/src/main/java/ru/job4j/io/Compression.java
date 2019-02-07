@@ -24,9 +24,17 @@ public class Compression {
             return;
         }
         Compression compress = new Compression();
-        compress.init(args);
-        compress.zip();
-        System.out.println("Архивирование директории завершено.");
+        compress.run(args);
+    }
+
+    /**
+     * Start program
+     * @param args arguments for program
+     */
+    public void run(String[] args) {
+        init(args);
+        zip();
+        System.out.println("Архивирование завершено.");
     }
 
     /**
