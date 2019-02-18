@@ -21,9 +21,8 @@ public class ConsoleChat {
      * Start chat.
      */
     private void start() {
-        try {
-            RandomAccessFile ra = new RandomAccessFile("randomText.txt", "r");
-            FileWriter log = new FileWriter("file.log");
+        try (RandomAccessFile ra = new RandomAccessFile("randomText.txt", "r");
+             FileWriter log = new FileWriter("file.log")) {
             Random random = new Random();
             Scanner sc = new Scanner(System.in);
             String response = sc.nextLine();
@@ -40,18 +39,14 @@ public class ConsoleChat {
                     System.out.println(reault);
                     writeLog(reault, log);
                 }
-
                 response = sc.nextLine();
                 writeLog(response, log);
             }
             System.out.println("Завершение чата!");
-            ra.close();
             log.flush();
-            log.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -61,7 +56,10 @@ public class ConsoleChat {
      */
     private void writeLog(String str, FileWriter f) {
         try {
-            f.write(new Date().toString() + " | " + str + "\n");
+            f.write(new Date().toString());
+            f.write(" | ");
+            f.write(str);
+            f.write("\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,16 +71,16 @@ public class ConsoleChat {
      * @return word
      */
     private String generateText(RandomAccessFile f) {
-        String rezult = "";
+        String result = "";
         try {
             long randomLocation = (int)(Math.random() * f.length());
             f.seek(randomLocation);
             String utf8 = new String(f.readLine().getBytes("ISO-8859-1"), "UTF-8");
             String[] words = utf8.split(" ");
-            rezult = words[(int)(Math.random() * words.length)];
+            result = words[(int)(Math.random() * words.length)];
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return rezult;
+        return result;
     }
 }
