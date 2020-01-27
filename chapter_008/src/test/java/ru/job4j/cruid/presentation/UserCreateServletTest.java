@@ -1,14 +1,9 @@
 package ru.job4j.cruid.presentation;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import ru.job4j.cruid.logic.Validate;
 import ru.job4j.cruid.logic.ValidateService;
 import ru.job4j.cruid.logic.ValidateStub;
@@ -28,20 +23,20 @@ import static org.junit.Assert.assertThat;
  * @version 0.1
  * @since 09.11.18
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(ValidateService.class)
-public class UserCreateServletTest {
-    @Ignore
-    @Test
-    public void whenAddUser() throws ServletException, IOException {
-        Validate validate = new ValidateStub();
-        PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn((ValidateService) validate);
-        HttpServletResponse res = PowerMockito.mock(HttpServletResponse.class);
-        HttpServletRequest req = PowerMockito.mock(HttpServletRequest.class);
-
-        Mockito.when(req.getParameter("login")).thenReturn("Alexey");
-        new UserCreateServlet().doPost(req, res);
-        assertThat(validate.findAll().iterator().next().getName(), is("Alexey"));
-    }
-}
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest(ValidateService.class)
+//public class UserCreateServletTest {
+//    @Ignore
+//    @Test
+//    public void whenAddUser() throws ServletException, IOException {
+//        Validate validate = new ValidateStub();
+//        PowerMockito.mockStatic(ValidateService.class);
+//        Mockito.when(ValidateService.getInstance()).thenReturn((ValidateService) validate);
+//        HttpServletResponse res = PowerMockito.mock(HttpServletResponse.class);
+//        HttpServletRequest req = PowerMockito.mock(HttpServletRequest.class);
+//
+//        Mockito.when(req.getParameter("login")).thenReturn("Alexey");
+//        new UserCreateServlet().doPost(req, res);
+//        assertThat(validate.findAll().iterator().next().getName(), is("Alexey"));
+//    }
+//}
